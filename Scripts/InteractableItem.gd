@@ -31,8 +31,9 @@ func interact():
 	# TODO: Fill this in as needed
 	match type:
 		Type.KeyItem:
-			# TODO: Item Pickup Dialog?
 			PlayerInventory.add_item(item_id)
+			var data = ItemData.data[item_id]
+			DialogManager.play_dialog(DialogData.DialogId.PickupDialog, [data["name"]])
 			queue_free()
 			print("Key Item Interacted!")
 		Type.LockItem:
@@ -46,6 +47,8 @@ func interact():
 		Type.ToggleButton:
 			print("Toggle Button Interacted!")
 		Type.Dialog:
-			print("Dialog Interacted!")
+			DialogManager.play_dialog(dialog_id)
+			queue_free()
+			print("Key Item Interacted!")
 		Type.HidingPlace: 
 			print("Hiding Place Interacted!")
