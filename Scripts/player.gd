@@ -1,8 +1,8 @@
 extends CharacterBody2D
 
-const max_speed = 400
-const accel = 1500
-const friction = 600
+@export var max_speed = 400
+@export var accel = 1500
+@export var friction = 600
 
 var input = Vector2.ZERO
 
