@@ -1,10 +1,11 @@
-[gd_scene load_steps=8 format=3 uid="uid://buxpjmkcbvb8t"]
+[gd_scene load_steps=9 format=3 uid="uid://buxpjmkcbvb8t"]
 
 [ext_resource type="PackedScene" uid="uid://mcnovg0o2sqq" path="res://Scenes/player.tscn" id="1_182o4"]
 [ext_resource type="Script" path="res://Scripts/World.gd" id="1_kfkq8"]
 [ext_resource type="PackedScene" uid="uid://bemnhsvv7b42j" path="res://Scenes/InteractableItem.tscn" id="2_bjvro"]
 [ext_resource type="Script" path="res://UI/UIController.gd" id="3_5febl"]
 [ext_resource type="Texture2D" uid="uid://dr5228tjnp5yx" path="res://Art/Test/White32.png" id="3_6tm8f"]
+[ext_resource type="Texture2D" uid="uid://b5ohs5orx6duk" path="res://Art/Test/White6.png" id="6_cb5pr"]
 
 [sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_yqenr"]
 texture = ExtResource("3_6tm8f")
@@ -26,6 +27,12 @@ script = ExtResource("1_kfkq8")
 [node name="Player" parent="." instance=ExtResource("1_182o4")]
 position = Vector2(59, 68)
 friction = 1500
+
+[node name="PointLight2D" parent="Player" index="3"]
+position = Vector2(58.5, 0.499999)
+scale = Vector2(0.301107, 0.0189887)
+color = Color(1, 1, 1, 1)
+energy = 1.87
 
 [node name="RemoteTransform2D" type="RemoteTransform2D" parent="Player"]
 remote_path = NodePath("../../Camera2D")
@@ -62,3 +69,11 @@ layer_0/tile_data = PackedInt32Array(0, 0, 0, 1, 0, 0, 2, 0, 0, 3, 0, 0, 4, 0, 0
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(59, 68)
 process_callback = 0
+
+[node name="Sprite2D" type="Sprite2D" parent="."]
+modulate = Color(0, 0, 0, 0.415686)
+position = Vector2(116, 127)
+scale = Vector2(45.5, 35.5)
+texture = ExtResource("6_cb5pr")
+
+[editable path="Player"]
