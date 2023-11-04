@@ -19,6 +19,7 @@ type = 0
 
 [node name="RichTextLabel" type="RichTextLabel" parent="."]
 visible = false
+light_mask = 0
 z_index = 4096
 z_as_relative = false
 offset_left = -64.0
