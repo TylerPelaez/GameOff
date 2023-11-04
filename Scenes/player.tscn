@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://mcnovg0o2sqq"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_q8mce"]
-[ext_resource type="Texture2D" uid="uid://dr5228tjnp5yx" path="res://Art/Test/White32.png" id="2_xbdsf"]
+[ext_resource type="Texture2D" uid="uid://cr0df0oy1wyrc" path="res://Art/Test/White8.png" id="2_pal6b"]
 [ext_resource type="Shape2D" uid="uid://ec2tovo237mh" path="res://Scenes/Player/PlayerCollisionShape.tres" id="3_kfaag"]
 
 [node name="Player" type="CharacterBody2D"]
@@ -14,7 +14,7 @@ friction = 2000
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 modulate = Color(0.301961, 0.729412, 0.262745, 1)
-texture = ExtResource("2_xbdsf")
+texture = ExtResource("2_pal6b")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = ExtResource("3_kfaag")
