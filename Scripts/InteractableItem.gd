@@ -4,6 +4,7 @@ class_name InteractableItem
 ## The kind of interactable item this is (what happens when the player interacts with it)
 @export var type: Type = Type.Dialog
 @export var has_collision: bool = false
+@export var casts_shadows: bool = false
 
 @export_group("Interactable Ids")
 ## If type is Dialog, the dialog Id to pop up when interaction occurs
@@ -13,6 +14,7 @@ class_name InteractableItem
 
 @onready var collider = $StaticBody2D/CollisionShape2D
 @onready var prompt = $RichTextLabel
+@onready var light_occluder_2d = $LightOccluder2D
 
 
 enum Type {
@@ -26,6 +28,7 @@ enum Type {
 
 func _ready():
 	collider.disabled = !has_collision
+	light_occluder_2d.occluder_light_mask = 0 if !casts_shadows else 1
 
 func interact():
 	# TODO: Fill this in as needed

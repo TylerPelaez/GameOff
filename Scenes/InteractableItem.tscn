@@ -1,4 +1,4 @@
-[gd_scene load_steps=6 format=3 uid="uid://bemnhsvv7b42j"]
+[gd_scene load_steps=7 format=3 uid="uid://bemnhsvv7b42j"]
 
 [ext_resource type="Script" path="res://Scripts/InteractableItem.gd" id="1_gg0bp"]
 [ext_resource type="Texture2D" uid="uid://dr5228tjnp5yx" path="res://Art/Test/White32.png" id="2_svkeg"]
@@ -9,6 +9,9 @@ size = Vector2(64, 64)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_gm7u7"]
 size = Vector2(32, 32)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_7ndrl"]
+polygon = PackedVector2Array(16, -16, 16, 16, -16, 16, -16, -16)
 
 [node name="InteractableItem" type="Node2D"]
 script = ExtResource("1_gg0bp")
@@ -43,6 +46,9 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_gm7u7")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_7ndrl")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
 [connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

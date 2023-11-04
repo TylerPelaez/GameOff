@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_q8mce"]
 [ext_resource type="Texture2D" uid="uid://cr0df0oy1wyrc" path="res://Art/Test/White8.png" id="2_pal6b"]
 [ext_resource type="Shape2D" uid="uid://ec2tovo237mh" path="res://Scenes/Player/PlayerCollisionShape.tres" id="3_kfaag"]
-[ext_resource type="Texture2D" uid="uid://bfdp7ialod1v6" path="res://Art/Test/2d_lights_and_shadows_neutral_point_light.webp" id="4_1hrs2"]
+[ext_resource type="Texture2D" uid="uid://s28stxn5rbuo" path="res://Art/Test/cone.png" id="4_4f6x5"]
 
 [node name="Player" type="CharacterBody2D"]
 collision_layer = 2
@@ -28,14 +28,12 @@ collision_mask = 4
 shape = ExtResource("3_kfaag")
 
 [node name="PointLight2D" type="PointLight2D" parent="."]
-position = Vector2(103, 4)
-scale = Vector2(0.482856, 0.0651042)
 color = Color(0.352941, 0.498039, 0, 1)
 energy = 1.44
 shadow_enabled = true
 shadow_color = Color(0, 0, 0, 1)
-texture = ExtResource("4_1hrs2")
-texture_scale = 1.44
+shadow_filter = 1
+texture = ExtResource("4_4f6x5")
 
 [connection signal="area_entered" from="InteractableCheck" to="." method="_on_interactable_check_area_entered"]
 [connection signal="area_exited" from="InteractableCheck" to="." method="_on_interactable_check_area_exited"]
