@@ -20,7 +20,7 @@ texture = ExtResource("2_pal6b")
 shape = ExtResource("3_kfaag")
 
 [node name="InteractableCheck" type="Area2D" parent="."]
-collision_layer = 0
+collision_layer = 2
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableCheck"]

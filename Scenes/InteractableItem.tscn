@@ -1,7 +1,8 @@
-[gd_scene load_steps=5 format=3 uid="uid://bemnhsvv7b42j"]
+[gd_scene load_steps=6 format=3 uid="uid://bemnhsvv7b42j"]
 
 [ext_resource type="Script" path="res://Scripts/InteractableItem.gd" id="1_gg0bp"]
 [ext_resource type="Texture2D" uid="uid://dr5228tjnp5yx" path="res://Art/Test/White32.png" id="2_svkeg"]
+[ext_resource type="Theme" uid="uid://f62ri8jv63it" path="res://UI/UITheme.tres" id="3_2j5q4"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_pgk1b"]
 size = Vector2(64, 64)
@@ -13,9 +14,22 @@ size = Vector2(32, 32)
 script = ExtResource("1_gg0bp")
 type = 0
 
+[node name="RichTextLabel" type="RichTextLabel" parent="."]
+visible = false
+z_index = 4096
+z_as_relative = false
+offset_left = -64.0
+offset_top = -34.0
+offset_right = 79.0
+offset_bottom = -19.0
+theme = ExtResource("3_2j5q4")
+text = "Press E to Interact"
+fit_content = true
+scroll_active = false
+
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4
-collision_mask = 0
+collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
 shape = SubResource("RectangleShape2D_pgk1b")
@@ -29,3 +43,6 @@ collision_mask = 2
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 shape = SubResource("RectangleShape2D_gm7u7")
+
+[connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="area_exited" from="Area2D" to="." method="_on_area_2d_area_exited"]

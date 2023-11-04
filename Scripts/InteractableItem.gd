@@ -12,7 +12,7 @@ class_name InteractableItem
 @export var item_id: ItemData.ItemId
 
 @onready var collider = $StaticBody2D/CollisionShape2D
-
+@onready var prompt = $RichTextLabel
 
 
 enum Type {
@@ -52,3 +52,10 @@ func interact():
 			print("Key Item Interacted!")
 		Type.HidingPlace: 
 			print("Hiding Place Interacted!")
+
+
+func _on_area_2d_area_entered(area):
+	prompt.visible = true
+
+func _on_area_2d_area_exited(area):
+	prompt.visible = false
