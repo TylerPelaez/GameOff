@@ -6,6 +6,8 @@ extends CharacterBody2D
 
 var input = Vector2.ZERO
 
+var in_interactable_area: bool = false
+var current_interactable: InteractableItem
 
 func _physics_process(delta):
 	player_movement(delta)
@@ -29,3 +31,22 @@ func player_movement(delta):
 		
 	
 	move_and_slide()
+
+
+func _unhandled_input(event):
+	if event.is_action_pressed("interact") and in_interactable_area and current_interactable != null:
+		current_interactable.interact()
+
+func _on_interactable_check_area_entered(area: Area2D):
+	in_interactable_area = true
+	var interactable = area.get_parent()
+	if current_interactable == null:
+		current_interactable = interactable
+
+
+func _on_interactable_check_area_exited(area):
+	var interactable = area.get_parent()
+	if interactable == current_interactable:
+		current_interactable = null
+		in_interactable_area = false
+	

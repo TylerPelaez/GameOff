@@ -1,8 +1,14 @@
-[gd_scene load_steps=2 format=3 uid="uid://buxpjmkcbvb8t"]
+[gd_scene load_steps=3 format=3 uid="uid://buxpjmkcbvb8t"]
 
 [ext_resource type="PackedScene" uid="uid://mcnovg0o2sqq" path="res://Scenes/player.tscn" id="1_182o4"]
+[ext_resource type="PackedScene" uid="uid://bemnhsvv7b42j" path="res://Scenes/InteractableItem.tscn" id="2_bjvro"]
 
 [node name="World" type="Node2D"]
 
 [node name="Player" parent="." instance=ExtResource("1_182o4")]
+position = Vector2(115, 85)
 friction = 1500
+
+[node name="InteractableItem" parent="." instance=ExtResource("2_bjvro")]
+position = Vector2(207, 88)
+type = 0
