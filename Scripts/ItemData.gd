@@ -8,6 +8,7 @@ enum ItemId {
 
 static var data = {
 	ItemId.TestItem: {
-		"icon": preload("res://Art/Test/White32.png")
+		"icon": preload("res://Art/Test/White32.png"),
+		"name": "Little Square Thing"
 	}
 }
