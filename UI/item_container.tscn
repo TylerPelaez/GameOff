@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://5g2w2fn3ftou"]
+
+[ext_resource type="Script" path="res://UI/item_container.gd" id="1_anjci"]
+[ext_resource type="Texture2D" uid="uid://dr5228tjnp5yx" path="res://Art/Test/White32.png" id="1_vdvqi"]
+
+[node name="ItemContainer" type="MarginContainer"]
+size_flags_horizontal = 4
+size_flags_vertical = 4
+script = ExtResource("1_anjci")
+
+[node name="TextureRect" type="TextureRect" parent="."]
+layout_mode = 2
+texture = ExtResource("1_vdvqi")
+stretch_mode = 4

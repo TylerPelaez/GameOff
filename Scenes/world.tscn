@@ -1,14 +1,37 @@
-[gd_scene load_steps=3 format=3 uid="uid://buxpjmkcbvb8t"]
+[gd_scene load_steps=5 format=3 uid="uid://buxpjmkcbvb8t"]
 
 [ext_resource type="PackedScene" uid="uid://mcnovg0o2sqq" path="res://Scenes/player.tscn" id="1_182o4"]
+[ext_resource type="Script" path="res://Scripts/World.gd" id="1_kfkq8"]
 [ext_resource type="PackedScene" uid="uid://bemnhsvv7b42j" path="res://Scenes/InteractableItem.tscn" id="2_bjvro"]
+[ext_resource type="Script" path="res://UI/UIController.gd" id="3_5febl"]
 
 [node name="World" type="Node2D"]
+script = ExtResource("1_kfkq8")
 
 [node name="Player" parent="." instance=ExtResource("1_182o4")]
-position = Vector2(115, 85)
+position = Vector2(59, 68)
 friction = 1500
 
 [node name="InteractableItem" parent="." instance=ExtResource("2_bjvro")]
-position = Vector2(207, 88)
-type = 0
+position = Vector2(138, 126)
+
+[node name="InteractableItem3" parent="." instance=ExtResource("2_bjvro")]
+position = Vector2(291, 128)
+type = 1
+has_collision = true
+
+[node name="CanvasLayer" type="CanvasLayer" parent="."]
+script = ExtResource("3_5febl")
+
+[node name="ItemInventory" type="HBoxContainer" parent="CanvasLayer"]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -44.0
+offset_top = -40.0
+offset_right = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+alignment = 2

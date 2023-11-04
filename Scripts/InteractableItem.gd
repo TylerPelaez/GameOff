@@ -1,23 +1,51 @@
 extends Node2D
 class_name InteractableItem
 
+## The kind of interactable item this is (what happens when the player interacts with it)
 @export var type: Type = Type.Dialog
+@export var has_collision: bool = false
+
+@export_group("Interactable Ids")
+## If type is Dialog, the dialog Id to pop up when interaction occurs
+@export var dialog_id: DialogData.DialogId 
+## If type is a Key OR Lock item, the item id to give to/take from the player when interaction occurs
+@export var item_id: ItemData.ItemId
+
+@onready var collider = $StaticBody2D/CollisionShape2D
+
+
 
 enum Type {
 	KeyItem,
+	LockItem,
 	InstantButton,
 	ToggleButton,
-	Dialog
+	Dialog,
+	HidingPlace,
 }
 
+func _ready():
+	collider.disabled = !has_collision
+
 func interact():
-	# TODO: Fill this out!
+	# TODO: Fill this in as needed
 	match type:
 		Type.KeyItem:
+			# TODO: Item Pickup Dialog?
+			PlayerInventory.add_item(item_id)
+			queue_free()
 			print("Key Item Interacted!")
+		Type.LockItem:
+			if PlayerInventory.has_item(item_id):
+				print("Lock Removed")
+				PlayerInventory.remove_item(item_id)
+				queue_free()
+			print("Lock Interacted")
 		Type.InstantButton:
 			print("Button Interacted!")
 		Type.ToggleButton:
 			print("Toggle Button Interacted!")
 		Type.Dialog:
 			print("Dialog Interacted!")
+		Type.HidingPlace: 
+			print("Hiding Place Interacted!")
