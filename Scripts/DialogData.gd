@@ -4,10 +4,14 @@ class_name DialogData
 # For each dialog, a unique name should be in this enum, with an associated entry in data
 enum DialogId {
 	TestDialog,
-	PickupDialog
+	PickupDialog,
+	HidingDialog,
+	NotHidingDialog
 }
 
 static var data = {
 	DialogId.TestDialog: ["This is a test", "ligma"],
-	DialogId.PickupDialog: ["You picked up %s."]
+	DialogId.PickupDialog: ["You picked up %s."],
+	DialogId.HidingDialog: ["You are hiding..."],
+	DialogId.NotHidingDialog: ["You are not hiding."]
 }
