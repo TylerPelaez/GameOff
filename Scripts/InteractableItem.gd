@@ -11,7 +11,7 @@ class_name InteractableItem
 @export var dialog_id: DialogData.DialogId 
 ## If type is a Key OR Lock item, the item id to give to/take from the player when interaction occurs
 @export var item_id: ItemData.ItemId
-
+@export var max_interaction_count = 3
 @onready var collider = $StaticBody2D/CollisionShape2D
 #@onready var prompt = $RichTextLabel
 @onready var light_occluder_2d = $LightOccluder2D
@@ -53,8 +53,22 @@ func interact():
 			DialogManager.play_dialog(dialog_id)
 			queue_free()
 			print("Key Item Interacted!")
+<<<<<<< HEAD
 		Type.HidingPlace:
 			print("Hiding Place Interacted!")
+=======
+		Type.HidingPlace: 
+			print("In Hiding Spot")
+			var players = get_tree().get_nodes_in_group("player")
+			var player = players[0]
+			if player.mode == Player.Mode.Hidden:
+				DialogManager.play_dialog(dialog_id)
+				player.mode = Player.Mode.Normal
+			elif player.mode == Player.Mode.Normal:
+				DialogManager.play_dialog(dialog_id)
+				player.visible = false
+				player.mode = Player.Mode.Hidden
+>>>>>>> 21b7ec51701ba9a92eb3ff30b44a560997ad872c
 
 
 func _on_area_2d_area_entered(area):

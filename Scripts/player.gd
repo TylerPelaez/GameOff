@@ -1,4 +1,5 @@
 extends CharacterBody2D
+class_name Player
 
 @export var max_speed = 400
 @export var accel = 1500
@@ -8,6 +9,11 @@ var input = Vector2.ZERO
 var direction = Vector2.RIGHT
 var in_interactable_area: bool = false
 var current_interactable: InteractableItem
+enum Mode {
+	Normal,
+	Hidden
+}
+var mode = Mode.Normal
 
 func _physics_process(delta):
 	player_movement(delta)
@@ -47,9 +53,9 @@ func player_movement(delta):
 	elif direction == Vector2.UP:
 		rotation_degrees = -90
 	elif  direction == Vector2.DOWN:
-		rotation_degrees = 90
-	
-	move_and_slide()
+		rotation_degrees = 90	
+	if mode == Mode.Normal:
+		move_and_slide()
 
 
 func _unhandled_input(event):
