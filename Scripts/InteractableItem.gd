@@ -53,10 +53,6 @@ func interact():
 			DialogManager.play_dialog(dialog_id)
 			queue_free()
 			print("Key Item Interacted!")
-<<<<<<< HEAD
-		Type.HidingPlace:
-			print("Hiding Place Interacted!")
-=======
 		Type.HidingPlace: 
 			print("In Hiding Spot")
 			var players = get_tree().get_nodes_in_group("player")
@@ -64,11 +60,11 @@ func interact():
 			if player.mode == Player.Mode.Hidden:
 				DialogManager.play_dialog(dialog_id)
 				player.mode = Player.Mode.Normal
+				player.visible = true
 			elif player.mode == Player.Mode.Normal:
 				DialogManager.play_dialog(dialog_id)
 				player.visible = false
 				player.mode = Player.Mode.Hidden
->>>>>>> 21b7ec51701ba9a92eb3ff30b44a560997ad872c
 
 
 func _on_area_2d_area_entered(area):
