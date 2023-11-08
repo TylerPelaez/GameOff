@@ -13,7 +13,7 @@ class_name InteractableItem
 @export var item_id: ItemData.ItemId
 
 @onready var collider = $StaticBody2D/CollisionShape2D
-@onready var prompt = $RichTextLabel
+#@onready var prompt = $RichTextLabel
 @onready var light_occluder_2d = $LightOccluder2D
 
 
@@ -53,12 +53,12 @@ func interact():
 			DialogManager.play_dialog(dialog_id)
 			queue_free()
 			print("Key Item Interacted!")
-		Type.HidingPlace: 
+		Type.HidingPlace:
 			print("Hiding Place Interacted!")
 
 
 func _on_area_2d_area_entered(area):
-	prompt.visible = true
+	EventManager.publish(EventManager.EventId.ShowInteractionPrompt, self)
 
 func _on_area_2d_area_exited(area):
-	prompt.visible = false
+	EventManager.publish(EventManager.EventId.HideInteractionPrompt)

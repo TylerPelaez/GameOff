@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://l7f6rmsgimnb"]
+
+[ext_resource type="Theme" uid="uid://f62ri8jv63it" path="res://UI/UITheme.tres" id="1_gych7"]
+
+[node name="RichTextLabel" type="RichTextLabel"]
+light_mask = 0
+z_index = 4096
+z_as_relative = false
+offset_right = 143.0
+offset_bottom = 15.0
+theme = ExtResource("1_gych7")
+text = "Press E to Interact"
+fit_content = true
+scroll_active = false

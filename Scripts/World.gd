@@ -17,3 +17,4 @@ func on_player_inventory_item_removed(item_id: ItemData.ItemId):
 
 func on_dialog_played(id: DialogData.DialogId, params: Array[String]):
 	ui_controller.play_dialog(id, params)
+

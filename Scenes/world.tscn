@@ -67,7 +67,7 @@ position = Vector2(224, 56)
 process_callback = 0
 
 [node name="CanvasModulate" type="CanvasModulate" parent="."]
-color = Color(0.0588235, 0.0588235, 0.0588235, 1)
+color = Color(0.584314, 0.584314, 0.584314, 1)
 
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 process_mode = 3
