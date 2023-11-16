@@ -5,6 +5,10 @@ class_name Player
 @export var accel = 1500
 @export var friction = 600
 
+@onready var animation_tree = $AnimationTree
+@onready var animation_state = animation_tree["parameters/playback"]
+@onready var flashlight = $Flashlight
+
 var input = Vector2.ZERO
 var direction = Vector2.RIGHT
 var in_interactable_area: bool = false
@@ -14,6 +18,9 @@ enum Mode {
 	Hidden
 }
 var mode = Mode.Normal
+
+func _ready():
+	animation_tree.active = true
 
 func _physics_process(delta):
 	player_movement(delta)
@@ -35,25 +42,14 @@ func player_movement(delta):
 	else:
 		velocity += (input * accel * delta)
 		velocity = velocity.limit_length(max_speed)
-	# if the player presses both keys at the same time
-	# the character will be looking to the right
-	if Input.is_action_pressed("ui_left"):
-		direction = Vector2.LEFT
-	if Input.is_action_pressed("ui_right"):
-		direction = Vector2.RIGHT
-	if Input.is_action_pressed("ui_up"):
-		direction = Vector2.UP
-	if Input.is_action_pressed("ui_down"):
-		direction = Vector2.DOWN
 
-	if direction == Vector2.RIGHT:
-		rotation_degrees = 0
-	elif direction == Vector2.LEFT:
-		rotation_degrees = 180
-	elif direction == Vector2.UP:
-		rotation_degrees = -90
-	elif  direction == Vector2.DOWN:
-		rotation_degrees = 90	
+	if input == Vector2.ZERO:
+		animation_state.travel("Idle")
+	else:
+		animation_tree.set("parameters/Idle/blend_position", input)
+		animation_tree.set("parameters/Walk/blend_position", input)
+		animation_state.travel("Walk")
+
 	if mode == Mode.Normal:
 		move_and_slide()
 
