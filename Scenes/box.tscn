@@ -1,0 +1,41 @@
+[gd_scene load_steps=5 format=3 uid="uid://cchefjiu42k83"]
+
+[ext_resource type="Texture2D" uid="uid://b7ux2641ss5or" path="res://Art/box.png" id="1_bpqgs"]
+[ext_resource type="PackedScene" uid="uid://req7g37uqqs3" path="res://Scenes/movable.tscn" id="2_jkhr6"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7j106"]
+size = Vector2(14, 15)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ar2dq"]
+size = Vector2(14, 9)
+
+[node name="Box" type="Sprite2D"]
+y_sort_enabled = true
+texture_filter = 1
+texture = ExtResource("1_bpqgs")
+
+[node name="Movable" parent="." instance=ExtResource("2_jkhr6")]
+
+[node name="CollisionShape2D" parent="Movable" index="0"]
+position = Vector2(0, 0.5)
+shape = SubResource("RectangleShape2D_7j106")
+
+[node name="AnchorLeft" parent="Movable" index="1"]
+position = Vector2(-8, 0)
+
+[node name="AnchorRight" parent="Movable" index="2"]
+position = Vector2(8, 0)
+
+[node name="AnchorUp" parent="Movable" index="3"]
+position = Vector2(0, -2)
+
+[node name="AnchorDown" parent="Movable" index="4"]
+position = Vector2(0, 8)
+
+[node name="StaticBody2D" type="StaticBody2D" parent="."]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
+position = Vector2(0, 3.5)
+shape = SubResource("RectangleShape2D_ar2dq")
+
+[editable path="Movable"]

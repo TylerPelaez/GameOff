@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://bh00qt7boigwi"]
+[gd_scene load_steps=13 format=3 uid="uid://bh00qt7boigwi"]
 
 [ext_resource type="Script" path="res://Scripts/World.gd" id="1_tpvs4"]
 [ext_resource type="Texture2D" uid="uid://bxn8kvm570f80" path="res://Art/Test/White.png" id="2_x6cc8"]
@@ -9,6 +9,7 @@
 [ext_resource type="Script" path="res://UI/UIController.gd" id="6_ithtf"]
 [ext_resource type="Script" path="res://Scenes/CanvasModulate.gd" id="7_f00oe"]
 [ext_resource type="Theme" uid="uid://f62ri8jv63it" path="res://UI/UITheme.tres" id="7_s3ygy"]
+[ext_resource type="PackedScene" uid="uid://cchefjiu42k83" path="res://Scenes/box.tscn" id="10_ki3tj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f15y5"]
 size = Vector2(32, 32)
@@ -172,6 +173,9 @@ position = Vector2(-7, 218)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ledge"]
 position = Vector2(166.5, 14)
 shape = SubResource("RectangleShape2D_wqn1k")
+
+[node name="Box" parent="." instance=ExtResource("10_ki3tj")]
+position = Vector2(248, 136)
 
 [editable path="InteractableItem"]
 [editable path="InteractableItem/Movable"]

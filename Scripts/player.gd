@@ -12,6 +12,7 @@ class_name Player
 @onready var flashlight = $Flashlight
 
 @onready var shape_cast_2d = $ShapeCast2D
+@onready var hold_position = $HoldPosition
 
 
 var input = Vector2.ZERO
@@ -77,8 +78,6 @@ func moving_object_mode(delta):
 	if dragging_object_playing:
 		return
 	
-	print("drag entered")
-	
 	var input = get_input()
 	if input.x != 0 && input.y != 0:
 		input.y = 0
@@ -86,7 +85,7 @@ func moving_object_mode(delta):
 	
 	var offset = (current_movable.GRID_SIZE * input)
 	if input != Vector2.ZERO && current_movable.can_move_by_amount(offset, shape_cast_2d):
-		global_position = movable_anchor.global_position
+		global_position = movable_anchor.global_position - hold_position.position
 		dragging_object_origin = global_position
 		dragging_object_playing = true
 		dragging_object_target = global_position + offset
@@ -117,8 +116,13 @@ func start_moving(object: Movable):
 	current_movable = object
 	mode = Mode.MovingObject
 	object.start_moving()
-	movable_anchor = object.get_anchor_for_player(self)
-	global_position = movable_anchor.global_position
+	var anchor = object.get_anchor_for_player(self)
+	movable_anchor = anchor.node
+	global_position = movable_anchor.global_position - hold_position.position
+
+	animation_tree.set("parameters/Idle/blend_position", anchor.player_face_direction)
+	animation_tree.set("parameters/Walk/blend_position", anchor.player_face_direction)
+	animation_state.travel("Idle")
 
 func stop_moving():
 	mode = Mode.Normal

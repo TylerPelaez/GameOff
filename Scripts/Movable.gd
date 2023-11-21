@@ -1,7 +1,7 @@
 extends Area2D
 class_name Movable
 
-static var GRID_SIZE = 32
+static var GRID_SIZE = 16
 
 @export var droppable = true
 
@@ -56,14 +56,22 @@ func can_move_by_amount(amount: Vector2, player_shape_cast: ShapeCast2D) -> bool
 	player_shape_cast.force_shapecast_update()
 	return !player_shape_cast.is_colliding()
 
-func get_anchor_for_player(player: Player) -> Node2D:
+class Anchor:
+	var node: Node2D
+	var player_face_direction: Vector2
+	
+	func _init(node, player_face_direction):
+		self.node = node
+		self.player_face_direction = player_face_direction
+
+func get_anchor_for_player(player: Player) -> Anchor:
 	var ppos = player.global_position
 
 	if ppos.x >= anchor_right.global_position.x:
-		return anchor_right
+		return Anchor.new(anchor_right, Vector2.LEFT)
 	if ppos.y <= anchor_up.global_position.y:
-		return anchor_up
+		return Anchor.new(anchor_up, Vector2.DOWN)
 	if ppos.x <= anchor_left.global_position.x:
-		return anchor_left
+		return Anchor.new(anchor_left, Vector2.RIGHT)
 	else:
-		return anchor_down
+		return Anchor.new(anchor_down, Vector2.UP)
