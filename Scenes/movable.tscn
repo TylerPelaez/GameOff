@@ -1,0 +1,26 @@
+[gd_scene load_steps=2 format=3 uid="uid://req7g37uqqs3"]
+
+[ext_resource type="Script" path="res://Scripts/Movable.gd" id="1_njmvu"]
+
+[node name="Movable" type="Area2D"]
+collision_layer = 8
+collision_mask = 2
+script = ExtResource("1_njmvu")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+
+[node name="AnchorLeft" type="Node2D" parent="."]
+position = Vector2(-16, 0)
+
+[node name="AnchorRight" type="Node2D" parent="."]
+position = Vector2(16, 0)
+
+[node name="AnchorUp" type="Node2D" parent="."]
+position = Vector2(0, -16)
+
+[node name="AnchorDown" type="Node2D" parent="."]
+position = Vector2(0, 16)
+
+[node name="ShapeCast2D" type="ShapeCast2D" parent="."]
+enabled = false
+collide_with_areas = true

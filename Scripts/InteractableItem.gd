@@ -16,14 +16,13 @@ class_name InteractableItem
 #@onready var prompt = $RichTextLabel
 @onready var light_occluder_2d = $LightOccluder2D
 
-
 enum Type {
 	KeyItem,
 	LockItem,
 	InstantButton,
 	ToggleButton,
 	Dialog,
-	HidingPlace,
+	HidingPlace
 }
 
 func _ready():
@@ -65,7 +64,6 @@ func interact():
 				DialogManager.play_dialog(dialog_id)
 				player.visible = false
 				player.mode = Player.Mode.Hidden
-
 
 func _on_area_2d_area_entered(area):
 	EventManager.publish(EventManager.EventId.ShowInteractionPrompt, self)
