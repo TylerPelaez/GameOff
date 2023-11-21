@@ -77,6 +77,8 @@ func moving_object_mode(delta):
 	if dragging_object_playing:
 		return
 	
+	print("drag entered")
+	
 	var input = get_input()
 	if input.x != 0 && input.y != 0:
 		input.y = 0
@@ -89,11 +91,12 @@ func moving_object_mode(delta):
 		dragging_object_playing = true
 		dragging_object_target = global_position + offset
 		var tween = get_tree().create_tween().bind_node(self)
+		tween.set_pause_mode(Tween.TWEEN_PAUSE_STOP)
+		tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 		tween.set_parallel(true)
 		tween.tween_property(self, "global_position", dragging_object_target, drag_object_animation_time_seconds)
-		tween.tween_property(current_movable, "global_position", current_movable.global_position + offset, drag_object_animation_time_seconds)
-		tween.set_parallel(false)
-		tween.tween_callback(on_object_drag_complete)
+		tween.tween_method(current_movable.move_to, current_movable.global_position, current_movable.global_position + offset, drag_object_animation_time_seconds)
+		tween.chain().tween_callback(on_object_drag_complete)
 		tween.play()
 
 func on_object_drag_complete():

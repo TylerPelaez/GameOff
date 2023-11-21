@@ -11,7 +11,7 @@
 [ext_resource type="Theme" uid="uid://f62ri8jv63it" path="res://UI/UITheme.tres" id="7_s3ygy"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f15y5"]
-size = Vector2(37, 36)
+size = Vector2(32, 32)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wqn1k"]
 size = Vector2(353, 48)
@@ -67,13 +67,12 @@ push_force = 300.0
 remote_path = NodePath("../../Camera2D")
 
 [node name="InteractableItem" parent="." instance=ExtResource("4_uut5t")]
-position = Vector2(138, 126)
+position = Vector2(192, 192)
 has_collision = true
 
 [node name="Movable" parent="InteractableItem" instance=ExtResource("6_fgp3u")]
 
 [node name="CollisionShape2D" parent="InteractableItem/Movable" index="0"]
-position = Vector2(-0.5, 0)
 shape = SubResource("RectangleShape2D_f15y5")
 
 [node name="InteractableItem2" parent="." instance=ExtResource("4_uut5t")]
@@ -167,6 +166,7 @@ casts_shadows = true
 dialog_id = 2
 
 [node name="Ledge" type="Area2D" parent="."]
+visible = false
 position = Vector2(-7, 218)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Ledge"]

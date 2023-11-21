@@ -1,9 +1,10 @@
-[gd_scene load_steps=30 format=3 uid="uid://mcnovg0o2sqq"]
+[gd_scene load_steps=31 format=3 uid="uid://mcnovg0o2sqq"]
 
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_q8mce"]
 [ext_resource type="Texture2D" uid="uid://vsfhqmcilr5f" path="res://Art/Thief1Sheet.png" id="2_umswe"]
 [ext_resource type="Shape2D" uid="uid://drdj8f2u8asla" path="res://Scenes/Player/PlayerGroundCollisionShape.tres" id="3_umhg0"]
 [ext_resource type="Shape2D" uid="uid://xoonwtrtim1y" path="res://Scenes/Player/PlayerInteractionCollisionShape.tres" id="4_7352q"]
+[ext_resource type="Shape2D" uid="uid://diuogay3p62e1" path="res://Scenes/Player/MovableCheckCollisionShape.tres" id="5_4r3gv"]
 [ext_resource type="Texture2D" uid="uid://86s60okdbu24" path="res://Art/Test/cone2.png" id="5_sitai"]
 
 [sub_resource type="Animation" id="Animation_c6rop"]
@@ -424,8 +425,6 @@ script = ExtResource("1_q8mce")
 max_speed = 75
 accel = 1501
 friction = 2000
-push_force = null
-drag_object_animation_time_seconds = null
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 texture_filter = 1
@@ -435,7 +434,7 @@ flip_h = true
 hframes = 12
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -4)
+visible = false
 rotation = 1.57079
 shape = ExtResource("3_umhg0")
 
@@ -445,6 +444,7 @@ collision_layer = 2
 collision_mask = 4
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableCheck"]
+visible = false
 position = Vector2(0, 1)
 shape = ExtResource("4_7352q")
 
@@ -454,8 +454,8 @@ collision_layer = 2
 collision_mask = 8
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="MovableCheck"]
-position = Vector2(0, 1)
-shape = ExtResource("4_7352q")
+position = Vector2(0, 3)
+shape = ExtResource("5_4r3gv")
 
 [node name="Flashlight" type="Node2D" parent="."]
 position = Vector2(0, -7)

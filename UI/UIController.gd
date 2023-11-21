@@ -27,6 +27,8 @@ func _process(delta):
 	if prompt_instance != null:
 		var pos = prompt_origin_object.get_global_transform_with_canvas().origin
 		prompt_instance.position = pos
+		prompt_instance.position.x -= (prompt_instance.size.x / 4)
+		prompt_instance.position.y -= 32
 
 func add_item(item_id: ItemData.ItemId):
 	var instance = item_container_prefab.instantiate()

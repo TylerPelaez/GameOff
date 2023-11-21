@@ -6,9 +6,11 @@
 light_mask = 0
 z_index = 4096
 z_as_relative = false
-offset_right = 143.0
-offset_bottom = 15.0
+offset_right = 7.0
+offset_bottom = 12.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
 theme = ExtResource("1_gych7")
-text = "Press E to Interact"
+text = "E"
 fit_content = true
 scroll_active = false
