@@ -23,7 +23,6 @@ var current_interactable: InteractableItem
 var current_movable: Movable
 var movable_anchor: Node2D
 
-
 var dragging_object_playing: bool = false
 var dragging_object_origin: Vector2
 var dragging_object_target: Vector2

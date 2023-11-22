@@ -1,8 +1,7 @@
-[gd_scene load_steps=31 format=3 uid="uid://chawhftcwjlwv"]
+[gd_scene load_steps=30 format=3 uid="uid://chawhftcwjlwv"]
 
 [ext_resource type="Script" path="res://Scripts/Player3D.gd" id="1_d4u14"]
-[ext_resource type="Shape2D" uid="uid://xoonwtrtim1y" path="res://Scenes/Player/PlayerInteractionCollisionShape.tres" id="2_s2ula"]
-[ext_resource type="Shape2D" uid="uid://diuogay3p62e1" path="res://Scenes/Player/MovableCheckCollisionShape.tres" id="3_5ke24"]
+[ext_resource type="Shape3D" uid="uid://oc7x3yamxs54" path="res://Scenes/Player/player3DWorldCollider.tres" id="3_7r586"]
 [ext_resource type="Material" uid="uid://c1y0pwcoki4bc" path="res://Art/Player/PlayerMaterial.tres" id="5_qa7qm"]
 
 [sub_resource type="Animation" id="Animation_c6rop"]
@@ -57,6 +56,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [Vector3(0.083, 1, 1)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HoldPosition:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector3(0, 0, 0.064)]
+}
 
 [sub_resource type="Animation" id="Animation_dmvj2"]
 resource_name = "IdleLeft"
@@ -109,6 +120,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector3(0.083, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HoldPosition:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector3(-0.064, 0, 0)]
 }
 
 [sub_resource type="Animation" id="Animation_dbr7m"]
@@ -163,6 +186,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [Vector3(-0.083, 1, 1)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HoldPosition:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector3(0.064, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_vdvev"]
 resource_name = "IdleUp"
@@ -215,6 +250,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector3(0.667, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HoldPosition:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector3(0, 0, -0.064)]
 }
 
 [sub_resource type="Animation" id="Animation_qlguf"]
@@ -279,6 +326,18 @@ tracks/4/keys = {
 "update": 0,
 "values": [Vector3(0.083, 1, 1)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("HoldPosition:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.000275761, -0.000690952, 0.0642972)]
+}
 
 [sub_resource type="Animation" id="Animation_hyrc5"]
 resource_name = "WalkDown"
@@ -331,6 +390,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector3(0.083, 1, 1)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HoldPosition:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector3(0, 0, 0.064)]
 }
 
 [sub_resource type="Animation" id="Animation_bfjqw"]
@@ -385,6 +456,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [Vector3(0.083, 1, 1)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HoldPosition:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector3(-0.064, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_pu1yf"]
 resource_name = "WalkRight"
@@ -438,6 +521,18 @@ tracks/3/keys = {
 "update": 1,
 "values": [Vector3(-0.083, 1, 1)]
 }
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HoldPosition:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector3(0.064, 0, 0)]
+}
 
 [sub_resource type="Animation" id="Animation_tv1lq"]
 resource_name = "WalkUp"
@@ -490,6 +585,18 @@ tracks/3/keys = {
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
 "values": [Vector3(0.667, 0, 0), Vector3(0.75, 0, 0), Vector3(0.833, 0, 0), Vector3(0.917, 0, 0)]
+}
+tracks/4/type = "value"
+tracks/4/imported = false
+tracks/4/enabled = true
+tracks/4/path = NodePath("HoldPosition:position")
+tracks/4/interp = 1
+tracks/4/loop_wrap = true
+tracks/4/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [Vector3(0, 0, -0.064)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ixvbk"]
@@ -573,9 +680,8 @@ graph_offset = Vector2(34, 26)
 material = ExtResource("5_qa7qm")
 size = Vector2(0.25, 0.25)
 
-[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_amscq"]
-radius = 0.04
-height = 0.15
+[sub_resource type="BoxShape3D" id="BoxShape3D_e6j8c"]
+size = Vector3(0.234684, 0.106756, 0.17562)
 
 [node name="Player3D" type="CharacterBody3D" groups=["player"]]
 collision_layer = 2
@@ -589,25 +695,6 @@ accel = 1501
 friction = 2000
 jump_strength = 3
 
-[node name="InteractableCheck" type="Area2D" parent="."]
-position = Vector2(0, -8)
-collision_layer = 2
-collision_mask = 4
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="InteractableCheck"]
-visible = false
-position = Vector2(0, 1)
-shape = ExtResource("2_s2ula")
-
-[node name="MovableCheck" type="Area2D" parent="."]
-position = Vector2(0, -7)
-collision_layer = 2
-collision_mask = 8
-
-[node name="CollisionShape2D" type="CollisionShape2D" parent="MovableCheck"]
-position = Vector2(0, 3)
-shape = ExtResource("3_5ke24")
-
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
 libraries = {
@@ -617,7 +704,7 @@ libraries = {
 [node name="AnimationTree" type="AnimationTree" parent="."]
 tree_root = SubResource("AnimationNodeStateMachine_lh46l")
 anim_player = NodePath("../AnimationPlayer")
-parameters/Idle/blend_position = Vector2(-0.000858366, 0.0204082)
+parameters/Idle/blend_position = Vector2(-0.282051, -0.12)
 parameters/Walk/blend_position = Vector2(0.000944257, -0.0538923)
 
 [node name="Visual" type="MeshInstance3D" parent="."]
@@ -627,7 +714,7 @@ skeleton = NodePath("../..")
 
 [node name="Collider" type="CollisionShape3D" parent="."]
 transform = Transform3D(1, 2.67397e-12, 0, -4.70429e-12, 1, 1.54614e-11, 0, -1.54614e-11, 1, -1.43051e-06, -0.024736, 2.80372e-07)
-shape = SubResource("CapsuleShape3D_amscq")
+shape = ExtResource("3_7r586")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0408187)
@@ -647,7 +734,30 @@ shadow_bias = 0.01
 [node name="MoveBoxAnchorPosition" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0536278)
 
+[node name="DraggableCheck" type="Area3D" parent="."]
+collision_layer = 64
+collision_mask = 32
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DraggableCheck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0257546, 0)
+shape = SubResource("BoxShape3D_e6j8c")
+
+[node name="InteractableCheck" type="Area3D" parent="."]
+collision_layer = 128
+collision_mask = 16
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableCheck"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0257546, 0)
+shape = SubResource("BoxShape3D_e6j8c")
+
+[node name="ShapeCast3D" type="ShapeCast3D" parent="."]
+shape = ExtResource("3_7r586")
+target_position = Vector3(0, 0, 0)
+
+[node name="HoldPosition" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.064)
+
+[connection signal="area_entered" from="DraggableCheck" to="." method="_on_draggable_check_area_entered"]
+[connection signal="area_exited" from="DraggableCheck" to="." method="_on_draggable_check_area_exited"]
 [connection signal="area_entered" from="InteractableCheck" to="." method="_on_interactable_check_area_entered"]
 [connection signal="area_exited" from="InteractableCheck" to="." method="_on_interactable_check_area_exited"]
-[connection signal="area_entered" from="MovableCheck" to="." method="_on_movable_check_area_entered"]
-[connection signal="area_exited" from="MovableCheck" to="." method="_on_movable_check_area_exited"]
