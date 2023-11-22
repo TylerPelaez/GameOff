@@ -7,3 +7,5 @@ resource_name = "wallwithdoor"
 albedo_texture = ExtResource("1_q6ccm")
 metallic_specular = 0.0
 texture_filter = 0
+distance_fade_mode = 2
+distance_fade_max_distance = 1.0

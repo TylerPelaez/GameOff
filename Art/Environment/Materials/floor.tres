@@ -10,3 +10,5 @@ metallic = 0.2
 roughness = 0.8
 uv1_scale = Vector3(3, 3, 3)
 texture_filter = 0
+distance_fade_mode = 3
+distance_fade_max_distance = 1.0
