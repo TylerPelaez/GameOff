@@ -1,0 +1,12 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://brpbwt21lgb6y"]
+
+[ext_resource type="Texture2D" uid="uid://bg6cq35ut2ojh" path="res://Art/Environment/Tiles-f6701d22c73bdf72a2fc334339ed5ffb_floortile.png" id="1_pjcn5"]
+
+[resource]
+resource_name = "floor"
+albedo_color = Color(0.906332, 0.906332, 0.906332, 1)
+albedo_texture = ExtResource("1_pjcn5")
+metallic = 0.2
+roughness = 0.8
+uv1_scale = Vector3(3, 3, 3)
+texture_filter = 0

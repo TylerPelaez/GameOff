@@ -118,11 +118,14 @@ func start_moving(object: Movable):
 	object.start_moving()
 	var anchor = object.get_anchor_for_player(self)
 	movable_anchor = anchor.node
-	global_position = movable_anchor.global_position - hold_position.position
-
+	
 	animation_tree.set("parameters/Idle/blend_position", anchor.player_face_direction)
 	animation_tree.set("parameters/Walk/blend_position", anchor.player_face_direction)
 	animation_state.travel("Idle")
+
+	
+	global_position = movable_anchor.global_position - hold_position.position
+
 
 func stop_moving():
 	mode = Mode.Normal

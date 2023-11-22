@@ -1,0 +1,13 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://c1y0pwcoki4bc"]
+
+[ext_resource type="Texture2D" uid="uid://vsfhqmcilr5f" path="res://Art/Thief1Sheet.png" id="1_uy5el"]
+
+[resource]
+transparency = 1
+albedo_texture = ExtResource("1_uy5el")
+metallic_specular = 0.0
+roughness = 0.0
+uv1_scale = Vector3(0.083, 1, 1)
+uv1_offset = Vector3(0.667, 0, 0)
+texture_filter = 0
+texture_repeat = false

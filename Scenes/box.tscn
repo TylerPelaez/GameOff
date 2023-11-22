@@ -1,4 +1,4 @@
-[gd_scene load_steps=5 format=3 uid="uid://cchefjiu42k83"]
+[gd_scene load_steps=6 format=3 uid="uid://cchefjiu42k83"]
 
 [ext_resource type="Texture2D" uid="uid://b7ux2641ss5or" path="res://Art/box.png" id="1_bpqgs"]
 [ext_resource type="PackedScene" uid="uid://req7g37uqqs3" path="res://Scenes/movable.tscn" id="2_jkhr6"]
@@ -8,6 +8,9 @@ size = Vector2(14, 15)
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_ar2dq"]
 size = Vector2(14, 9)
+
+[sub_resource type="OccluderPolygon2D" id="OccluderPolygon2D_ss6b8"]
+polygon = PackedVector2Array(-7, -7, 7, -7, 7, 8, -7, 8)
 
 [node name="Box" type="Sprite2D"]
 y_sort_enabled = true
@@ -37,5 +40,8 @@ position = Vector2(0, 8)
 [node name="CollisionShape2D" type="CollisionShape2D" parent="StaticBody2D"]
 position = Vector2(0, 3.5)
 shape = SubResource("RectangleShape2D_ar2dq")
+
+[node name="LightOccluder2D" type="LightOccluder2D" parent="."]
+occluder = SubResource("OccluderPolygon2D_ss6b8")
 
 [editable path="Movable"]
