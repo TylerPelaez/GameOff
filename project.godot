@@ -82,11 +82,11 @@ jump={
 [layer_names]
 
 2d_physics/layer_1="World"
+3d_physics/layer_1="World"
 2d_physics/layer_2="Player"
+3d_physics/layer_2="Player"
 2d_physics/layer_3="Interactable"
-3d_physics/layer_3="World"
 2d_physics/layer_4="Movable"
-3d_physics/layer_4="Player"
 3d_physics/layer_5="Interact"
 3d_physics/layer_6="Draggable"
 3d_physics/layer_7="PlayerDraggableCheck"

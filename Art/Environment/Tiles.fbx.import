@@ -32,19 +32,19 @@ _subresources={
 "materials": {
 "floor": {
 "use_external/enabled": true,
-"use_external/path": "res://Art/Mesh/Materials/floor.tres"
+"use_external/path": "res://Art/Environment/Materials/floor.tres"
 },
 "walledge": {
 "use_external/enabled": true,
-"use_external/path": "res://Art/Mesh/Materials/walledge.tres"
+"use_external/path": "res://Art/Environment/Materials/walledge.tres"
 },
 "wallmiddle": {
 "use_external/enabled": true,
-"use_external/path": "res://Art/Mesh/Materials/wallmiddle.tres"
+"use_external/path": "res://Art/Environment/Materials/wallmiddle.tres"
 },
 "wallwithdoor": {
 "use_external/enabled": true,
-"use_external/path": "res://Art/Mesh/Materials/wallwithdoor.tres"
+"use_external/path": "res://Art/Environment/Materials/wallwithdoor.tres"
 }
 },
 "meshes": {
@@ -56,7 +56,7 @@ _subresources={
 "lods/normal_split_angle": 25.0,
 "save_to_file/enabled": true,
 "save_to_file/make_streamable": "",
-"save_to_file/path": "res://Art/Mesh/Meshes/Floor_Empty.res"
+"save_to_file/path": "res://Art/Environment/Meshes/Floor_Empty.res"
 },
 "Root Scene_Room_Corner": {
 "generate/lightmap_uv": 0,
@@ -66,7 +66,7 @@ _subresources={
 "lods/normal_split_angle": 25.0,
 "save_to_file/enabled": true,
 "save_to_file/make_streamable": "",
-"save_to_file/path": "res://Art/Mesh/Meshes/Room_Corner.res"
+"save_to_file/path": "res://Art/Environment/Meshes/Room_Corner.res"
 },
 "Root Scene_room_Wall_Left_Edge": {
 "generate/lightmap_uv": 0,
@@ -76,7 +76,7 @@ _subresources={
 "lods/normal_split_angle": 25.0,
 "save_to_file/enabled": true,
 "save_to_file/make_streamable": "",
-"save_to_file/path": "res://Art/Mesh/Meshes/Room_Wall_Left_Edge.res"
+"save_to_file/path": "res://Art/Environment/Meshes/Room_Wall_Left_Edge.res"
 },
 "Root Scene_room_Wall_Middle": {
 "generate/lightmap_uv": 0,
@@ -86,7 +86,7 @@ _subresources={
 "lods/normal_split_angle": 25.0,
 "save_to_file/enabled": true,
 "save_to_file/make_streamable": "",
-"save_to_file/path": "res://Art/Mesh/Meshes/Room_Wall_Middle.res"
+"save_to_file/path": "res://Art/Environment/Meshes/Room_Wall_Middle.res"
 },
 "Root Scene_room_Wall_Right_Edge": {
 "generate/lightmap_uv": 0,
@@ -96,9 +96,9 @@ _subresources={
 "lods/normal_split_angle": 25.0,
 "save_to_file/enabled": true,
 "save_to_file/make_streamable": "",
-"save_to_file/path": "res://Art/Mesh/Meshes/Room_Wall_Right_Edge.res"
+"save_to_file/path": "res://Art/Environment/Meshes/Room_Wall_Right_Edge.res"
 },
-"Root Scene_wall_Door": {
+"Root Scene_wall_Door1": {
 "generate/lightmap_uv": 0,
 "generate/lods": 0,
 "generate/shadow_meshes": 0,
@@ -106,7 +106,37 @@ _subresources={
 "lods/normal_split_angle": 25.0,
 "save_to_file/enabled": true,
 "save_to_file/make_streamable": "",
-"save_to_file/path": "res://Art/Mesh/Meshes/Door.res"
+"save_to_file/path": "res://Art/Environment/Meshes/Door.res"
+},
+"Root Scene_wall_Left": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://Art/Environment/Meshes/Wall_Left_No_Floor.res"
+},
+"Root Scene_wall_Middle": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://Art/Environment/Meshes/Wall_Middle_No_Floor.res"
+},
+"Root Scene_wall_Right": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://Art/Environment/Meshes/Wall_Right_No_Floor.res"
 }
 },
 "nodes": {

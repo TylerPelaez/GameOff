@@ -94,7 +94,7 @@ func moving_object_mode(delta):
 		input = input.normalized()
 
 	var offset = (current_box.GRID_SIZE * input)
-	if input != Vector3.ZERO && current_box.can_move_by_amount(offset, shape_cast):
+	if input != Vector3.ZERO && current_box.can_move_by_amount(offset, shape_cast, self):
 		var new_pos = movable_anchor.global_position - hold_position.position
 		global_position.x = new_pos.x
 		global_position.z = new_pos.z
@@ -112,6 +112,8 @@ func moving_object_mode(delta):
 
 func on_object_drag_complete():
 	dragging_object_playing = false
+	if current_box.on_drag_complete():
+		stop_moving()
 
 func _unhandled_input(event):
 	if event.is_action_pressed("interact") && mode == Mode.Normal:
@@ -125,6 +127,8 @@ func _unhandled_input(event):
 
 #
 func start_moving(object: Box):
+	if object.state != Box.State.Default:
+		return
 	current_box = object
 	mode = Mode.MovingObject
 	object.start_moving()
