@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Game Off"
-run/main_scene="res://Scenes/Level1.tscn"
+run/main_scene="res://Scenes/3d_world_test.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -97,5 +97,6 @@ jump={
 
 [rendering]
 
+renderer/rendering_method="gl_compatibility"
 renderer/rendering_method.mobile="gl_compatibility"
 environment/defaults/default_clear_color=Color(0, 0, 0, 1)
