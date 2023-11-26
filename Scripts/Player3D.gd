@@ -124,6 +124,8 @@ func _unhandled_input(event):
 			start_moving(current_box)
 		elif mode == Mode.MovingObject && !dragging_object_playing:
 			stop_moving()
+	if event.is_action_pressed("ui_cancel"):
+		get_tree().change_scene_to_file("res://UI/game_over_screen.tscn")
 
 #
 func start_moving(object: Box):

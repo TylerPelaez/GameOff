@@ -3,9 +3,9 @@ extends CanvasLayer
 
 
 func _on_restart_button_pressed():
-	get.tree().reload_current_scene()
+	get_tree().change_scene_to_file("res://Scenes/3d_world_test.tscn")
 
 
 func _on_quit_button_pressed():
-	get.tree().quit()
+	get_tree().quit()
 
