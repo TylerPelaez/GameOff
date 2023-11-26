@@ -3,7 +3,7 @@
 [ext_resource type="Script" path="res://Scripts/player.gd" id="1_q8mce"]
 [ext_resource type="Texture2D" uid="uid://vsfhqmcilr5f" path="res://Art/Thief1Sheet.png" id="2_umswe"]
 [ext_resource type="Shape2D" uid="uid://drdj8f2u8asla" path="res://Scenes/Player/PlayerGroundCollisionShape.tres" id="3_umhg0"]
-[ext_resource type="Shape2D" uid="uid://xoonwtrtim1y" path="res://Scenes/Player/PlayerInteractionCollisionShape.tres" id="4_7352q"]
+[ext_resource type="Shape2D" path="res://Scenes/Player/PlayerInteractionCollisionShape.tres" id="4_7352q"]
 [ext_resource type="Shape2D" uid="uid://diuogay3p62e1" path="res://Scenes/Player/MovableCheckCollisionShape.tres" id="5_4r3gv"]
 [ext_resource type="Texture2D" uid="uid://86s60okdbu24" path="res://Art/Test/cone2.png" id="5_sitai"]
 
