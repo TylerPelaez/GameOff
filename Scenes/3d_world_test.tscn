@@ -1,4 +1,4 @@
-[gd_scene load_steps=18 format=3 uid="uid://falvrtr5sb5m"]
+[gd_scene load_steps=19 format=3 uid="uid://falvrtr5sb5m"]
 
 [ext_resource type="MeshLibrary" uid="uid://d00ge6jxao8rg" path="res://Art/Environment/MeshLibrary.tres" id="1_76fpt"]
 [ext_resource type="PackedScene" uid="uid://chawhftcwjlwv" path="res://Scenes/player3D.tscn" id="3_c653b"]
@@ -13,6 +13,20 @@
 background_energy_multiplier = 0.1
 ambient_light_source = 2
 ambient_light_color = Color(0.188235, 0.188235, 0.188235, 1)
+ssao_enabled = true
+ssao_intensity = 1.0
+ssao_light_affect = 0.5
+ssil_enabled = true
+volumetric_fog_enabled = true
+volumetric_fog_density = 0.5167
+volumetric_fog_albedo = Color(1, 0, 0, 1)
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_a575m"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 1.12
+dof_blur_near_enabled = true
+dof_blur_near_distance = 1.08
+dof_blur_near_transition = 2.0
 
 [sub_resource type="QuadMesh" id="QuadMesh_5spff"]
 
@@ -41,7 +55,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_1yw6e"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_6c0sk"]
 resource_local_to_scene = true
 resource_name = "Root Scene_ChainHolder"
 _surfaces = [{
@@ -72,7 +86,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_wj01c"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_ojalj"]
 resource_local_to_scene = true
 resource_name = "Root Scene_ChainHolder"
 _surfaces = [{
@@ -105,6 +119,7 @@ metadata/_editor_floor_ = Vector3(0, 0, 0)
 [node name="Camera3D" type="Camera3D" parent="."]
 transform = Transform3D(1, 2.21078e-06, 3.87438e-05, -3.1149e-05, 0.641182, 0.767389, -2.31453e-05, -0.767389, 0.641182, 5.81203, 1.53581, 0.940144)
 environment = SubResource("Environment_30wu8")
+attributes = SubResource("CameraAttributesPractical_a575m")
 
 [node name="Player3D" parent="." instance=ExtResource("3_c653b")]
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.812, 0.599468, 0.209)
@@ -183,7 +198,7 @@ skeleton = NodePath("../..")
 
 [node name="ChainHolder" parent="Environment" node_paths=PackedStringArray("attached") instance=ExtResource("5_ct13f")]
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.00045, 1.69812, -8.49981)
-mesh = SubResource("ArrayMesh_1yw6e")
+mesh = SubResource("ArrayMesh_6c0sk")
 skeleton = NodePath("../..")
 max_tiles = 3
 attached = NodePath("../Box11")
@@ -195,7 +210,7 @@ skeleton = NodePath("../..")
 
 [node name="ChainHolder2" parent="Environment" node_paths=PackedStringArray("attached") instance=ExtResource("5_ct13f")]
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 3.00034, 1.69824, -5.99989)
-mesh = SubResource("ArrayMesh_wj01c")
+mesh = SubResource("ArrayMesh_ojalj")
 max_tiles = 2
 attached = NodePath("../Box4")
 
@@ -205,5 +220,17 @@ opened_by = 0
 _button = NodePath("../Button")
 
 [node name="Button" parent="Environment" instance=ExtResource("8_0dfrb")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 7.00006, 0.697116, -0.499718)
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 7.00006, 0.699652, -0.499718)
 type = 2
+
+[node name="OmniLight3D" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 4.68335e-10, 6.22094e-10, -1.0662e-12, 1, 2.28101e-09, 0, 0, 1, 5.45957, 1.66056, 0.76713)
+light_color = Color(0.461647, 0.568522, 0.267637, 1)
+light_energy = 0.8
+light_volumetric_fog_energy = 0.6
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="."]
+transform = Transform3D(1, 4.68335e-10, 6.22094e-10, -1.0662e-12, 1, 2.28101e-09, 0, 0, 1, 4.77898, 2.96775, -5.96202)
+light_color = Color(0.462745, 0.568627, 0.266667, 1)
+light_energy = 0.8
+light_volumetric_fog_energy = 0.6

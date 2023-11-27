@@ -12,6 +12,7 @@ mesh = ExtResource("3_3jwqj")
 script = ExtResource("2_ee2t5")
 
 [node name="Chain" type="MeshInstance3D" parent="."]
+cast_shadow = 2
 mesh = ExtResource("1_o5ywj")
 
 [node name="StaticBody3D" type="StaticBody3D" parent="."]

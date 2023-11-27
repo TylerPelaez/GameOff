@@ -6,4 +6,6 @@
 resource_name = "lambert2"
 albedo_texture = ExtResource("1_va6hd")
 metallic_specular = 0.0
+ao_enabled = true
+ao_light_affect = 1.0
 texture_filter = 0

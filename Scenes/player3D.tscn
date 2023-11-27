@@ -1,4 +1,4 @@
-[gd_scene load_steps=30 format=3 uid="uid://chawhftcwjlwv"]
+[gd_scene load_steps=33 format=3 uid="uid://chawhftcwjlwv"]
 
 [ext_resource type="Script" path="res://Scripts/Player3D.gd" id="1_d4u14"]
 [ext_resource type="Shape3D" uid="uid://oc7x3yamxs54" path="res://Scenes/Player/player3DWorldCollider.tres" id="3_7r586"]
@@ -68,6 +68,18 @@ tracks/4/keys = {
 "update": 1,
 "values": [Vector3(0, 0, 0.064)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("OmniLight3D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.0341352, 0.0461332)]
+}
 
 [sub_resource type="Animation" id="Animation_dmvj2"]
 resource_name = "IdleLeft"
@@ -132,6 +144,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector3(-0.064, 0, 0)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("OmniLight3D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.0411295, 0.0341352, 0.0461332)]
 }
 
 [sub_resource type="Animation" id="Animation_dbr7m"]
@@ -198,6 +222,18 @@ tracks/4/keys = {
 "update": 1,
 "values": [Vector3(0.064, 0, 0)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("OmniLight3D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.041, 0.034, 0.046)]
+}
 
 [sub_resource type="Animation" id="Animation_vdvev"]
 resource_name = "IdleUp"
@@ -254,14 +290,14 @@ tracks/3/keys = {
 tracks/4/type = "value"
 tracks/4/imported = false
 tracks/4/enabled = true
-tracks/4/path = NodePath("HoldPosition:position")
+tracks/4/path = NodePath("OmniLight3D:position")
 tracks/4/interp = 1
 tracks/4/loop_wrap = true
 tracks/4/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector3(0, 0, -0.064)]
+"update": 0,
+"values": [Vector3(0, 0.0341352, 0.0461332)]
 }
 
 [sub_resource type="Animation" id="Animation_qlguf"]
@@ -338,6 +374,18 @@ tracks/5/keys = {
 "update": 0,
 "values": [Vector3(0.000275761, -0.000690952, 0.0642972)]
 }
+tracks/6/type = "value"
+tracks/6/imported = false
+tracks/6/enabled = true
+tracks/6/path = NodePath("OmniLight3D:position")
+tracks/6/interp = 1
+tracks/6/loop_wrap = true
+tracks/6/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.0341352, 0.0461332)]
+}
 
 [sub_resource type="Animation" id="Animation_hyrc5"]
 resource_name = "WalkDown"
@@ -402,6 +450,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector3(0, 0, 0.064)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("OmniLight3D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.0341352, 0.0461332)]
 }
 
 [sub_resource type="Animation" id="Animation_bfjqw"]
@@ -468,6 +528,18 @@ tracks/4/keys = {
 "update": 1,
 "values": [Vector3(-0.064, 0, 0)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("OmniLight3D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.0411295, 0.0341352, 0.0461332)]
+}
 
 [sub_resource type="Animation" id="Animation_pu1yf"]
 resource_name = "WalkRight"
@@ -533,6 +605,18 @@ tracks/4/keys = {
 "update": 1,
 "values": [Vector3(0.064, 0, 0)]
 }
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("OmniLight3D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0.041, 0.034, 0.046)]
+}
 
 [sub_resource type="Animation" id="Animation_tv1lq"]
 resource_name = "WalkUp"
@@ -597,6 +681,18 @@ tracks/4/keys = {
 "transitions": PackedFloat32Array(1),
 "update": 1,
 "values": [Vector3(0, 0, -0.064)]
+}
+tracks/5/type = "value"
+tracks/5/imported = false
+tracks/5/enabled = true
+tracks/5/path = NodePath("OmniLight3D:position")
+tracks/5/interp = 1
+tracks/5/loop_wrap = true
+tracks/5/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.0341352, 0.0461332)]
 }
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_ixvbk"]
@@ -680,6 +776,44 @@ graph_offset = Vector2(34, 26)
 material = ExtResource("5_qa7qm")
 size = Vector2(0.25, 0.25)
 
+[sub_resource type="Animation" id="Animation_yj2dv"]
+resource_name = "Flicker"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:omni_range")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.7, 3.7, 5.6, 7.8),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.5, 0.6, 0.5, 0.6, 0.5]
+}
+
+[sub_resource type="Animation" id="Animation_2hr34"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:omni_range")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.5]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_orihg"]
+_data = {
+"Flicker": SubResource("Animation_yj2dv"),
+"RESET": SubResource("Animation_2hr34")
+}
+
 [sub_resource type="BoxShape3D" id="BoxShape3D_e6j8c"]
 size = Vector3(0.234684, 0.106756, 0.17562)
 
@@ -711,6 +845,7 @@ parameters/Walk/blend_position = Vector2(0.000944257, -0.0538923)
 
 [node name="Visual" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, -2.57152e-12, 9.09495e-12, 2.57152e-12, 1, 9.09495e-12, -9.09495e-12, -9.09495e-12, 1, 0, 0.025, 0)
+cast_shadow = 2
 mesh = SubResource("QuadMesh_1aga6")
 skeleton = NodePath("../..")
 
@@ -719,19 +854,32 @@ transform = Transform3D(1, 2.67397e-12, 0, -4.70429e-12, 1, 1.54614e-11, 0, -1.5
 shape = ExtResource("3_7r586")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.0408187)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0341352, 0.0461332)
 light_color = Color(0.913725, 0.611765, 0, 1)
+light_energy = 0.5
+light_volumetric_fog_energy = 0.2
 shadow_enabled = true
-shadow_bias = 0.05
-omni_range = 1.0
+shadow_bias = 0.01
+omni_range = 0.5
+omni_attenuation = 0.5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="OmniLight3D"]
+autoplay = "Flicker"
+libraries = {
+"": SubResource("AnimationLibrary_orihg")
+}
 
 [node name="FlashlightHolder" type="Node3D" parent="."]
+visible = false
 
 [node name="SpotLight3D" type="SpotLight3D" parent="FlashlightHolder"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.6102e-10, 0, -0.00870505)
 light_color = Color(0.913736, 0.613487, 0, 1)
+light_energy = 0.678
+light_volumetric_fog_energy = 1.644
 shadow_enabled = true
 shadow_bias = 0.01
+spot_attenuation = 0.574349
 
 [node name="MoveBoxAnchorPosition" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0536278)
