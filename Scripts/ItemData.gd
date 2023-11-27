@@ -12,5 +12,9 @@ static var data = {
 	ItemId.TestItem: {
 		"icon": preload("res://Art/Test/White32.png"),
 		"name": "Little Square Thing"
+	},
+	ItemId.TestItem2: {
+		"icon": preload("res://Art/Test/White32.png"),
+		"name": "Little Square Thing"
 	}
 }

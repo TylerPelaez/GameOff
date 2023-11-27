@@ -30,7 +30,7 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [Vector3(1, 1, 1), Vector3(1, 0, 1)]
+"values": [Vector3(1, 1, 1), Vector3(1, 0.001, 1)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
@@ -54,7 +54,7 @@ tracks/3/keys = {
 "times": PackedFloat32Array(0, 1),
 "transitions": PackedFloat32Array(1, 1),
 "update": 0,
-"values": [1.0, 0.0]
+"values": [1.0, 0.001]
 }
 
 [sub_resource type="Animation" id="Animation_77cwi"]

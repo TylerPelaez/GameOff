@@ -6,9 +6,6 @@ const FALL_DISTANCE_MARGIN = 0.01
 const GRID_SIZE = .5
 const GRID_SIZE_Y = 0.33
 
-
-@export var droppable = true
-
 @onready var shape_cast = $ShapeCast3D
 @onready var draggable_shape = $DraggableArea/CollisionShape3D
 

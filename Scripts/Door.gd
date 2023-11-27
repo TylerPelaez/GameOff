@@ -19,6 +19,8 @@ enum OpenedBy {
 
 var mat: StandardMaterial3D
 
+var opened = false
+
 func set_opened_by(val):
 	opened_by = val
 	notify_property_list_changed()
@@ -46,4 +48,7 @@ func _process(delta):
 	mat.uv1_scale.y = mat_y_scale
 
 func open():
+	if opened:
+		return
 	animation_player.play("Open")
+	opened = true

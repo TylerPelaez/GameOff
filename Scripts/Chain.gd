@@ -3,7 +3,7 @@ extends MeshInstance3D
 class_name Chain
 
 @export var max_tiles = 5
-@export var attached: Node3D
+@export var attached: Node3D : set = set_attached
 
 @onready var chain = $Chain
 
@@ -11,6 +11,13 @@ class_name Chain
 var material: StandardMaterial3D
 
 var debug_sphere
+
+func set_attached(val):
+	if attached != null:
+		attached.attached_to_chain = false
+		attached.attached_chain = null
+	attached = val
+
 
 func _ready():
 	material = chain.mesh.surface_get_material(0).duplicate()
