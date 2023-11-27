@@ -144,7 +144,7 @@ func can_move_by_amount(amount: Vector3, player_shape_cast: ShapeCast3D, player:
 	if get_stack_height() > 2:
 		return false
 	
-	if !attached_chain.can_reach(global_position + amount):
+	if attached_to_chain && !attached_chain.can_reach(global_position + amount):
 		return false
 	
 	shape_cast.clear_exceptions()
