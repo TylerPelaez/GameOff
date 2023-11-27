@@ -3,7 +3,8 @@ class_name Box
 
 const FALL_DISTANCE_MARGIN = 0.01
 
-static var GRID_SIZE = .5
+const GRID_SIZE = .5
+const GRID_SIZE_Y = 0.33
 
 
 @export var droppable = true
@@ -21,6 +22,14 @@ static var GRID_SIZE = .5
 
 @onready var ray_cast_3d = $RayCast3D
 
+@export var attached_to_chain: bool = false
+@export var attached_chain: Chain
+@export var use_attachment_pos: bool = false
+var attachment_pos: Vector3
+
+var lower_box
+var upper_box
+
 
 enum State {
 	Default,
@@ -31,26 +40,55 @@ enum State {
 
 var state = State.Default
 
+func _ready():
+	ray_cast_3d.target_position = Vector3(0, -20, 0)
+	ray_cast_3d.force_raycast_update()
+
+	if ray_cast_3d.is_colliding():
+		var obj = ray_cast_3d.get_collider().get_parent()
+		if obj is Box:
+			obj.upper_box = self
+			lower_box = obj
+
 func start_moving():
 	state = State.Moving
+	if upper_box != null:
+		upper_box.start_moving()
 
 func stop_moving():
 	if state != State.Falling:
 		state = State.Default
+		if upper_box != null:
+			upper_box.stop_moving()
 
 func move_to(position: Vector3):
 	if state == State.Moving:
-		global_position = position
+		global_position.x = position.x
+		global_position.z = position.z
+		if upper_box != null:
+			upper_box.move_to(position)
+
+func on_drag_start():
+	if lower_box != null:
+		lower_box.upper_box = null
+		lower_box = null
 
 func on_drag_complete() -> bool:
-	return try_fall()
+	return try_fall_and_update_lower_box()
 
-func try_fall() -> bool:
+func try_fall_and_update_lower_box() -> bool:
 	ray_cast_3d.position = Vector3.ZERO
 	ray_cast_3d.target_position = Vector3(0, -20, 0)
 	ray_cast_3d.force_raycast_update()
 	if ray_cast_3d.is_colliding():
 		var collision_position = ray_cast_3d.get_collision_point()
+		
+		
+		var obj = ray_cast_3d.get_collider().get_parent()
+	
+		if obj is Box:
+			obj.upper_box = self
+			lower_box = obj
 		
 		var min_y = 999999
 		if collision_shape_3d.shape is ConcavePolygonShape3D:
@@ -61,24 +99,54 @@ func try_fall() -> bool:
 					min_y = face.y
 		
 		if (global_position.y + min_y) - collision_position.y > FALL_DISTANCE_MARGIN:
-			fall(Vector3(global_position.x, collision_position.y - min_y, global_position.z))
+			if attached_to_chain:
+				fall(Vector3(global_position.x, global_position.y - GRID_SIZE_Y, global_position.z), true)
+			else:	
+				fall(Vector3(global_position.x, collision_position.y - min_y, global_position.z), false)
 			return true
 	else:
 		push_error("Box cannot find ground, will now float")
 	return false
 
-func fall(target_position: Vector3):
+func fall(target_position: Vector3, suspend: bool):
 	var tween = get_tree().create_tween().bind_node(self)
 	var collision_position = ray_cast_3d.get_collision_point()
-	
 	state = State.Falling
 	tween.tween_property(self, "global_position", target_position, 0.25)
 	tween.tween_callback(on_fall_complete)
+	
+	
+	if attached_to_chain:
+		attachment_pos = global_position
+		use_attachment_pos = true
+		
+		var target_attachment_pos = (global_position + target_position) / 2.0
+		var towards_chain_origin = (attached_chain.global_position - target_attachment_pos)
+		var offset = Vector3(towards_chain_origin.x, 0, towards_chain_origin.z).normalized() * (GRID_SIZE / 2.0)
+		target_attachment_pos += offset
+		
+		var attachment_pos_tween = get_tree().create_tween().bind_node(self)
+		attachment_pos_tween.tween_property(self, "attachment_pos", target_attachment_pos, 0.125)
+	
+	if upper_box != null:
+		upper_box.fall(Vector3(target_position.x, target_position.y + GRID_SIZE_Y, target_position.z), false)
 
 func on_fall_complete():
 	state = State.Default
 
+func get_stack_height() -> int:
+	if upper_box == null:
+		return 1
+	else:
+		return upper_box.get_stack_height() + 1
+
 func can_move_by_amount(amount: Vector3, player_shape_cast: ShapeCast3D, player: Player3D) -> bool:
+	if get_stack_height() > 2:
+		return false
+	
+	if !attached_chain.can_reach(global_position + amount):
+		return false
+	
 	shape_cast.clear_exceptions()
 	player_shape_cast.clear_exceptions()
 	var children = get_children()

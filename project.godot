@@ -20,6 +20,7 @@ config/icon="res://icon.svg"
 PlayerInventory="*res://Scripts/PlayerInventory.gd"
 DialogManager="*res://Scripts/DialogManager.gd"
 EventManager="*res://Scripts/EventManager.gd"
+DrawDebug="*res://Scripts/DrawDebug.gd"
 
 [display]
 

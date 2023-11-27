@@ -3,11 +3,11 @@
 [ext_resource type="ArrayMesh" uid="uid://qrc3s6jf8yq5" path="res://Art/Environment/Box/Box.res" id="1_w7n8r"]
 [ext_resource type="Script" path="res://Scripts/Box.gd" id="2_cdkt3"]
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_lyxrt"]
-data = PackedVector3Array(-0.16, -0.16, -0.16, -0.16, 0.16, -0.16, -0.16, 0.16, 0.16, -0.16, 0.16, 0.16, -0.16, -0.16, 0.16, -0.16, -0.16, -0.16, 0.16, -0.16, 0.16, 0.16, 0.16, -0.16, 0.16, -0.16, -0.16, 0.16, 0.16, 0.16, 0.16, 0.16, -0.16, 0.16, -0.16, 0.16, 0.16, -0.16, 0.16, -0.16, -0.16, -0.16, -0.16, -0.16, 0.16, 0.16, -0.16, 0.16, 0.16, -0.16, -0.16, -0.16, -0.16, -0.16, 0.16, -0.16, -0.16, -0.16, 0.16, -0.16, -0.16, -0.16, -0.16, 0.16, -0.16, -0.16, 0.16, 0.16, -0.16, -0.16, 0.16, -0.16, -0.16, 0.16, 0.16, -0.16, 0.16, -0.16, 0.16, 0.16, -0.16, 0.16, 0.16, 0.16, -0.16, 0.16, 0.16, 0.16, 0.16, -0.16, 0.16, 0.16, 0.16, -0.16, -0.16, 0.16, -0.16, 0.16, 0.16, 0.16, 0.16, 0.16, 0.16, -0.16, 0.16, -0.16, -0.16, 0.16)
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_y032l"]
+data = PackedVector3Array(-0.25, -0.1665, -0.25, -0.25, 0.1665, -0.25, -0.25, 0.1665, 0.25, -0.25, 0.1665, 0.25, -0.25, -0.1665, 0.25, -0.25, -0.1665, -0.25, 0.25, -0.1665, 0.25, 0.25, 0.1665, -0.25, 0.25, -0.1665, -0.25, 0.25, 0.1665, 0.25, 0.25, 0.1665, -0.25, 0.25, -0.1665, 0.25, 0.25, -0.1665, 0.25, -0.25, -0.1665, -0.25, -0.25, -0.1665, 0.25, 0.25, -0.1665, 0.25, 0.25, -0.1665, -0.25, -0.25, -0.1665, -0.25, 0.25, -0.1665, -0.25, -0.25, 0.1665, -0.25, -0.25, -0.1665, -0.25, 0.25, -0.1665, -0.25, 0.25, 0.1665, -0.25, -0.25, 0.1665, -0.25, -0.25, 0.1665, 0.25, -0.25, 0.1665, -0.25, 0.25, 0.1665, -0.25, 0.25, 0.1665, 0.25, -0.25, 0.1665, 0.25, 0.25, 0.1665, -0.25, 0.25, 0.1665, 0.25, -0.25, -0.1665, 0.25, -0.25, 0.1665, 0.25, 0.25, 0.1665, 0.25, 0.25, -0.1665, 0.25, -0.25, -0.1665, 0.25)
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_qxevf"]
-size = Vector3(0.3, 0.25, 0.3)
+size = Vector3(0.48, 0.25, 0.48)
 
 [node name="Box" type="MeshInstance3D"]
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -18,7 +18,8 @@ script = ExtResource("2_cdkt3")
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_lyxrt")
+transform = Transform3D(1, 9.64506e-13, 0, 1.0662e-12, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_y032l")
 
 [node name="DraggableArea" type="Area3D" parent="."]
 collision_layer = 32
@@ -44,3 +45,5 @@ transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 0, 0, -0
 
 [node name="RayCast3D" type="RayCast3D" parent="."]
 target_position = Vector3(0, -10, 0)
+
+[node name="StaticBody3D2" type="StaticBody3D" parent="."]

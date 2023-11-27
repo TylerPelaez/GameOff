@@ -98,6 +98,7 @@ func moving_object_mode(delta):
 		var new_pos = movable_anchor.global_position - hold_position.position
 		global_position.x = new_pos.x
 		global_position.z = new_pos.z
+		current_box.on_drag_start()
 		dragging_object_origin = global_position
 		dragging_object_playing = true
 		dragging_object_target = global_position + offset
