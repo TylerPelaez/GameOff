@@ -14,7 +14,6 @@ polygon = PackedVector2Array(16, -16, 16, 5.48985, 16, 16, -16, 16, -16, -16)
 
 [node name="InteractableItem" type="Node2D"]
 script = ExtResource("1_gg0bp")
-type = 0
 
 [node name="Area2D" type="Area2D" parent="."]
 collision_layer = 4

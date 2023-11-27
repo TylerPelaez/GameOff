@@ -4,8 +4,6 @@ extends Node
 signal show_interaction_prompt(interactable: InteractableItem)
 signal hide_interaction_prompt
 
-
-
 enum EventId {
 	ShowInteractionPrompt, # Args: Node2D
 	HideInteractionPrompt, # No Args

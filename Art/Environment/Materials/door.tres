@@ -3,6 +3,7 @@
 [ext_resource type="Texture2D" uid="uid://wjm8sfi5m7b5" path="res://Art/Environment/Door-b214ec83c45a33849e396c2171388a5e_door.png" id="1_pkqtu"]
 
 [resource]
+resource_local_to_scene = true
 resource_name = "door"
 cull_mode = 2
 albedo_texture = ExtResource("1_pkqtu")
