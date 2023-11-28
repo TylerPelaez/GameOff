@@ -7,7 +7,7 @@ class_name Player3D
 @export var jump_strength = 1000
 
 @export var drag_object_animation_time_seconds: float = 0.75
-
+@export var max_fallible_tiles: int = 2
 
 @onready var animation_tree = $AnimationTree
 @onready var animation_state = animation_tree["parameters/playback"]
@@ -20,11 +20,10 @@ class_name Player3D
 
 var input = Vector3.ZERO
 var direction = Vector3.RIGHT
-var in_interactable_area: bool = false
-var current_interactable: InteractableItem
 
+var objects_in_range = []
 
-var current_box: Box
+var current_interactable
 var movable_anchor: Node3D
 
 var dragging_object_playing: bool = false
@@ -37,6 +36,8 @@ enum Mode {
 	MovingObject
 }
 var mode = Mode.Normal
+
+var last_on_ground_pos: Vector3
 
 func _ready():
 	animation_tree.active = true
@@ -69,6 +70,20 @@ func normal_mode(delta):
 	velocity.x = ground_velocity.x
 	velocity.z = ground_velocity.y
 
+	if Input.is_action_just_pressed("jump") and is_on_floor():
+		velocity.y = jump_strength
+
+	var gravity = ProjectSettings.get_setting("physics/3d/default_gravity", 9.8)
+	velocity.y -= delta * gravity
+
+	move_and_slide()
+	
+	if is_on_floor():
+		if last_on_ground_pos.y - global_position.y > max_fallible_tiles * Box.GRID_SIZE_Y:
+			die()
+		else:
+			last_on_ground_pos = global_position
+
 	if input == Vector3.ZERO:
 		animation_state.travel("Idle")
 	else:
@@ -76,13 +91,8 @@ func normal_mode(delta):
 		animation_tree.set("parameters/Idle/blend_position", animation_values)
 		animation_tree.set("parameters/Walk/blend_position", animation_values)
 		animation_state.travel("Walk")
-	move_and_slide()
-	
-	if Input.is_action_just_pressed("jump") and is_on_floor():
-		velocity.y = jump_strength
-	
-	var gravity = ProjectSettings.get_setting("physics/3d/default_gravity", 9.8)
-	velocity.y -= delta * gravity
+		
+		update_objects()
 
 func moving_object_mode(delta):
 	if dragging_object_playing:
@@ -93,12 +103,12 @@ func moving_object_mode(delta):
 		input.z = 0
 		input = input.normalized()
 
-	var offset = (current_box.GRID_SIZE * input)
-	if input != Vector3.ZERO && current_box.can_move_by_amount(offset, shape_cast, self):
+	var offset = (current_interactable.GRID_SIZE * input)
+	if input != Vector3.ZERO && current_interactable.can_move_by_amount(offset, shape_cast, self):
 		var new_pos = movable_anchor.global_position - hold_position.position
 		global_position.x = new_pos.x
 		global_position.z = new_pos.z
-		current_box.on_drag_start()
+		current_interactable.on_drag_start()
 		dragging_object_origin = global_position
 		dragging_object_playing = true
 		dragging_object_target = global_position + offset
@@ -107,32 +117,35 @@ func moving_object_mode(delta):
 		tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 		tween.set_parallel(true)
 		tween.tween_property(self, "global_position", dragging_object_target, drag_object_animation_time_seconds)
-		tween.tween_method(current_box.move_to, current_box.global_position, current_box.global_position + offset, drag_object_animation_time_seconds)
+		tween.tween_method(current_interactable.move_to, current_interactable.global_position, current_interactable.global_position + offset, drag_object_animation_time_seconds)
 		tween.chain().tween_callback(on_object_drag_complete)
 		tween.play()
 
 func on_object_drag_complete():
 	dragging_object_playing = false
-	if current_box.on_drag_complete():
+	if current_interactable.on_drag_complete():
 		stop_moving()
 
 func _unhandled_input(event):
-	if event.is_action_pressed("interact") && mode == Mode.Normal:
-		if in_interactable_area and current_interactable != null:
+	if event.is_action_pressed("interact"):
+		if !is_on_floor():
+			return
+		if mode == Mode.Normal &&  current_interactable != null and current_interactable is InteractableItem:
 			current_interactable.interact()
-	elif event.is_action_pressed("move"):
-		if current_box != null && mode == Mode.Normal:
-			start_moving(current_box)
+		elif current_interactable != null && mode == Mode.Normal and current_interactable is Box:
+			start_moving(current_interactable)
 		elif mode == Mode.MovingObject && !dragging_object_playing:
 			stop_moving()
 	if event.is_action_pressed("ui_cancel"):
-		get_tree().change_scene_to_file("res://UI/game_over_screen.tscn")
+		die()
 
+func die():
+	get_tree().change_scene_to_file("res://UI/game_over_screen.tscn")
 #
 func start_moving(object: Box):
 	if object.state != Box.State.Default:
 		return
-	current_box = object
+	current_interactable = object
 	mode = Mode.MovingObject
 	object.start_moving()
 	var anchor = object.get_anchor_for_player(self)
@@ -145,31 +158,50 @@ func start_moving(object: Box):
 	var new_pos = movable_anchor.global_position - hold_position.position
 	global_position.x = new_pos.x
 	global_position.z = new_pos.z
+	
+	hide_interaction_prompt()
 
-#
 func stop_moving():
 	mode = Mode.Normal
-	current_box.stop_moving()
-
-func _on_interactable_check_area_entered(area):
-	in_interactable_area = true
-	var interactable = area.get_parent()
-	if current_interactable == null:
-		current_interactable = interactable
-
-
-func _on_interactable_check_area_exited(area):
-	var interactable = area.get_parent()
-	if interactable == current_interactable:
-		current_interactable = null
-		in_interactable_area = false
-
+	current_interactable.stop_moving()
+	update_objects()
 
 func _on_draggable_check_area_entered(area):
-	if mode != Mode.MovingObject:
-		current_box = area.get_parent()
+	var object = area.get_parent()
+	objects_in_range.append(object)
+	
+	update_objects()
 
+func update_objects():
+	if mode == Mode.MovingObject:
+		return # don't mess with whatever we're doing
+	
+	if objects_in_range.size() == 0:
+		current_interactable = null
+		hide_interaction_prompt()
+		return
+	
+	var prev_interactable = current_interactable
+	
+	current_interactable = null
+	var max_distance_sq = 99999999
+	for object in objects_in_range:
+		var distance_sq = global_position.distance_squared_to(object.global_position)
+		if (current_interactable == null || max_distance_sq > distance_sq) && (!(object is Box) || object.can_drag()):
+			current_interactable = object
+			max_distance_sq = distance_sq
+			
+	if current_interactable != prev_interactable && current_interactable != null:
+		show_interaction_prompt(current_interactable)
 
 func _on_draggable_check_area_exited(area):
-	if mode != Mode.MovingObject:
-		current_box = null
+	var object = area.get_parent()
+	objects_in_range.erase(object)
+	
+	update_objects()
+
+func show_interaction_prompt(object):
+	EventManager.publish(EventManager.EventId.ShowInteractionPrompt, object)
+
+func hide_interaction_prompt():
+	EventManager.publish(EventManager.EventId.HideInteractionPrompt)

@@ -43,7 +43,7 @@ func interact():
 		Type.Key:
 			PlayerInventory.add_item(_key_id)
 			var data = ItemData.data[_key_id]
-#			DialogManager.play_dialog(DialogData.DialogId.PickupDialog, [data["name"]])
+			DialogManager.play_dialog(DialogData.DialogId.PickupDialog, [data["name"]])
 			queue_free()
 			print("Key Item Interacted!")
 		Type.Alter:
@@ -59,7 +59,7 @@ func interact():
 			toggled.emit(_toggled_on)
 			print("Toggle Button Interacted!")
 		Type.Dialog:
-#			DialogManager.play_dialog(_dialog_id)
+			DialogManager.play_dialog(_dialog_id)
 			queue_free()
 			print("Key Item Interacted!")
 #		Type.HidingPlace: 
@@ -75,10 +75,3 @@ func interact():
 #				DialogManager.play_dialog(dialog_id)
 #				player.visible = false
 #				player.mode = Player.Mode.Hidden
-
-func _on_interaction_area_area_entered(area):
-	EventManager.publish(EventManager.EventId.ShowInteractionPrompt, self)
-
-
-func _on_interaction_area_area_exited(area):
-	EventManager.publish(EventManager.EventId.HideInteractionPrompt)

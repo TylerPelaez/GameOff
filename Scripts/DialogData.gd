@@ -11,7 +11,7 @@ enum DialogId {
 
 static var data = {
 	DialogId.TestDialog: ["This is a test", "ligma"],
-	DialogId.PickupDialog: ["You picked up %s."],
+	DialogId.PickupDialog: ["You picked up a %s."],
 	DialogId.HidingDialog: ["You are hiding..."],
 	DialogId.NotHidingDialog: ["You are not hiding."]
 }

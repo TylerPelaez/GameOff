@@ -842,6 +842,7 @@ max_speed = 1
 accel = 1501
 friction = 2000
 jump_strength = 3
+drag_object_animation_time_seconds = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
@@ -897,18 +898,10 @@ spot_attenuation = 0.574349
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -0.0536278)
 
 [node name="DraggableCheck" type="Area3D" parent="."]
-collision_layer = 64
-collision_mask = 32
+collision_layer = 192
+collision_mask = 48
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DraggableCheck"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0257546, 0)
-shape = SubResource("BoxShape3D_e6j8c")
-
-[node name="InteractableCheck" type="Area3D" parent="."]
-collision_layer = 128
-collision_mask = 16
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractableCheck"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0257546, 0)
 shape = SubResource("BoxShape3D_e6j8c")
 
@@ -921,5 +914,3 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.064, 0, 0)
 
 [connection signal="area_entered" from="DraggableCheck" to="." method="_on_draggable_check_area_entered"]
 [connection signal="area_exited" from="DraggableCheck" to="." method="_on_draggable_check_area_exited"]
-[connection signal="area_entered" from="InteractableCheck" to="." method="_on_interactable_check_area_entered"]
-[connection signal="area_exited" from="InteractableCheck" to="." method="_on_interactable_check_area_exited"]

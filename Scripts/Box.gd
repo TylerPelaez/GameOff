@@ -8,6 +8,7 @@ const GRID_SIZE_Y = 0.33
 
 @onready var shape_cast = $ShapeCast3D
 @onready var draggable_shape = $DraggableArea/CollisionShape3D
+@onready var draggable_area = $DraggableArea
 
 @onready var collision_shape_3d = $StaticBody3D/CollisionShape3D
 
@@ -195,3 +196,7 @@ func get_anchor_for_player(player: Player3D) -> Anchor:
 		return Anchor.new(anchor_left, Vector2.RIGHT)
 	else:
 		return Anchor.new(anchor_forward, Vector2.UP)
+
+
+func can_drag() -> bool:
+	return get_stack_height() <= 2

@@ -3,6 +3,8 @@ class_name UIController
 
 var interaction_prompt_prefab = preload("res://UI/interaction_prompt.tscn")
 
+@export var camera: Camera3D
+
 @onready var item_inventory = $ItemInventory
 @onready var dialog_container = $DialogContainer
 @onready var dialog_text_label = $DialogContainer/NinePatchRect/MarginContainer/RichTextLabel
@@ -24,8 +26,8 @@ func _ready():
 	EventManager.subscribe(EventManager.EventId.HideInteractionPrompt, _on_hide_interaction_prompt)
 
 func _process(delta):
-	if prompt_instance != null:
-		var pos = prompt_origin_object.get_global_transform_with_canvas().origin
+	if prompt_instance != null && prompt_origin_object != null:
+		var pos = camera.unproject_position(prompt_origin_object.global_position + Vector3(0, .1, 0))
 		prompt_instance.position = pos
 		prompt_instance.position.x -= (prompt_instance.size.x / 4)
 		prompt_instance.position.y -= 32

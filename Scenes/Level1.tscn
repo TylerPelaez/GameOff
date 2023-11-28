@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://bh00qt7boigwi"]
+[gd_scene load_steps=12 format=3 uid="uid://bh00qt7boigwi"]
 
 [ext_resource type="Script" path="res://Scripts/World.gd" id="1_tpvs4"]
 [ext_resource type="Texture2D" uid="uid://bxn8kvm570f80" path="res://Art/Test/White.png" id="2_x6cc8"]
@@ -6,9 +6,8 @@
 [ext_resource type="TileSet" uid="uid://crij6o86v6on8" path="res://Scenes/TileSet.tres" id="4_ibg8i"]
 [ext_resource type="PackedScene" uid="uid://bemnhsvv7b42j" path="res://Scenes/InteractableItem.tscn" id="4_uut5t"]
 [ext_resource type="PackedScene" uid="uid://req7g37uqqs3" path="res://Scenes/movable.tscn" id="6_fgp3u"]
-[ext_resource type="Script" path="res://UI/UIController.gd" id="6_ithtf"]
 [ext_resource type="Script" path="res://Scenes/CanvasModulate.gd" id="7_f00oe"]
-[ext_resource type="Theme" uid="uid://f62ri8jv63it" path="res://UI/UITheme.tres" id="7_s3ygy"]
+[ext_resource type="PackedScene" uid="uid://bw8btg3rvl7hi" path="res://UI/UIController.tscn" id="8_d2s3s"]
 [ext_resource type="PackedScene" uid="uid://cchefjiu42k83" path="res://Scenes/box.tscn" id="10_ki3tj"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_f15y5"]
@@ -69,7 +68,6 @@ remote_path = NodePath("../../Camera2D")
 
 [node name="InteractableItem" parent="." instance=ExtResource("4_uut5t")]
 position = Vector2(192, 192)
-has_collision = true
 
 [node name="Movable" parent="InteractableItem" instance=ExtResource("6_fgp3u")]
 
@@ -78,17 +76,12 @@ shape = SubResource("RectangleShape2D_f15y5")
 
 [node name="InteractableItem2" parent="." instance=ExtResource("4_uut5t")]
 position = Vector2(56, 128)
-type = 4
 
 [node name="InteractableItem3" parent="." instance=ExtResource("4_uut5t")]
 position = Vector2(216, 64)
-type = 1
-has_collision = true
 
 [node name="InteractableItem4" parent="." instance=ExtResource("4_uut5t")]
 position = Vector2(624, 112)
-type = 1
-has_collision = true
 
 [node name="Camera2D" type="Camera2D" parent="."]
 position = Vector2(326, 124)
@@ -101,70 +94,11 @@ visibility_layer = 3
 color = Color(0.0980392, 0.0980392, 0.0980392, 1)
 script = ExtResource("7_f00oe")
 
-[node name="CanvasLayer" type="CanvasLayer" parent="."]
-process_mode = 3
-script = ExtResource("6_ithtf")
-
-[node name="ItemInventory" type="HBoxContainer" parent="CanvasLayer"]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -20.0
-offset_top = 2.0
-offset_right = -15.0
-offset_bottom = 7.0
-grow_horizontal = 0
-grow_vertical = 0
-scale = Vector2(0.5, 0.5)
-alignment = 2
-
-[node name="DialogContainer" type="Control" parent="CanvasLayer"]
-visible = false
-layout_mode = 3
-anchor_left = 0.02
-anchor_right = 0.98
-anchor_bottom = 0.98
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
-theme = ExtResource("7_s3ygy")
-
-[node name="NinePatchRect" type="NinePatchRect" parent="CanvasLayer/DialogContainer"]
-self_modulate = Color(0.486275, 0.486275, 0.486275, 0.560784)
-layout_mode = 1
-anchors_preset = 12
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_top = -36.0
-grow_horizontal = 2
-grow_vertical = 0
-texture = ExtResource("2_x6cc8")
-
-[node name="MarginContainer" type="MarginContainer" parent="CanvasLayer/DialogContainer/NinePatchRect"]
-layout_mode = 1
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-theme = ExtResource("7_s3ygy")
-
-[node name="RichTextLabel" type="RichTextLabel" parent="CanvasLayer/DialogContainer/NinePatchRect/MarginContainer"]
-layout_mode = 2
-text = "You picked up TEST ITEM. Testing Two lines with a lot of words. helooooooooooooooooo"
-scroll_active = false
+[node name="CanvasLayer" parent="." instance=ExtResource("8_d2s3s")]
 
 [node name="InteractableItem5" parent="." instance=ExtResource("4_uut5t")]
 position = Vector2(160, 80)
 scale = Vector2(0.5, 0.5)
-type = 5
-has_collision = true
-casts_shadows = true
-dialog_id = 2
 
 [node name="Ledge" type="Area2D" parent="."]
 visible = false

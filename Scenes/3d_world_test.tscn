@@ -1,6 +1,7 @@
-[gd_scene load_steps=19 format=3 uid="uid://falvrtr5sb5m"]
+[gd_scene load_steps=21 format=3 uid="uid://falvrtr5sb5m"]
 
 [ext_resource type="MeshLibrary" uid="uid://d00ge6jxao8rg" path="res://Art/Environment/MeshLibrary.tres" id="1_76fpt"]
+[ext_resource type="Script" path="res://Scripts/World.gd" id="1_l0fqf"]
 [ext_resource type="PackedScene" uid="uid://chawhftcwjlwv" path="res://Scenes/player3D.tscn" id="3_c653b"]
 [ext_resource type="PackedScene" uid="uid://l7wxwtb8sjjg" path="res://Scenes/DraggableBox.tscn" id="3_j0sb7"]
 [ext_resource type="PackedScene" uid="uid://djdn7qbr08owm" path="res://Scenes/chain.tscn" id="5_ct13f"]
@@ -8,6 +9,7 @@
 [ext_resource type="Material" uid="uid://75jb8jyrr0vt" path="res://Art/Environment/Materials/m_ChainHolder.tres" id="7_6onbk"]
 [ext_resource type="Texture2D" uid="uid://oeaskavpqne2" path="res://Art/pot.png" id="7_oohfo"]
 [ext_resource type="PackedScene" uid="uid://bece0kkh8f7g1" path="res://Scenes/InteractableItem3D.tscn" id="8_0dfrb"]
+[ext_resource type="PackedScene" uid="uid://bw8btg3rvl7hi" path="res://UI/UIController.tscn" id="9_tbvch"]
 
 [sub_resource type="Environment" id="Environment_30wu8"]
 background_energy_multiplier = 0.1
@@ -17,6 +19,8 @@ ssao_enabled = true
 ssao_intensity = 1.0
 ssao_light_affect = 0.5
 ssil_enabled = true
+glow_bloom = 0.28
+glow_blend_mode = 0
 volumetric_fog_enabled = true
 volumetric_fog_density = 0.5167
 volumetric_fog_albedo = Color(1, 0, 0, 1)
@@ -55,7 +59,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_1d15y"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_a45uj"]
 resource_local_to_scene = true
 resource_name = "Root Scene_ChainHolder"
 _surfaces = [{
@@ -86,7 +90,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_4l0kl"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_ogdna"]
 resource_local_to_scene = true
 resource_name = "Root Scene_ChainHolder"
 _surfaces = [{
@@ -106,6 +110,7 @@ shadow_mesh = SubResource("ArrayMesh_dae4x")
 
 [node name="3DWorldTest" type="Node3D"]
 transform = Transform3D(1, -5.49965e-05, 4.14818e-05, 5.49965e-05, 1, -1.13368e-05, -4.14818e-05, 1.13368e-05, 1, 0, 0, 0)
+script = ExtResource("1_l0fqf")
 
 [node name="GridMap" type="GridMap" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0.25)
@@ -197,7 +202,7 @@ skeleton = NodePath("../..")
 
 [node name="ChainHolder" parent="Environment" node_paths=PackedStringArray("attached") instance=ExtResource("5_ct13f")]
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.00045, 1.69812, -8.49981)
-mesh = SubResource("ArrayMesh_1d15y")
+mesh = SubResource("ArrayMesh_a45uj")
 skeleton = NodePath("../..")
 max_tiles = 3
 attached = NodePath("../Box11")
@@ -209,14 +214,9 @@ skeleton = NodePath("../..")
 
 [node name="ChainHolder2" parent="Environment" node_paths=PackedStringArray("attached") instance=ExtResource("5_ct13f")]
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 3.00034, 1.69824, -5.99989)
-mesh = SubResource("ArrayMesh_4l0kl")
+mesh = SubResource("ArrayMesh_ogdna")
 max_tiles = 2
 attached = NodePath("../Box4")
-
-[node name="Door" parent="Environment" node_paths=PackedStringArray("_button") instance=ExtResource("5_rw0gb")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.75, 0.5, -1.73479)
-opened_by = 0
-_button = NodePath("../Button")
 
 [node name="Door2" parent="Environment" node_paths=PackedStringArray("_alter") instance=ExtResource("5_rw0gb")]
 transform = Transform3D(-4.07454e-08, 4.36597e-05, -1, 6.63333e-05, 1, 4.36597e-05, 1, -6.63333e-05, -4.3583e-08, 7.23267, 0.499879, -5.24956)
@@ -235,6 +235,11 @@ _required_key = 1
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 4.94158, 0.699851, -4.07021)
 _key_id = 1
 
+[node name="Door" parent="Environment" node_paths=PackedStringArray("_button") instance=ExtResource("5_rw0gb")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.75, 0.5, -1.74)
+opened_by = 0
+_button = NodePath("../Button")
+
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 4.68335e-10, 6.22094e-10, -1.0662e-12, 1, 2.28101e-09, 0, 0, 1, 5.45957, 1.66056, 0.76713)
 light_color = Color(0.461647, 0.568522, 0.267637, 1)
@@ -246,3 +251,6 @@ transform = Transform3D(1, 4.68335e-10, 6.22094e-10, -1.0662e-12, 1, 2.28101e-09
 light_color = Color(0.462745, 0.568627, 0.266667, 1)
 light_energy = 0.8
 light_volumetric_fog_energy = 0.6
+
+[node name="CanvasLayer" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("9_tbvch")]
+camera = NodePath("../Camera3D")

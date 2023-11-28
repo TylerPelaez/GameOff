@@ -1,7 +1,7 @@
 extends Node
 
 
-signal show_interaction_prompt(interactable: InteractableItem)
+signal show_interaction_prompt(interactable: Node3D)
 signal hide_interaction_prompt
 
 enum EventId {

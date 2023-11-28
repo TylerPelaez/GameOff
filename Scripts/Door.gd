@@ -14,8 +14,8 @@ enum OpenedBy {
 	KeyOnAlter,
 }
 
-@export var mat_y_offset: float = 0.0
-@export var mat_y_scale: float = 1.0
+var mat_y_offset: float = 0.0
+var mat_y_scale: float = 1.0
 
 var mat: StandardMaterial3D
 
@@ -27,8 +27,8 @@ func set_opened_by(val):
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
-	mat = mesh_instance_3d.get_active_material(0)
-	
+	mat = mesh_instance_3d.get_active_material(0).duplicate()
+	mesh_instance_3d.material_override = mat
 	if opened_by == OpenedBy.ButtonPress:
 		if _button == null:
 			push_error("Missing button on door opened by button press!")

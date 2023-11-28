@@ -12,6 +12,7 @@ metallic_specular = 0.0
 ao_enabled = true
 ao_light_affect = 1.0
 ao_texture = ExtResource("2_36r7u")
+uv1_offset = Vector3(0, 0.001, 0)
 texture_filter = 0
 distance_fade_mode = 2
 distance_fade_max_distance = 0.5

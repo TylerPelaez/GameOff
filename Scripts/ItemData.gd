@@ -11,10 +11,10 @@ enum ItemId {
 static var data = {
 	ItemId.TestItem: {
 		"icon": preload("res://Art/Test/White32.png"),
-		"name": "Little Square Thing"
+		"name": "Blue Feather"
 	},
 	ItemId.TestItem2: {
 		"icon": preload("res://Art/Test/White32.png"),
-		"name": "Little Square Thing"
+		"name": "Rotting Heart"
 	}
 }
