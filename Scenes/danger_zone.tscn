@@ -1,0 +1,19 @@
+[gd_scene load_steps=3 format=3 uid="uid://kb7mnexxt38o"]
+
+[ext_resource type="Script" path="res://Scripts/danger_zone.gd" id="1_lv171"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_h2y8f"]
+size = Vector3(5.1914, 2.39491, 7.3669)
+
+[node name="DangerZone" type="Area3D"]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 11.4902, 0.238877, -9.82753)
+collision_layer = 256
+collision_mask = 2
+script = ExtResource("1_lv171")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, -0.567269, 0.634273, -1.0128)
+shape = SubResource("BoxShape3D_h2y8f")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
+[connection signal="body_exited" from="." to="." method="_on_body_exited"]

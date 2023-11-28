@@ -1,0 +1,6 @@
+[gd_scene load_steps=2 format=3 uid="uid://fd4ixajcmwgs"]
+
+[ext_resource type="Script" path="res://Scripts/DagerOrchestrator.gd" id="1_iuw5f"]
+
+[node name="DangerOrchestrator" type="Node"]
+script = ExtResource("1_iuw5f")

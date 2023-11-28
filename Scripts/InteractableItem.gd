@@ -62,16 +62,8 @@ func interact():
 			DialogManager.play_dialog(_dialog_id)
 			queue_free()
 			print("Key Item Interacted!")
-#		Type.HidingPlace: 
-# TODO: Re-enable hiding
-#			print("In Hiding Spot")
-#			var players = get_tree().get_nodes_in_group("player")
-#			var player = players[0]
-#			if player.mode == Player.Mode.Hidden:
-#				DialogManager.play_dialog(dialog_id)
-#				player.mode = Player.Mode.Normal
-#				player.visible = true
-#			elif player.mode == Player.Mode.Normal:
-#				DialogManager.play_dialog(dialog_id)
-#				player.visible = false
-#				player.mode = Player.Mode.Hidden
+		Type.HidingPlace:
+			print("In Hiding Spot")
+			var players = get_tree().get_nodes_in_group("player")
+			var player = players[0]
+			player.hide_inside_object(self)

@@ -1,7 +1,8 @@
-[gd_scene load_steps=33 format=3 uid="uid://chawhftcwjlwv"]
+[gd_scene load_steps=38 format=3 uid="uid://chawhftcwjlwv"]
 
 [ext_resource type="Script" path="res://Scripts/Player3D.gd" id="1_d4u14"]
 [ext_resource type="Shape3D" uid="uid://oc7x3yamxs54" path="res://Scenes/Player/player3DWorldCollider.tres" id="3_7r586"]
+[ext_resource type="Script" path="res://Scripts/PlayerLightFlicker.gd" id="4_lw1ik"]
 [ext_resource type="Material" uid="uid://c1y0pwcoki4bc" path="res://Art/Player/PlayerMaterial.tres" id="5_qa7qm"]
 
 [sub_resource type="Animation" id="Animation_c6rop"]
@@ -804,6 +805,18 @@ tracks/1/keys = {
 "update": 0,
 "values": [0.7, 0.9, 0.7, 0.9, 0.7, 0.9, 0.7, 0.9, 0.7, 0.9, 0.7]
 }
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:omni_attenuation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [0.5, 0.5]
+}
 
 [sub_resource type="Animation" id="Animation_2hr34"]
 length = 0.001
@@ -819,19 +832,87 @@ tracks/0/keys = {
 "update": 0,
 "values": [0.5]
 }
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:omni_attenuation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.5]
+}
+
+[sub_resource type="Animation" id="Animation_wjqi3"]
+resource_name = "FlickerDiminished"
+length = 10.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:omni_range")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 1.1, 2.3, 3.4, 3.7, 5.6, 6.6, 7.7, 8.8, 9, 9.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.25, 0.3, 0.25, 0.3, 0.25, 0.3, 0.25, 0.3, 0.25, 0.3, 0.25]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:light_energy")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 1.1, 2.3, 3.4, 3.7, 5.6, 6.6, 7.7, 8.8, 9, 9.7),
+"transitions": PackedFloat32Array(1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1),
+"update": 0,
+"values": [0.1, 0.17, 0.1, 0.17, 0.1, 0.17, 0.1, 0.17, 0.1, 0.17, 0.1]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:omni_attenuation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0, 10),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [1.0, 1.0]
+}
 
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_orihg"]
 _data = {
 "Flicker": SubResource("Animation_yj2dv"),
+"FlickerDiminished": SubResource("Animation_wjqi3"),
 "RESET": SubResource("Animation_2hr34")
 }
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_wnjs1"]
+animation = &"FlickerDiminished"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_o05af"]
+animation = &"Flicker"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_eco1h"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_wnjs1")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_o05af")
+blend_point_1/pos = 1.0
+min_space = 0.0
+sync = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e6j8c"]
 size = Vector3(0.234684, 0.106756, 0.17562)
 
 [node name="Player3D" type="CharacterBody3D" groups=["player"]]
 collision_layer = 2
-collision_mask = 5
+collision_mask = 13
 axis_lock_angular_x = true
 axis_lock_angular_y = true
 axis_lock_angular_z = true
@@ -842,7 +923,6 @@ max_speed = 1
 accel = 1501
 friction = 2000
 jump_strength = 3
-drag_object_animation_time_seconds = null
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
@@ -869,18 +949,24 @@ shape = ExtResource("3_7r586")
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0341352, 0.0461332)
 light_color = Color(0.913725, 0.611765, 0, 1)
-light_energy = 0.7
+light_energy = 0.3
 light_volumetric_fog_energy = 0.2
 shadow_enabled = true
 shadow_bias = 0.01
 omni_range = 0.5
 omni_attenuation = 0.5
+script = ExtResource("4_lw1ik")
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="OmniLight3D"]
-autoplay = "Flicker"
+autoplay = "FlickerDiminished"
 libraries = {
 "": SubResource("AnimationLibrary_orihg")
 }
+
+[node name="AnimationTree" type="AnimationTree" parent="OmniLight3D"]
+tree_root = SubResource("AnimationNodeBlendSpace1D_eco1h")
+anim_player = NodePath("../AnimationPlayer")
+parameters/blend_position = 1.0
 
 [node name="FlashlightHolder" type="Node3D" parent="."]
 visible = false
@@ -911,6 +997,8 @@ target_position = Vector3(0, 0, 0)
 
 [node name="HoldPosition" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.064, 0, 0)
+
+[node name="InteractableNotBlockedRayCast" type="RayCast3D" parent="."]
 
 [connection signal="area_entered" from="DraggableCheck" to="." method="_on_draggable_check_area_entered"]
 [connection signal="area_exited" from="DraggableCheck" to="." method="_on_draggable_check_area_exited"]

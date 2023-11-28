@@ -17,6 +17,9 @@ class_name Player3D
 @onready var shape_cast = $ShapeCast3D
 @onready var hold_position = $HoldPosition
 
+@onready var interactable_not_blocked_ray_cast = $InteractableNotBlockedRayCast
+
+
 
 var input = Vector3.ZERO
 var direction = Vector3.RIGHT
@@ -128,9 +131,11 @@ func on_object_drag_complete():
 
 func _unhandled_input(event):
 	if event.is_action_pressed("interact"):
-		if !is_on_floor():
+		if mode == Mode.Hidden:
+			unhide()
+		elif !is_on_floor():
 			return
-		if mode == Mode.Normal &&  current_interactable != null and current_interactable is InteractableItem:
+		elif mode == Mode.Normal &&  current_interactable != null and current_interactable is InteractableItem:
 			current_interactable.interact()
 		elif current_interactable != null && mode == Mode.Normal and current_interactable is Box:
 			start_moving(current_interactable)
@@ -186,8 +191,18 @@ func update_objects():
 	current_interactable = null
 	var max_distance_sq = 99999999
 	for object in objects_in_range:
+		if object is Box and !object.can_drag():
+			continue
+
+		
+		# Check if theres a wall b/w the player and the object
+		interactable_not_blocked_ray_cast.target_position = interactable_not_blocked_ray_cast.to_local(object.global_position)
+		interactable_not_blocked_ray_cast.force_raycast_update()
+		if interactable_not_blocked_ray_cast.is_colliding() && interactable_not_blocked_ray_cast.get_collider().get_parent().get_parent() != object:
+			continue
+		
 		var distance_sq = global_position.distance_squared_to(object.global_position)
-		if (current_interactable == null || max_distance_sq > distance_sq) && (!(object is Box) || object.can_drag()):
+		if current_interactable == null || max_distance_sq > distance_sq:
 			current_interactable = object
 			max_distance_sq = distance_sq
 			
@@ -201,7 +216,22 @@ func _on_draggable_check_area_exited(area):
 	update_objects()
 
 func show_interaction_prompt(object):
-	EventManager.publish(EventManager.EventId.ShowInteractionPrompt, object)
+	EventManager.show_interaction_prompt.emit(object)
 
 func hide_interaction_prompt():
-	EventManager.publish(EventManager.EventId.HideInteractionPrompt)
+	EventManager.hide_interaction_prompt.emit()
+
+func hide_inside_object(hiding_place: InteractableItem):
+	if mode == Player.Mode.Normal:
+		visible = false
+		mode = Player.Mode.Hidden
+		hide_interaction_prompt()
+
+func unhide():
+	if mode == Player.Mode.Hidden:
+		mode = Player.Mode.Normal
+		visible = true
+		update_objects()
+
+func is_hidden() -> bool:
+	return mode == Mode.Hidden

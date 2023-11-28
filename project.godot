@@ -21,6 +21,7 @@ PlayerInventory="*res://Scripts/PlayerInventory.gd"
 DialogManager="*res://Scripts/DialogManager.gd"
 EventManager="*res://Scripts/EventManager.gd"
 DrawDebug="*res://Scripts/DrawDebug.gd"
+DangerOrchestrator="*res://Scenes/danger_orchestrator.tscn"
 
 [display]
 
@@ -91,11 +92,14 @@ jump={
 2d_physics/layer_2="Player"
 3d_physics/layer_2="Player"
 2d_physics/layer_3="Interactable"
+3d_physics/layer_3="DarknessTrigger"
 2d_physics/layer_4="Movable"
+3d_physics/layer_4="LightnessTrigger"
 3d_physics/layer_5="Interact"
 3d_physics/layer_6="Draggable"
 3d_physics/layer_7="PlayerDraggableCheck"
 3d_physics/layer_8="PlayerInteractCheck"
+3d_physics/layer_9="DangerZone"
 2d_physics/layer_20="Level0"
 2d_physics/layer_21="Level1"
 2d_physics/layer_22="Level2"

@@ -22,8 +22,8 @@ var prompt_origin_object
 
 
 func _ready():
-	EventManager.subscribe(EventManager.EventId.ShowInteractionPrompt, _on_show_interaction_prompt)
-	EventManager.subscribe(EventManager.EventId.HideInteractionPrompt, _on_hide_interaction_prompt)
+	EventManager.show_interaction_prompt.connect(_on_show_interaction_prompt)
+	EventManager.hide_interaction_prompt.connect(_on_hide_interaction_prompt)
 
 func _process(delta):
 	if prompt_instance != null && prompt_origin_object != null:

@@ -1,0 +1,33 @@
+[gd_scene load_steps=3 format=3 uid="uid://bny3ql5dweqei"]
+
+[ext_resource type="Script" path="res://Scripts/HallwayLightTransition.gd" id="1_01q2f"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_s1og5"]
+size = Vector3(1.09061, 1, 0.446118)
+
+[node name="HallwayLightTransition" type="Node3D"]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 0, 0, 0)
+script = ExtResource("1_01q2f")
+
+[node name="DarknessTrigger" type="Area3D" parent="."]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 0.0287542, 0.167078, -0.237452)
+collision_layer = 4
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DarknessTrigger"]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 3.8147e-06, -3.57628e-07, -0.02914)
+shape = SubResource("BoxShape3D_s1og5")
+
+[node name="LightnessTrigger" type="Area3D" parent="."]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 0.0228004, 0.167084, 0.244298)
+collision_layer = 8
+collision_mask = 2
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="LightnessTrigger"]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 3.8147e-06, -3.57628e-07, -0.02914)
+shape = SubResource("BoxShape3D_s1og5")
+
+[connection signal="body_entered" from="DarknessTrigger" to="." method="_on_darkness_trigger_body_entered"]
+[connection signal="body_exited" from="DarknessTrigger" to="." method="_on_darkness_trigger_body_exited"]
+[connection signal="body_entered" from="LightnessTrigger" to="." method="_on_lightness_trigger_body_entered"]
+[connection signal="body_exited" from="LightnessTrigger" to="." method="_on_lightness_trigger_body_exited"]
