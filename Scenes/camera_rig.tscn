@@ -1,0 +1,232 @@
+[gd_scene load_steps=20 format=3 uid="uid://w4v1ajvmm7to"]
+
+[ext_resource type="Script" path="res://Scripts/FollowPlayer.gd" id="1_eov5e"]
+[ext_resource type="Environment" uid="uid://ck0y1u8tgqjfa" path="res://EnvironmentLighting.tres" id="2_l3dfq"]
+
+[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_a575m"]
+dof_blur_far_enabled = true
+dof_blur_far_distance = 1.12
+dof_blur_near_enabled = true
+dof_blur_near_distance = 1.08
+dof_blur_near_transition = 2.0
+
+[sub_resource type="Animation" id="Animation_msusn"]
+resource_name = "Darken"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:environment:ambient_light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.5]
+}
+
+[sub_resource type="Animation" id="Animation_0agt1"]
+resource_name = "Lighten"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:environment:ambient_light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="Animation" id="Animation_mjf6t"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:environment:ambient_light_energy")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_a03pr"]
+_data = {
+"Darken": SubResource("Animation_msusn"),
+"Lighten": SubResource("Animation_0agt1"),
+"RESET": SubResource("Animation_mjf6t")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tqva6"]
+animation = &"Darken"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u7prx"]
+animation = &"Lighten"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_ch8or"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_tqva6")
+blend_point_0/pos = 0.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_u7prx")
+blend_point_1/pos = 1.0
+min_space = 0.0
+sync = true
+
+[sub_resource type="Animation" id="Animation_csfu0"]
+resource_name = "BottomView"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.52724e-05, 0.93634, 0.731144)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pbyga"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.453786, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.52724e-05, 0.93634, 0.731144)]
+}
+
+[sub_resource type="Animation" id="Animation_njilh"]
+resource_name = "TopView"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.453786, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Camera3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3.33786e-05, 1.03194, 0.53512)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_injk7"]
+_data = {
+"BottomView": SubResource("Animation_csfu0"),
+"RESET": SubResource("Animation_pbyga"),
+"TopView": SubResource("Animation_njilh")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e6tue"]
+animation = &"TopView"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d5yqo"]
+animation = &"BottomView"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_muxvj"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_e6tue")
+blend_point_0/pos = 1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_d5yqo")
+blend_point_1/pos = 0.0
+min_space = 0.0
+value_label = "0.5"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5scpu"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_xbkem"]
+states/BlendSpace1D/node = SubResource("AnimationNodeBlendSpace1D_muxvj")
+states/BlendSpace1D/position = Vector2(496, 88)
+states/Start/position = Vector2(252, 93)
+transitions = ["Start", "BlendSpace1D", SubResource("AnimationNodeStateMachineTransition_5scpu")]
+
+[node name="CameraRig" type="Node3D"]
+transform = Transform3D(1, 0, 0, 0, 0.898794, 0.438371, 0, -0.438371, 0.898794, 0, 0, 0)
+script = ExtResource("1_eov5e")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 2.21024e-06, 3.87444e-05, -3.1149e-05, 0.641182, 0.767389, -2.31453e-05, -0.767389, 0.641182, 2.52724e-05, 0.93634, 0.731144)
+environment = ExtResource("2_l3dfq")
+attributes = SubResource("CameraAttributesPractical_a575m")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="Camera3D"]
+libraries = {
+"": SubResource("AnimationLibrary_a03pr")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="Camera3D"]
+tree_root = SubResource("AnimationNodeBlendSpace1D_ch8or")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/blend_position = 1.00094
+
+[node name="UpperRayCast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 5.4997e-05, -4.14811e-05, -5.4996e-05, 1, 1.13987e-05, 4.14824e-05, -1.13941e-05, 1, 2.52724e-05, 0.93634, 0.731144)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+autoplay = "BottomView"
+libraries = {
+"": SubResource("AnimationLibrary_injk7")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+tree_root = SubResource("AnimationNodeStateMachine_xbkem")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/BlendSpace1D/blend_position = -0.121837
+
+[node name="LowerRayCast" type="RayCast3D" parent="."]
+transform = Transform3D(1, 5.4997e-05, -4.14811e-05, -6.76148e-05, 0.898799, -0.438361, 1.31755e-05, 0.438361, 0.898799, 2.57492e-05, 0.521064, 1.06761)

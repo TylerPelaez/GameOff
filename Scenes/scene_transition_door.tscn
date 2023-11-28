@@ -1,0 +1,9 @@
+[gd_scene load_steps=2 format=3 uid="uid://cpqlmfxkym2m1"]
+
+[ext_resource type="PackedScene" uid="uid://bece0kkh8f7g1" path="res://Scenes/InteractableItem3D.tscn" id="1_tohto"]
+
+[node name="SceneTransitionDoor" groups=["scene_transition_door"] instance=ExtResource("1_tohto")]
+type = 6
+
+[node name="PlayerSpawnPoint" type="Node3D" parent="." index="3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.333, -0.105, 0)

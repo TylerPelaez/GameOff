@@ -1,0 +1,58 @@
+[gd_scene load_steps=8 format=3 uid="uid://dao4rw1k7my24"]
+
+[ext_resource type="Script" path="res://Scripts/World.gd" id="1_ws6w0"]
+[ext_resource type="MeshLibrary" uid="uid://d00ge6jxao8rg" path="res://Art/Environment/MeshLibrary.tres" id="2_mperq"]
+[ext_resource type="PackedScene" uid="uid://l7wxwtb8sjjg" path="res://Scenes/DraggableBox.tscn" id="3_8lttv"]
+[ext_resource type="PackedScene" uid="uid://cpqlmfxkym2m1" path="res://Scenes/scene_transition_door.tscn" id="4_yaw3e"]
+[ext_resource type="PackedScene" uid="uid://bw8btg3rvl7hi" path="res://UI/UIController.tscn" id="5_70ro7"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_5spff"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_58wq8"]
+data = PackedVector3Array(0.5, -0.5, 0, -0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, -0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0)
+
+[node name="Room2" type="Node3D"]
+transform = Transform3D(1, -5.49965e-05, 4.14818e-05, 5.49965e-05, 1, -1.13368e-05, -4.14818e-05, 1.13368e-05, 1, 0, 0, 0)
+script = ExtResource("1_ws6w0")
+
+[node name="GridMap" type="GridMap" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0.25)
+mesh_library = ExtResource("2_mperq")
+cell_size = Vector3(1, 1, 1)
+data = {
+"cells": PackedInt32Array(4, 0, 655360, 5, 0, 655360, 6, 0, 655360, 4, 1, 655360, 5, 1, 655360, 6, 1, 655360, 4, 2, 655360, 5, 2, 655360, 6, 2, 655360, 3, 65534, 2, 7, 65534, 1441794, 4, 65534, 4, 7, 3, 655362, 3, 3, 1048578, 3, 65535, 1048580, 3, 0, 1048580, 3, 2, 1048580, 3, 1, 1048580, 4, 3, 655364, 5, 3, 655364, 6, 3, 655364, 7, 2, 1441796, 7, 1, 1441796, 7, 0, 1441796, 7, 65535, 1441796, 4, 65535, 1441792, 5, 65535, 1441792, 6, 65535, 1441792, 6, 65534, 4, 5, 65534, 4)
+}
+metadata/_editor_floor_ = Vector3(0, 0, 0)
+
+[node name="Environment" type="Node3D" parent="."]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Environment"]
+transform = Transform3D(1, 4.68335e-10, 6.22094e-10, -1.0662e-12, 1, 2.28101e-09, 0, 0, 1, 5.45957, 1.66056, 0.76713)
+light_color = Color(0.461647, 0.568522, 0.267637, 1)
+light_energy = 0.8
+light_volumetric_fog_energy = 0.6
+shadow_enabled = true
+distance_fade_enabled = true
+
+[node name="Box8" parent="Environment" instance=ExtResource("3_8lttv")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.5, 0.666383, -0.499979)
+skeleton = NodePath("../..")
+
+[node name="SceneTransitionDoor" parent="Environment" instance=ExtResource("4_yaw3e")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 7.00004, 0.700041, 0.000282438)
+destination_scene = "res://Scenes/Rooms/TestRoom1.tscn"
+
+[node name="Floor" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(94.1028, -0.000620166, 9.65473e-05, -0.00907888, 3.59042e-06, 1.00071, -0.00127177, -45.8884, 8.15407e-08, 3.24997, 0.5, 4.75001)
+visible = false
+mesh = SubResource("QuadMesh_5spff")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Floor/StaticBody3D"]
+transform = Transform3D(1, -3.63798e-12, 6.40182e-14, 0, 1, -5.68434e-14, 2.73941e-11, 0, 1, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_58wq8")
+
+[node name="CanvasLayer" parent="." instance=ExtResource("5_70ro7")]

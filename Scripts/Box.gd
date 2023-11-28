@@ -23,7 +23,7 @@ const GRID_SIZE_Y = 0.33
 @export var attached_to_chain: bool = false
 @export var attached_chain: Chain
 @export var use_attachment_pos: bool = false
-var attachment_pos: Vector3
+@export var attachment_pos: Vector3
 
 var lower_box
 var upper_box
@@ -187,12 +187,21 @@ class Anchor:
 
 func get_anchor_for_player(player: Player3D) -> Anchor:
 	var ppos = player.global_position
+	var closest = anchor_right
+	var closest_distance_sq = closest.global_position.distance_squared_to(ppos)
+	var anchors = [anchor_behind, anchor_left, anchor_forward]
+	for anchor in anchors:
+		var dist_sq = anchor.global_position.distance_squared_to(ppos)
+		if dist_sq < closest_distance_sq:
+			closest_distance_sq = dist_sq
+			closest = anchor
+	
 
-	if ppos.x >= anchor_right.global_position.x:
+	if closest == anchor_right:
 		return Anchor.new(anchor_right, Vector2.LEFT)
-	if ppos.z <= anchor_behind.global_position.z:
+	if closest == anchor_behind:
 		return Anchor.new(anchor_behind, Vector2.DOWN)
-	if ppos.x <= anchor_left.global_position.x:
+	if closest == anchor_left:
 		return Anchor.new(anchor_left, Vector2.RIGHT)
 	else:
 		return Anchor.new(anchor_forward, Vector2.UP)

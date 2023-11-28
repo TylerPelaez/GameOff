@@ -19,7 +19,15 @@ class_name Player3D
 
 @onready var interactable_not_blocked_ray_cast = $InteractableNotBlockedRayCast
 
+@onready var remote_transform_3d = $RemoteTransform3D
 
+
+var hold_positions = {
+	Vector2.LEFT: Vector3(-.064, 0, 0),
+	Vector2.RIGHT: Vector3(.064, 0, 0),
+	Vector2.UP: Vector3(0, 0, -0.064),
+	Vector2.DOWN: Vector3(0, 0, 0.064),
+}
 
 var input = Vector3.ZERO
 var direction = Vector3.RIGHT
@@ -137,6 +145,7 @@ func _unhandled_input(event):
 			return
 		elif mode == Mode.Normal &&  current_interactable != null and current_interactable is InteractableItem:
 			current_interactable.interact()
+			update_objects()
 		elif current_interactable != null && mode == Mode.Normal and current_interactable is Box:
 			start_moving(current_interactable)
 		elif mode == Mode.MovingObject && !dragging_object_playing:
@@ -155,6 +164,7 @@ func start_moving(object: Box):
 	object.start_moving()
 	var anchor = object.get_anchor_for_player(self)
 	movable_anchor = anchor.node
+	hold_position.position = hold_positions[anchor.player_face_direction]
 
 	animation_tree.set("parameters/Idle/blend_position", anchor.player_face_direction)
 	animation_tree.set("parameters/Walk/blend_position", anchor.player_face_direction)
@@ -163,6 +173,7 @@ func start_moving(object: Box):
 	var new_pos = movable_anchor.global_position - hold_position.position
 	global_position.x = new_pos.x
 	global_position.z = new_pos.z
+	shape_cast.position = Vector3.ZERO
 	
 	hide_interaction_prompt()
 
@@ -179,7 +190,7 @@ func _on_draggable_check_area_entered(area):
 
 func update_objects():
 	if mode == Mode.MovingObject:
-		return # don't mess with whatever we're doing
+		return # don't mess with whatever we're doinge
 	
 	if objects_in_range.size() == 0:
 		current_interactable = null
@@ -193,20 +204,55 @@ func update_objects():
 	for object in objects_in_range:
 		if object is Box and !object.can_drag():
 			continue
-
+		
+		if object is InteractableItem and !object.can_interact():
+			continue
 		
 		# Check if theres a wall b/w the player and the object
 		interactable_not_blocked_ray_cast.target_position = interactable_not_blocked_ray_cast.to_local(object.global_position)
 		interactable_not_blocked_ray_cast.force_raycast_update()
-		if interactable_not_blocked_ray_cast.is_colliding() && interactable_not_blocked_ray_cast.get_collider().get_parent().get_parent() != object:
+		if interactable_not_blocked_ray_cast.is_colliding() && interactable_not_blocked_ray_cast.get_collider().get_parent().get_parent() != object && interactable_not_blocked_ray_cast.get_collider().get_parent() != object:
 			continue
+		
+		# If this is a box, check if the player would be able to even grab the box at a valid point
+		if object is Box:
+			var anchor = object.get_anchor_for_player(self)
+			var candidate_hold_position = hold_positions[anchor.player_face_direction]
+			var candidate_position = anchor.node.global_position - candidate_hold_position
+			candidate_position.y = global_position.y
+
+			interactable_not_blocked_ray_cast.global_position = candidate_position
+			interactable_not_blocked_ray_cast.target_position = Vector3(0, -0.11, 0) # height of the player currently
+			interactable_not_blocked_ray_cast.force_raycast_update()
+			# this means the player would not have ground beneath them, so we should not allow holding the box here
+			if !interactable_not_blocked_ray_cast.is_colliding():
+				continue
+			
+			shape_cast.clear_exceptions()
+			var children = object.get_children()
+			for child in children:
+				if child is CollisionObject3D:
+					shape_cast.add_exception(child)
+				children.append_array(child.get_children())
+			
+			var dir_to_anchor = (candidate_position - object.global_position)
+			dir_to_anchor.y = 0
+			shape_cast.global_position = object.global_position
+			shape_cast.target_position = dir_to_anchor.normalized() * (Box.GRID_SIZE / 2)
+			shape_cast.force_shapecast_update()
+			if shape_cast.is_colliding():
+				continue
+			
 		
 		var distance_sq = global_position.distance_squared_to(object.global_position)
 		if current_interactable == null || max_distance_sq > distance_sq:
 			current_interactable = object
 			max_distance_sq = distance_sq
-			
-	if current_interactable != prev_interactable && current_interactable != null:
+	
+	if prev_interactable != null and current_interactable == null:
+		hide_interaction_prompt()
+	
+	if current_interactable != null:
 		show_interaction_prompt(current_interactable)
 
 func _on_draggable_check_area_exited(area):
@@ -235,3 +281,6 @@ func unhide():
 
 func is_hidden() -> bool:
 	return mode == Mode.Hidden
+
+func assign_camera_rig(camera_rig: Node3D):
+	remote_transform_3d.remote_path = remote_transform_3d.get_path_to(camera_rig)

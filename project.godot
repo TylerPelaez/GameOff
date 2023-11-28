@@ -11,17 +11,19 @@ config_version=5
 [application]
 
 config/name="Game Off"
-run/main_scene="res://Scenes/3d_world_test.tscn"
+run/main_scene="res://Scenes/Rooms/TestRoom1.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
 [autoload]
 
-PlayerInventory="*res://Scripts/PlayerInventory.gd"
 DialogManager="*res://Scripts/DialogManager.gd"
 EventManager="*res://Scripts/EventManager.gd"
 DrawDebug="*res://Scripts/DrawDebug.gd"
 DangerOrchestrator="*res://Scenes/danger_orchestrator.tscn"
+GameStateService="*res://addons/game_state_helper/game_state_service.gd"
+TransitionMgr="*res://addons/transition_mgr/transition_mgr.tscn"
+PlayerInventory="*res://Scenes/PlayerInventory.tscn"
 
 [display]
 
@@ -33,7 +35,7 @@ window/stretch/mode="viewport"
 
 [editor_plugins]
 
-enabled=PackedStringArray()
+enabled=PackedStringArray("res://addons/game_state_helper/plugin.cfg", "res://addons/transition_mgr/plugin.cfg")
 
 [input]
 

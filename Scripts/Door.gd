@@ -1,4 +1,3 @@
-@tool
 extends Node3D
 class_name Door
 
@@ -23,7 +22,6 @@ var opened = false
 
 func set_opened_by(val):
 	opened_by = val
-	notify_property_list_changed()
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
@@ -52,3 +50,8 @@ func open():
 		return
 	animation_player.play("Open")
 	opened = true
+
+
+func _on_game_state_helper_loading_data(data):
+	if opened:
+		scale.y = 0.001

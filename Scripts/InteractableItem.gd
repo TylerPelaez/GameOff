@@ -1,4 +1,3 @@
-@tool
 extends Node3D
 class_name InteractableItem
 
@@ -13,13 +12,18 @@ signal toggled(val: bool)
 
 @onready var collision_shape_3d = $MeshInstance3D/StaticBody3D/CollisionShape3D
 
-
 @export var _key_id: ItemData.ItemId
 @export var _dialog_id: DialogData.DialogId
+@export var _one_time_dialog: bool
+
 
 @export var _required_key: ItemData.ItemId
 
 @export var _toggled_on: bool
+@export_file("*.tscn", "*.scn") var destination_scene := "" 
+
+var dialog_triggered: bool = false
+
 
 enum Type {
 	Key,
@@ -27,12 +31,12 @@ enum Type {
 	InstantButton,
 	ToggleButton,
 	Dialog,
-	HidingPlace
+	HidingPlace,
+	SceneTransitionDoor
 }
 
 func set_type(val):
 	type = val
-	notify_property_list_changed()
 
 func _ready():
 	collision_shape_3d.disabled = !has_collision
@@ -60,10 +64,24 @@ func interact():
 			print("Toggle Button Interacted!")
 		Type.Dialog:
 			DialogManager.play_dialog(_dialog_id)
-			queue_free()
-			print("Key Item Interacted!")
+			dialog_triggered = true
+			print("Dialog Interacted!")
 		Type.HidingPlace:
 			print("In Hiding Spot")
 			var players = get_tree().get_nodes_in_group("player")
 			var player = players[0]
 			player.hide_inside_object(self)
+		Type.SceneTransitionDoor:
+			GameStateService.set_global_state_value(Room.ENTERING_ROOM_FROM_SCENE_STATE_KEY, get_owner().scene_file_path)
+			TransitionMgr.transition_to(destination_scene)
+
+
+func can_interact() -> bool:
+	match type:
+		Type.Dialog:
+			return !_one_time_dialog || !dialog_triggered
+		_:
+			return true
+
+func get_player_spawn_point():
+	return $PlayerSpawnPoint

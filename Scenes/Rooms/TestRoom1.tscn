@@ -1,11 +1,8 @@
-[gd_scene load_steps=40 format=3 uid="uid://falvrtr5sb5m"]
+[gd_scene load_steps=21 format=3 uid="uid://falvrtr5sb5m"]
 
 [ext_resource type="MeshLibrary" uid="uid://d00ge6jxao8rg" path="res://Art/Environment/MeshLibrary.tres" id="1_76fpt"]
 [ext_resource type="Script" path="res://Scripts/World.gd" id="1_l0fqf"]
-[ext_resource type="PackedScene" uid="uid://chawhftcwjlwv" path="res://Scenes/player3D.tscn" id="3_c653b"]
 [ext_resource type="PackedScene" uid="uid://l7wxwtb8sjjg" path="res://Scenes/DraggableBox.tscn" id="3_j0sb7"]
-[ext_resource type="Script" path="res://Scripts/FollowPlayer.gd" id="4_6rudd"]
-[ext_resource type="Environment" uid="uid://ck0y1u8tgqjfa" path="res://EnvironmentLighting.tres" id="4_jbw0r"]
 [ext_resource type="PackedScene" uid="uid://djdn7qbr08owm" path="res://Scenes/chain.tscn" id="5_ct13f"]
 [ext_resource type="PackedScene" uid="uid://btleuhp1kmvle" path="res://Scenes/door.tscn" id="5_rw0gb"]
 [ext_resource type="Material" uid="uid://75jb8jyrr0vt" path="res://Art/Environment/Materials/m_ChainHolder.tres" id="7_6onbk"]
@@ -14,196 +11,7 @@
 [ext_resource type="PackedScene" uid="uid://bw8btg3rvl7hi" path="res://UI/UIController.tscn" id="9_tbvch"]
 [ext_resource type="PackedScene" uid="uid://bny3ql5dweqei" path="res://Scenes/hallway_light_transition.tscn" id="12_uaplk"]
 [ext_resource type="PackedScene" uid="uid://kb7mnexxt38o" path="res://Scenes/danger_zone.tscn" id="13_6upbw"]
-
-[sub_resource type="CameraAttributesPractical" id="CameraAttributesPractical_a575m"]
-dof_blur_far_enabled = true
-dof_blur_far_distance = 1.12
-dof_blur_near_enabled = true
-dof_blur_near_distance = 1.08
-dof_blur_near_transition = 2.0
-
-[sub_resource type="Animation" id="Animation_msusn"]
-resource_name = "Darken"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:environment:ambient_light_energy")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [0.5]
-}
-
-[sub_resource type="Animation" id="Animation_0agt1"]
-resource_name = "Lighten"
-length = 0.1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:environment:ambient_light_energy")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
-}
-
-[sub_resource type="Animation" id="Animation_mjf6t"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath(".:environment:ambient_light_energy")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [1.0]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_a03pr"]
-_data = {
-"Darken": SubResource("Animation_msusn"),
-"Lighten": SubResource("Animation_0agt1"),
-"RESET": SubResource("Animation_mjf6t")
-}
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tqva6"]
-animation = &"Darken"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_u7prx"]
-animation = &"Lighten"
-
-[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_ch8or"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_tqva6")
-blend_point_0/pos = 0.0
-blend_point_1/node = SubResource("AnimationNodeAnimation_u7prx")
-blend_point_1/pos = 1.0
-min_space = 0.0
-sync = true
-
-[sub_resource type="Animation" id="Animation_csfu0"]
-resource_name = "BottomView"
-length = 0.1
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../CameraRig/Camera3D:position")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(2.52724e-05, 0.93634, 0.731144)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../CameraRig:rotation")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0, 0, 0)]
-}
-
-[sub_resource type="Animation" id="Animation_pbyga"]
-length = 0.001
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../CameraRig:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-0.453786, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../CameraRig/Camera3D:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(2.52724e-05, 0.93634, 0.731144)]
-}
-
-[sub_resource type="Animation" id="Animation_njilh"]
-resource_name = "TopView"
-length = 0.1
-loop_mode = 1
-tracks/0/type = "value"
-tracks/0/imported = false
-tracks/0/enabled = true
-tracks/0/path = NodePath("../../CameraRig:rotation")
-tracks/0/interp = 1
-tracks/0/loop_wrap = true
-tracks/0/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(-0.453786, 0, 0)]
-}
-tracks/1/type = "value"
-tracks/1/imported = false
-tracks/1/enabled = true
-tracks/1/path = NodePath("../../CameraRig/Camera3D:position")
-tracks/1/interp = 1
-tracks/1/loop_wrap = true
-tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(3.33786e-05, 1.03194, 0.53512)]
-}
-
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_injk7"]
-_data = {
-"BottomView": SubResource("Animation_csfu0"),
-"RESET": SubResource("Animation_pbyga"),
-"TopView": SubResource("Animation_njilh")
-}
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e6tue"]
-animation = &"TopView"
-
-[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d5yqo"]
-animation = &"BottomView"
-
-[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_muxvj"]
-blend_point_0/node = SubResource("AnimationNodeAnimation_e6tue")
-blend_point_0/pos = 1.0
-blend_point_1/node = SubResource("AnimationNodeAnimation_d5yqo")
-blend_point_1/pos = 0.0
-min_space = 0.0
-value_label = "0.5"
-
-[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5scpu"]
-advance_mode = 2
-
-[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_xbkem"]
-states/BlendSpace1D/node = SubResource("AnimationNodeBlendSpace1D_muxvj")
-states/BlendSpace1D/position = Vector2(496, 88)
-states/Start/position = Vector2(252, 93)
-transitions = ["Start", "BlendSpace1D", SubResource("AnimationNodeStateMachineTransition_5scpu")]
+[ext_resource type="PackedScene" uid="uid://cpqlmfxkym2m1" path="res://Scenes/scene_transition_door.tscn" id="14_bh1n0"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_5spff"]
 
@@ -232,7 +40,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_gaoog"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_tdha5"]
 resource_local_to_scene = true
 resource_name = "Root Scene_ChainHolder"
 _surfaces = [{
@@ -263,7 +71,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_uwgtq"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_bromc"]
 resource_local_to_scene = true
 resource_name = "Root Scene_ChainHolder"
 _surfaces = [{
@@ -281,9 +89,10 @@ _surfaces = [{
 blend_shape_mode = 0
 shadow_mesh = SubResource("ArrayMesh_dae4x")
 
-[node name="3DWorldTest" type="Node3D"]
+[node name="Room" type="Node3D" node_paths=PackedStringArray("default_player_spawn_point")]
 transform = Transform3D(1, -5.49965e-05, 4.14818e-05, 5.49965e-05, 1, -1.13368e-05, -4.14818e-05, 1.13368e-05, 1, 0, 0, 0)
 script = ExtResource("1_l0fqf")
+default_player_spawn_point = NodePath("PlayerSpawnPoint")
 
 [node name="GridMap" type="GridMap" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0.25)
@@ -293,59 +102,6 @@ data = {
 "cells": PackedInt32Array(4, 0, 655360, 5, 0, 655360, 6, 0, 655360, 4, 1, 655360, 5, 1, 655360, 6, 1, 655360, 4, 2, 655360, 5, 2, 655360, 6, 2, 655360, 5, 65534, 1, 3, 65534, 2, 7, 65534, 1441794, 4, 65534, 4, 7, 3, 655362, 3, 3, 1048578, 3, 65535, 1048580, 3, 0, 1048580, 3, 2, 1048580, 3, 1, 1048580, 4, 3, 655364, 5, 3, 655364, 6, 3, 655364, 7, 2, 1441796, 7, 1, 1441796, 7, 0, 1441796, 7, 65535, 1441796, 4, 65535, 1441792, 5, 65535, 1441792, 4, 65533, 1048580, 5, 65533, 1441792, 6, 65533, 1441796, 6, 65532, 1441796, 6, 65531, 1441796, 6, 65529, 1441794, 4, 65532, 1048580, 4, 65531, 1048580, 4, 65530, 1048580, 4, 65529, 2, 5, 65529, 4, 5, 65532, 1441792, 5, 65531, 1441792, 5, 65530, 1441792, 6, 65535, 1441792, 6, 65534, 4, 65539, 65533, 0, 65539, 65532, 0, 65539, 65531, 0, 65539, 65530, 0, 65539, 65529, 0, 65539, 65528, 0, 65540, 65528, 0, 65540, 65527, 0, 65541, 65527, 0, 65542, 65527, 1441796, 65541, 65528, 0, 65538, 65533, 655363, 65538, 65532, 0, 65538, 65531, 0, 65538, 65530, 0, 65538, 65529, 0, 65538, 65528, 0, 65538, 65527, 0, 65539, 65527, 0, 65539, 65526, 4, 65540, 65526, 4, 65541, 65526, 4, 65542, 65526, 1441794, 65538, 65526, 4, 65537, 65533, 1048580, 65537, 65532, 1048580, 65537, 65531, 1048580, 65537, 65530, 1048580, 65537, 65529, 1048580, 65537, 65528, 1048580, 65537, 65527, 1048580, 65537, 65526, 2, 7, 65529, 2, 7, 65530, 1441792, 6, 65530, 1441793, 8, 65531, 655362, 8, 65530, 1441796, 7, 65531, 655365, 65544, 65531, 655366, 65542, 65528, 1441797, 65543, 65529, 6, 65544, 65529, 8, 65545, 65529, 1048584, 65545, 65530, 1048583, 65545, 65531, 1048582, 65543, 65532, 6, 65542, 65532, 1441798, 65543, 65533, 655366, 65542, 65533, 1441799, 65543, 65534, 1441798, 65543, 65535, 1441799, 65543, 0, 1441799, 65543, 1, 1441799, 65543, 2, 1441799, 65543, 3, 1441799, 65538, 1, 1441799, 65538, 2, 1441799, 65538, 0, 1441799, 65538, 3, 1441800, 65539, 65534, 1048584, 65539, 65535, 1048583, 65537, 65534, 1441795, 65537, 65535, 8, 65536, 65534, 1441800, 8, 65529, 1, 8, 65528, 1441796, 9, 65527, 655364, 10, 65527, 655364, 11, 65527, 655364, 12, 65526, 1048579, 12, 65525, 1441796, 12, 65523, 1441796, 12, 65524, 1441796, 8, 65527, 2, 12, 65527, 655362, 7, 65528, 1441800, 11, 65526, 655366, 9, 65526, 655367, 10, 65526, 655367, 11, 65525, 1441799, 11, 65524, 1441799, 11, 65523, 1441799, 13, 65526, 1048583, 9, 65529, 1048583, 12, 65522, 655367)
 }
 metadata/_editor_floor_ = Vector3(0, 0, 0)
-
-[node name="CameraRig" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.898794, 0.438371, 0, -0.438371, 0.898794, 5.51637, 0.599417, -5.71557)
-script = ExtResource("4_6rudd")
-
-[node name="Camera3D" type="Camera3D" parent="CameraRig"]
-transform = Transform3D(1, 2.21024e-06, 3.87444e-05, -3.1149e-05, 0.641182, 0.767389, -2.31453e-05, -0.767389, 0.641182, 2.52724e-05, 0.93634, 0.731144)
-environment = ExtResource("4_jbw0r")
-attributes = SubResource("CameraAttributesPractical_a575m")
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraRig/Camera3D"]
-libraries = {
-"": SubResource("AnimationLibrary_a03pr")
-}
-
-[node name="AnimationTree" type="AnimationTree" parent="CameraRig/Camera3D"]
-tree_root = SubResource("AnimationNodeBlendSpace1D_ch8or")
-anim_player = NodePath("../AnimationPlayer")
-active = true
-parameters/blend_position = 1.0
-
-[node name="UpperRayCast" type="RayCast3D" parent="CameraRig"]
-transform = Transform3D(1, 5.4997e-05, -4.14811e-05, -5.4996e-05, 1, 1.13987e-05, 4.14824e-05, -1.13941e-05, 1, 2.52724e-05, 0.93634, 0.731144)
-target_position = Vector3(-4.29153e-06, -0.936332, -0.731154)
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraRig"]
-root_node = NodePath("../../Player3D/RemoteTransform3D")
-autoplay = "BottomView"
-libraries = {
-"": SubResource("AnimationLibrary_injk7")
-}
-
-[node name="AnimationTree" type="AnimationTree" parent="CameraRig"]
-tree_root = SubResource("AnimationNodeStateMachine_xbkem")
-anim_player = NodePath("../AnimationPlayer")
-active = true
-parameters/BlendSpace1D/blend_position = 0.0
-
-[node name="LowerRayCast" type="RayCast3D" parent="CameraRig"]
-transform = Transform3D(1, 5.4997e-05, -4.14811e-05, -6.76148e-05, 0.898799, -0.438361, 1.31755e-05, 0.438361, 0.898799, 2.57492e-05, 0.521064, 1.06761)
-target_position = Vector3(-4.76837e-06, -0.93633, -0.731153)
-
-[node name="Player3D" parent="." instance=ExtResource("3_c653b")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.51637, 0.599417, -5.71557)
-axis_lock_angular_x = false
-axis_lock_angular_y = false
-axis_lock_angular_z = false
-
-[node name="RemoteTransform3D" type="RemoteTransform3D" parent="Player3D"]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 0, 0, 0)
-remote_path = NodePath("../../CameraRig")
-update_rotation = false
-update_scale = false
 
 [node name="Environment" type="Node3D" parent="."]
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -429,7 +185,7 @@ skeleton = NodePath("../..")
 
 [node name="ChainHolder" parent="Environment" node_paths=PackedStringArray("attached") instance=ExtResource("5_ct13f")]
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.00045, 1.69812, -8.49981)
-mesh = SubResource("ArrayMesh_gaoog")
+mesh = SubResource("ArrayMesh_tdha5")
 skeleton = NodePath("../..")
 max_tiles = 3
 attached = NodePath("../Box11")
@@ -441,7 +197,7 @@ skeleton = NodePath("../..")
 
 [node name="ChainHolder2" parent="Environment" node_paths=PackedStringArray("attached") instance=ExtResource("5_ct13f")]
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 3.00034, 1.69824, -5.99989)
-mesh = SubResource("ArrayMesh_uwgtq")
+mesh = SubResource("ArrayMesh_bromc")
 max_tiles = 2
 attached = NodePath("../Box4")
 
@@ -452,6 +208,12 @@ _alter = NodePath("../Alter")
 [node name="Button" parent="Environment" instance=ExtResource("8_0dfrb")]
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 7.00006, 0.699652, -0.499718)
 type = 2
+
+[node name="Button3" parent="Environment" instance=ExtResource("8_0dfrb")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 4.60188, 0.69979, 0.0411717)
+type = 4
+_one_time_dialog = true
+destination_scene = "res://Scenes/SecondRoomTest.tscn"
 
 [node name="Alter" parent="Environment" instance=ExtResource("8_0dfrb")]
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 7.00024, 0.699604, -4.74428)
@@ -473,11 +235,6 @@ transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.75, 0.
 opened_by = 0
 _button = NodePath("../Button")
 
-[node name="Door3" parent="Environment" node_paths=PackedStringArray("_button") instance=ExtResource("5_rw0gb")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.75, 0.5, -1.74)
-opened_by = 0
-_button = NodePath("../Button")
-
 [node name="HallwayLightTransition" parent="Environment" instance=ExtResource("12_uaplk")]
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 8.72368, 0.745129, -6.72066)
 
@@ -485,5 +242,11 @@ transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 8.72368,
 danger_min_wait_time_seconds = 5.0
 danger_max_wait_time_seconds = 10.0
 
-[node name="CanvasLayer" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("9_tbvch")]
-camera = NodePath("../CameraRig/Camera3D")
+[node name="SceneTransitionDoor" parent="Environment" instance=ExtResource("14_bh1n0")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.50004, 0.700013, 0.000220216)
+destination_scene = "res://Scenes/Rooms/TestRoom2.tscn"
+
+[node name="PlayerSpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.49999, 0.817121, 1.50022)
+
+[node name="CanvasLayer" parent="." instance=ExtResource("9_tbvch")]

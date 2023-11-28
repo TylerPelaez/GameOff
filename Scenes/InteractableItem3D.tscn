@@ -1,6 +1,7 @@
-[gd_scene load_steps=6 format=3 uid="uid://bece0kkh8f7g1"]
+[gd_scene load_steps=7 format=3 uid="uid://bece0kkh8f7g1"]
 
 [ext_resource type="Script" path="res://Scripts/InteractableItem.gd" id="1_xq7ro"]
+[ext_resource type="Script" path="res://addons/game_state_helper/game_state_helper.gd" id="2_oq52q"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_jhiwe"]
 size = Vector3(1, 0.38, 1)
@@ -33,3 +34,7 @@ mesh = SubResource("BoxMesh_gtt8t")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
 shape = SubResource("ConcavePolygonShape3D_ijad2")
+
+[node name="GameStateHelper" type="Node" parent="."]
+script = ExtResource("2_oq52q")
+save_properties = Array[String](["_toggled_on", "dialog_triggered"])
