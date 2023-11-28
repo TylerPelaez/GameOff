@@ -1,9 +1,10 @@
-[gd_scene load_steps=21 format=3 uid="uid://falvrtr5sb5m"]
+[gd_scene load_steps=31 format=3 uid="uid://falvrtr5sb5m"]
 
 [ext_resource type="MeshLibrary" uid="uid://d00ge6jxao8rg" path="res://Art/Environment/MeshLibrary.tres" id="1_76fpt"]
 [ext_resource type="Script" path="res://Scripts/World.gd" id="1_l0fqf"]
 [ext_resource type="PackedScene" uid="uid://chawhftcwjlwv" path="res://Scenes/player3D.tscn" id="3_c653b"]
 [ext_resource type="PackedScene" uid="uid://l7wxwtb8sjjg" path="res://Scenes/DraggableBox.tscn" id="3_j0sb7"]
+[ext_resource type="Script" path="res://Scripts/FollowPlayer.gd" id="4_6rudd"]
 [ext_resource type="PackedScene" uid="uid://djdn7qbr08owm" path="res://Scenes/chain.tscn" id="5_ct13f"]
 [ext_resource type="PackedScene" uid="uid://btleuhp1kmvle" path="res://Scenes/door.tscn" id="5_rw0gb"]
 [ext_resource type="Material" uid="uid://75jb8jyrr0vt" path="res://Art/Environment/Materials/m_ChainHolder.tres" id="7_6onbk"]
@@ -32,6 +33,121 @@ dof_blur_near_enabled = true
 dof_blur_near_distance = 1.08
 dof_blur_near_transition = 2.0
 
+[sub_resource type="Animation" id="Animation_csfu0"]
+resource_name = "BottomView"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../CameraRig/Camera3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.52724e-05, 0.93634, 0.731144)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../CameraRig:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0, 0)]
+}
+
+[sub_resource type="Animation" id="Animation_pbyga"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../CameraRig:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.453786, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../CameraRig/Camera3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(2.52724e-05, 0.93634, 0.731144)]
+}
+
+[sub_resource type="Animation" id="Animation_njilh"]
+resource_name = "TopView"
+length = 0.1
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("../../CameraRig:rotation")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(-0.453786, 0, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("../../CameraRig/Camera3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(3.33786e-05, 1.03194, 0.53512)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_injk7"]
+_data = {
+"BottomView": SubResource("Animation_csfu0"),
+"RESET": SubResource("Animation_pbyga"),
+"TopView": SubResource("Animation_njilh")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_e6tue"]
+animation = &"TopView"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_d5yqo"]
+animation = &"BottomView"
+
+[sub_resource type="AnimationNodeBlendSpace1D" id="AnimationNodeBlendSpace1D_muxvj"]
+blend_point_0/node = SubResource("AnimationNodeAnimation_e6tue")
+blend_point_0/pos = 1.0
+blend_point_1/node = SubResource("AnimationNodeAnimation_d5yqo")
+blend_point_1/pos = 0.0
+min_space = 0.0
+value_label = "0.5"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5scpu"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_xbkem"]
+states/BlendSpace1D/node = SubResource("AnimationNodeBlendSpace1D_muxvj")
+states/BlendSpace1D/position = Vector2(496, 88)
+states/Start/position = Vector2(252, 93)
+transitions = ["Start", "BlendSpace1D", SubResource("AnimationNodeStateMachineTransition_5scpu")]
+
 [sub_resource type="QuadMesh" id="QuadMesh_5spff"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_58wq8"]
@@ -59,7 +175,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_a45uj"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_r3m22"]
 resource_local_to_scene = true
 resource_name = "Root Scene_ChainHolder"
 _surfaces = [{
@@ -90,7 +206,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_ogdna"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_afkj3"]
 resource_local_to_scene = true
 resource_name = "Root Scene_ChainHolder"
 _surfaces = [{
@@ -117,24 +233,51 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0.25)
 mesh_library = ExtResource("1_76fpt")
 cell_size = Vector3(1, 1, 1)
 data = {
-"cells": PackedInt32Array(4, 0, 655360, 5, 0, 655360, 6, 0, 655360, 4, 1, 655360, 5, 1, 655360, 6, 1, 655360, 4, 2, 655360, 5, 2, 655360, 6, 2, 655360, 5, 65534, 1, 3, 65534, 2, 7, 65534, 1441794, 4, 65534, 4, 7, 3, 655362, 3, 3, 1048578, 3, 65535, 1048580, 3, 0, 1048580, 3, 2, 1048580, 3, 1, 1048580, 4, 3, 655364, 5, 3, 655364, 6, 3, 655364, 7, 2, 1441796, 7, 1, 1441796, 7, 0, 1441796, 7, 65535, 1441796, 4, 65535, 1441792, 5, 65535, 1441792, 4, 65533, 1048580, 5, 65533, 1441792, 6, 65533, 1441796, 6, 65532, 1441796, 6, 65531, 1441796, 6, 65529, 1441794, 4, 65532, 1048580, 4, 65531, 1048580, 4, 65530, 1048580, 4, 65529, 2, 5, 65529, 4, 5, 65532, 1441792, 5, 65531, 1441792, 5, 65530, 1441792, 6, 65535, 1441792, 6, 65534, 4, 65539, 65533, 0, 65539, 65532, 0, 65539, 65531, 0, 65539, 65530, 0, 65539, 65529, 0, 65539, 65528, 0, 65540, 65528, 0, 65540, 65527, 0, 65541, 65527, 0, 65542, 65527, 1441796, 65541, 65528, 0, 65542, 65528, 1441796, 65538, 65533, 0, 65538, 65532, 0, 65538, 65531, 0, 65538, 65530, 0, 65538, 65529, 0, 65538, 65528, 0, 65538, 65527, 0, 65539, 65527, 0, 65539, 65526, 4, 65540, 65526, 4, 65541, 65526, 4, 65542, 65526, 1441794, 65538, 65526, 4, 65538, 65534, 655362, 65537, 65534, 1048578, 65537, 65533, 1048580, 65537, 65532, 1048580, 65537, 65531, 1048580, 65537, 65530, 1048580, 65537, 65529, 1048580, 65537, 65528, 1048580, 65537, 65527, 1048580, 65537, 65526, 2, 65538, 65535, 1441796, 65538, 0, 1441796, 65538, 1, 1441796, 65538, 2, 1441796, 65538, 3, 1441796, 65544, 65534, 1048580, 65544, 65535, 1048580, 65544, 0, 1048580, 65544, 1, 1048580, 65544, 2, 1048580, 65544, 3, 1048580, 7, 65529, 2, 8, 65529, 1441794, 7, 65530, 1441792, 6, 65530, 1441793, 8, 65531, 655362, 8, 65530, 1441796, 7, 65531, 655365, 65544, 65528, 655363, 65543, 65528, 655365, 65545, 65529, 1048581, 65545, 65531, 1048579, 65545, 65530, 1048580)
+"cells": PackedInt32Array(4, 0, 655360, 5, 0, 655360, 6, 0, 655360, 4, 1, 655360, 5, 1, 655360, 6, 1, 655360, 4, 2, 655360, 5, 2, 655360, 6, 2, 655360, 5, 65534, 1, 3, 65534, 2, 7, 65534, 1441794, 4, 65534, 4, 7, 3, 655362, 3, 3, 1048578, 3, 65535, 1048580, 3, 0, 1048580, 3, 2, 1048580, 3, 1, 1048580, 4, 3, 655364, 5, 3, 655364, 6, 3, 655364, 7, 2, 1441796, 7, 1, 1441796, 7, 0, 1441796, 7, 65535, 1441796, 4, 65535, 1441792, 5, 65535, 1441792, 4, 65533, 1048580, 5, 65533, 1441792, 6, 65533, 1441796, 6, 65532, 1441796, 6, 65531, 1441796, 6, 65529, 1441794, 4, 65532, 1048580, 4, 65531, 1048580, 4, 65530, 1048580, 4, 65529, 2, 5, 65529, 4, 5, 65532, 1441792, 5, 65531, 1441792, 5, 65530, 1441792, 6, 65535, 1441792, 6, 65534, 4, 65539, 65533, 0, 65539, 65532, 0, 65539, 65531, 0, 65539, 65530, 0, 65539, 65529, 0, 65539, 65528, 0, 65540, 65528, 0, 65540, 65527, 0, 65541, 65527, 0, 65542, 65527, 1441796, 65541, 65528, 0, 65538, 65533, 655363, 65538, 65532, 0, 65538, 65531, 0, 65538, 65530, 0, 65538, 65529, 0, 65538, 65528, 0, 65538, 65527, 0, 65539, 65527, 0, 65539, 65526, 4, 65540, 65526, 4, 65541, 65526, 4, 65542, 65526, 1441794, 65538, 65526, 4, 65537, 65533, 1048580, 65537, 65532, 1048580, 65537, 65531, 1048580, 65537, 65530, 1048580, 65537, 65529, 1048580, 65537, 65528, 1048580, 65537, 65527, 1048580, 65537, 65526, 2, 7, 65529, 2, 8, 65529, 1441794, 7, 65530, 1441792, 6, 65530, 1441793, 8, 65531, 655362, 8, 65530, 1441796, 7, 65531, 655365, 65544, 65531, 655366, 65542, 65528, 1441797, 65543, 65529, 6, 65544, 65529, 8, 65545, 65529, 1048584, 65545, 65530, 1048583, 65545, 65531, 1048582, 65543, 65532, 6, 65542, 65532, 1441798, 65543, 65533, 655366, 65542, 65533, 1441799, 65543, 65534, 1441798, 65543, 65535, 1441799, 65543, 0, 1441799, 65543, 1, 1441799, 65543, 2, 1441799, 65543, 3, 1441799, 65538, 1, 1441799, 65538, 2, 1441799, 65538, 0, 1441799, 65538, 3, 1441800, 65539, 65534, 1048584, 65539, 65535, 1048583, 65537, 65534, 1441795, 65537, 65535, 8, 65536, 65534, 1441800)
 }
-metadata/_editor_floor_ = Vector3(0, 0, 0)
+metadata/_editor_floor_ = Vector3(0, 1, 0)
 
-[node name="Camera3D" type="Camera3D" parent="."]
-transform = Transform3D(1, 2.21078e-06, 3.87438e-05, -3.1149e-05, 0.641182, 0.767389, -2.31453e-05, -0.767389, 0.641182, 5.81203, 1.53581, 0.940144)
+[node name="CameraRig" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.898794, 0.438371, 0, -0.438371, 0.898794, 5.8119, 0.599494, 2.52685)
+script = ExtResource("4_6rudd")
+
+[node name="Camera3D" type="Camera3D" parent="CameraRig"]
+transform = Transform3D(1, 2.21024e-06, 3.87444e-05, -3.1149e-05, 0.641182, 0.767389, -2.31453e-05, -0.767389, 0.641182, 2.52724e-05, 0.93634, 0.731144)
 environment = SubResource("Environment_30wu8")
 attributes = SubResource("CameraAttributesPractical_a575m")
 
+[node name="UpperRayCast" type="RayCast3D" parent="CameraRig"]
+transform = Transform3D(1, 5.4997e-05, -4.14811e-05, -5.4996e-05, 1, 1.13987e-05, 4.14824e-05, -1.13941e-05, 1, 2.52724e-05, 0.93634, 0.731144)
+target_position = Vector3(-4.29153e-06, -0.936332, -0.731155)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="CameraRig"]
+root_node = NodePath("../../Player3D/RemoteTransform3D")
+autoplay = "BottomView"
+libraries = {
+"": SubResource("AnimationLibrary_injk7")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="CameraRig"]
+tree_root = SubResource("AnimationNodeStateMachine_xbkem")
+anim_player = NodePath("../AnimationPlayer")
+active = true
+parameters/BlendSpace1D/blend_position = 0.0
+
+[node name="LowerRayCast" type="RayCast3D" parent="CameraRig"]
+transform = Transform3D(1, 5.4997e-05, -4.14811e-05, -6.76148e-05, 0.898799, -0.438361, 1.31755e-05, 0.438361, 0.898799, 2.57492e-05, 0.521064, 1.06761)
+target_position = Vector3(-4.76837e-06, -0.936331, -0.731153)
+
 [node name="Player3D" parent="." instance=ExtResource("3_c653b")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.812, 0.599468, 0.209)
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.8119, 0.599494, 2.52685)
 axis_lock_angular_x = false
 axis_lock_angular_y = false
 axis_lock_angular_z = false
 
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="Player3D"]
-transform = Transform3D(1, 2.21078e-06, 3.87438e-05, -3.1149e-05, 0.641182, 0.767389, -2.31453e-05, -0.767389, 0.641182, 2.52724e-05, 0.93634, 0.731144)
-remote_path = NodePath("../../Camera3D")
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 0, 0, 0)
+remote_path = NodePath("../../CameraRig")
+update_rotation = false
+update_scale = false
 
 [node name="Environment" type="Node3D" parent="."]
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 0, 0, 0)
@@ -202,7 +345,7 @@ skeleton = NodePath("../..")
 
 [node name="ChainHolder" parent="Environment" node_paths=PackedStringArray("attached") instance=ExtResource("5_ct13f")]
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.00045, 1.69812, -8.49981)
-mesh = SubResource("ArrayMesh_a45uj")
+mesh = SubResource("ArrayMesh_r3m22")
 skeleton = NodePath("../..")
 max_tiles = 3
 attached = NodePath("../Box11")
@@ -214,7 +357,7 @@ skeleton = NodePath("../..")
 
 [node name="ChainHolder2" parent="Environment" node_paths=PackedStringArray("attached") instance=ExtResource("5_ct13f")]
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 3.00034, 1.69824, -5.99989)
-mesh = SubResource("ArrayMesh_ogdna")
+mesh = SubResource("ArrayMesh_afkj3")
 max_tiles = 2
 attached = NodePath("../Box4")
 
@@ -233,6 +376,7 @@ _required_key = 1
 
 [node name="Key" parent="Environment" instance=ExtResource("8_0dfrb")]
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 4.94158, 0.699851, -4.07021)
+has_collision = false
 _key_id = 1
 
 [node name="Door" parent="Environment" node_paths=PackedStringArray("_button") instance=ExtResource("5_rw0gb")]
@@ -245,12 +389,16 @@ transform = Transform3D(1, 4.68335e-10, 6.22094e-10, -1.0662e-12, 1, 2.28101e-09
 light_color = Color(0.461647, 0.568522, 0.267637, 1)
 light_energy = 0.8
 light_volumetric_fog_energy = 0.6
+shadow_enabled = true
+distance_fade_enabled = true
 
 [node name="OmniLight3D2" type="OmniLight3D" parent="."]
 transform = Transform3D(1, 4.68335e-10, 6.22094e-10, -1.0662e-12, 1, 2.28101e-09, 0, 0, 1, 4.77898, 2.96775, -5.96202)
 light_color = Color(0.462745, 0.568627, 0.266667, 1)
 light_energy = 0.8
 light_volumetric_fog_energy = 0.6
+shadow_enabled = true
+distance_fade_enabled = true
 
 [node name="CanvasLayer" parent="." node_paths=PackedStringArray("camera") instance=ExtResource("9_tbvch")]
-camera = NodePath("../Camera3D")
+camera = NodePath("../CameraRig/Camera3D")
