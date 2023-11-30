@@ -1,0 +1,52 @@
+[gd_scene load_steps=9 format=3 uid="uid://bxpw7nskdk5im"]
+
+[ext_resource type="ArrayMesh" uid="uid://dxnhup1bxr3hk" path="res://Art/Environment/ShortWall/Root Scene_wall_shortBottom.res" id="1_eukbr"]
+[ext_resource type="ArrayMesh" uid="uid://byjc66ue3ch05" path="res://Art/Environment/ShortWall/Root Scene_wall_shortMiddle.res" id="2_ivwd5"]
+[ext_resource type="ArrayMesh" uid="uid://dm70c2mcnbcmw" path="res://Art/Environment/ShortWall/Root Scene_wall_shortTop.res" id="3_mk5jm"]
+[ext_resource type="ArrayMesh" uid="uid://cfrsi8i4bguo" path="res://Art/Environment/Meshes/Floor_Empty.res" id="4_cdhqr"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_1kw54"]
+data = PackedVector3Array(0.5, 0.3333, -0.5, -0.5, 0, -0.5, -0.5, 0.3333, -0.5, 0.5, 0.3333, -0.5, 0.5, 0, -0.5, -0.5, 0, -0.5)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_i5l2h"]
+data = PackedVector3Array(0.5, 0.3333, -0.5, -0.5, 0, -0.5, -0.5, 0.3333, -0.5, 0.5, 0.3333, -0.5, 0.5, 0, -0.5, -0.5, 0, -0.5)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_am13o"]
+data = PackedVector3Array(0.5, 0.3333, -0.5, -0.5, 0, -0.5, -0.5, 0.3333, -0.5, 0.5, 0.3333, -0.5, 0.5, 0, -0.5, -0.5, 0, -0.5)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_8g2dv"]
+data = PackedVector3Array(0.5, 0, 0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, -0.5, 0, 0.5, -0.5, 0, -0.5, 0.5, 0, -0.5)
+
+[node name="ShortWalls" type="Node3D"]
+
+[node name="RootSceneWallShortBottom" type="MeshInstance3D" parent="."]
+mesh = ExtResource("1_eukbr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="RootSceneWallShortBottom"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RootSceneWallShortBottom/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_1kw54")
+
+[node name="RootSceneWallShortMiddle" type="MeshInstance3D" parent="."]
+mesh = ExtResource("2_ivwd5")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="RootSceneWallShortMiddle"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RootSceneWallShortMiddle/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_i5l2h")
+
+[node name="RootSceneWallShortTop" type="MeshInstance3D" parent="."]
+mesh = ExtResource("3_mk5jm")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="RootSceneWallShortTop"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="RootSceneWallShortTop/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_am13o")
+
+[node name="FloorEmpty" type="MeshInstance3D" parent="."]
+mesh = ExtResource("4_cdhqr")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="FloorEmpty"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="FloorEmpty/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_8g2dv")

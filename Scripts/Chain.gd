@@ -1,5 +1,5 @@
 @tool
-extends MeshInstance3D
+extends Node3D
 class_name Chain
 
 @export var max_tiles = 5
