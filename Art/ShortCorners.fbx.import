@@ -1,0 +1,65 @@
+[remap]
+
+importer="scene"
+importer_version=1
+type="PackedScene"
+uid="uid://d061uroi6keg"
+path="res://.godot/imported/ShortCorners.fbx-ab16ed0b8f218d63c8b49fcbc36b5ea2.scn"
+
+[deps]
+
+source_file="res://Art/ShortCorners.fbx"
+dest_files=["res://.godot/imported/ShortCorners.fbx-ab16ed0b8f218d63c8b49fcbc36b5ea2.scn"]
+
+[params]
+
+nodes/root_type="Node3D"
+nodes/root_name="Scene Root"
+nodes/apply_root_scale=true
+nodes/root_scale=100.0
+meshes/ensure_tangents=true
+meshes/generate_lods=true
+meshes/create_shadow_meshes=true
+meshes/light_baking=1
+meshes/lightmap_texel_size=0.2
+skins/use_named_skins=true
+animation/import=true
+animation/fps=30
+animation/trimming=false
+animation/remove_immutable_tracks=true
+import_script/path=""
+_subresources={
+"meshes": {
+"Root Scene_wall_shortCornerBottom": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://Art/Environment/ShortWall/Root Scene_wall_shortCornerBottom.res"
+},
+"Root Scene_wall_shortCornerMiddle": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://Art/Environment/ShortWall/Root Scene_wall_shortCornerMiddle.res"
+},
+"Root Scene_wall_shortCornerTop": {
+"generate/lightmap_uv": 0,
+"generate/lods": 0,
+"generate/shadow_meshes": 0,
+"lods/normal_merge_angle": 60.0,
+"lods/normal_split_angle": 25.0,
+"save_to_file/enabled": true,
+"save_to_file/make_streamable": "",
+"save_to_file/path": "res://Art/Environment/ShortWall/Root Scene_wall_shortCornerTop.res"
+}
+}
+}
+gltf/embedded_image_handling=1
