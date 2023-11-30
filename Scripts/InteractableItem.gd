@@ -11,6 +11,8 @@ signal toggled(val: bool)
 @export var has_collision: bool = true
 
 @onready var collision_shape_3d = $MeshInstance3D/StaticBody3D/CollisionShape3D
+@onready var animation_player = $AnimationPlayer
+
 
 @export var _key_id: ItemData.ItemId
 @export var _dialog_id: DialogData.DialogId
@@ -34,7 +36,8 @@ enum Type {
 	ToggleButton,
 	Dialog,
 	HidingPlace,
-	SceneTransitionDoor
+	SceneTransitionDoor,
+	Breakable,
 }
 
 func set_type(val):
@@ -81,12 +84,19 @@ func interact():
 		Type.SceneTransitionDoor:
 			GameStateService.set_global_state_value(Room.ENTERING_ROOM_FROM_SCENE_STATE_KEY, get_owner().scene_file_path)
 			TransitionMgr.transition_to(destination_scene)
+		Type.Breakable:
+			if PlayerInventory.has_item(ItemData.ItemId.Chisel):
+				explode()
 
+func explode():
+	animation_player.play("break")
 
 func can_interact() -> bool:
 	match type:
 		Type.Dialog:
 			return !_one_time_dialog || !dialog_triggered
+		Type.Breakable:
+			return PlayerInventory.has_item(ItemData.ItemId.Chisel)
 		_:
 			return true
 

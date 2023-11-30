@@ -42,7 +42,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_lvmcx"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_b5385"]
 resource_local_to_scene = true
 resource_name = "Root Scene_ChainHolder"
 _surfaces = [{
@@ -73,7 +73,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_8repf"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_i4seh"]
 resource_local_to_scene = true
 resource_name = "Root Scene_ChainHolder"
 _surfaces = [{
@@ -186,7 +186,7 @@ skeleton = NodePath("../..")
 
 [node name="ChainHolder" parent="Environment" node_paths=PackedStringArray("attached") instance=ExtResource("5_ct13f")]
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.00045, 1.69812, -8.49981)
-mesh = SubResource("ArrayMesh_lvmcx")
+mesh = SubResource("ArrayMesh_b5385")
 skeleton = NodePath("../..")
 max_tiles = 3
 attached = NodePath("../Box11")
@@ -198,7 +198,7 @@ skeleton = NodePath("../..")
 
 [node name="ChainHolder2" parent="Environment" node_paths=PackedStringArray("attached") instance=ExtResource("5_ct13f")]
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 3.00034, 1.69824, -5.99989)
-mesh = SubResource("ArrayMesh_8repf")
+mesh = SubResource("ArrayMesh_i4seh")
 max_tiles = 2
 attached = NodePath("../Box4")
 

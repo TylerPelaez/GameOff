@@ -268,14 +268,14 @@ func hide_interaction_prompt():
 	EventManager.hide_interaction_prompt.emit()
 
 func hide_inside_object(hiding_place: InteractableItem):
-	if mode == Player.Mode.Normal:
+	if mode == Mode.Normal:
 		visible = false
-		mode = Player.Mode.Hidden
+		mode = Mode.Hidden
 		hide_interaction_prompt()
 
 func unhide():
-	if mode == Player.Mode.Hidden:
-		mode = Player.Mode.Normal
+	if mode == Mode.Hidden:
+		mode = Mode.Normal
 		visible = true
 		update_objects()
 
