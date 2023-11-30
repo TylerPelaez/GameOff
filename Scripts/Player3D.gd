@@ -209,8 +209,13 @@ func update_objects():
 		if object is InteractableItem and !object.can_interact():
 			continue
 		
+		var target_pos = object.global_position
+		if object is InteractableItem:
+			interactable_not_blocked_ray_cast.position = Vector3.ZERO
+			target_pos = object.get_interaction_area_global_pos()
+		
 		# Check if theres a wall b/w the player and the object
-		interactable_not_blocked_ray_cast.target_position = interactable_not_blocked_ray_cast.to_local(object.global_position)
+		interactable_not_blocked_ray_cast.target_position = interactable_not_blocked_ray_cast.to_local(target_pos)
 		interactable_not_blocked_ray_cast.force_raycast_update()
 		if interactable_not_blocked_ray_cast.is_colliding() && interactable_not_blocked_ray_cast.get_collider().get_parent().get_parent() != object && interactable_not_blocked_ray_cast.get_collider().get_parent() != object:
 			continue

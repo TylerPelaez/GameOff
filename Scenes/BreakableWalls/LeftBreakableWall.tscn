@@ -1,0 +1,87 @@
+[gd_scene load_steps=10 format=3 uid="uid://cx3ntgq3ckxjn"]
+
+[ext_resource type="PackedScene" uid="uid://bece0kkh8f7g1" path="res://Scenes/InteractableItem3D.tscn" id="1_0cwef"]
+[ext_resource type="Shape3D" uid="uid://cqv7e3jhlu84a" path="res://Scenes/BreakableWalls/BreakableWallInteraction.tres" id="2_532ac"]
+[ext_resource type="ArrayMesh" uid="uid://c03dd6uckgniq" path="res://Art/Environment/WallObjects/Root Scene_wall_NoneMissing.res" id="3_c7sah"]
+[ext_resource type="Shape3D" uid="uid://b21jq24ea2tx1" path="res://Scenes/BreakableWalls/WallCollisionMesh.tres" id="4_srls4"]
+[ext_resource type="ArrayMesh" uid="uid://bl3p3aqoyjq20" path="res://Art/Environment/WallObjects/Root Scene_wall_MissingLeft.res" id="5_xvfj1"]
+[ext_resource type="Shape3D" uid="uid://cfmmtxcjsta04" path="res://Scenes/BreakableWalls/BrokenWallLeftMissingCollisionMesh.tres" id="6_h88m2"]
+
+[sub_resource type="Animation" id="Animation_wrmlh"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:mesh")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_c7sah")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D/StaticBody3D/CollisionShape3D:shape")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("4_srls4")]
+}
+
+[sub_resource type="Animation" id="Animation_ojoji"]
+resource_name = "break"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:mesh")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("5_xvfj1")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D/StaticBody3D/CollisionShape3D:shape")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("6_h88m2")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_geofu"]
+_data = {
+"RESET": SubResource("Animation_wrmlh"),
+"break": SubResource("Animation_ojoji")
+}
+
+[node name="LeftBreakableWall" instance=ExtResource("1_0cwef")]
+type = 7
+
+[node name="CollisionShape3D" parent="InteractionArea" index="0"]
+shape = ExtResource("2_532ac")
+
+[node name="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0)
+mesh = ExtResource("3_c7sah")
+
+[node name="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" index="0"]
+shape = ExtResource("4_srls4")
+
+[node name="AnimationPlayer" parent="." index="3"]
+libraries = {
+"": SubResource("AnimationLibrary_geofu")
+}

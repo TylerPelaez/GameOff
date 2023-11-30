@@ -12,6 +12,7 @@ signal toggled(val: bool)
 
 @onready var collision_shape_3d = $MeshInstance3D/StaticBody3D/CollisionShape3D
 @onready var animation_player = $AnimationPlayer
+@onready var interaction_area = $InteractionArea
 
 
 @export var _key_id: ItemData.ItemId
@@ -41,6 +42,10 @@ enum Type {
 	SceneTransitionDoor,
 	Breakable,
 }
+
+
+func get_interaction_area_global_pos():
+	return interaction_area.global_position
 
 func set_type(val):
 	type = val
