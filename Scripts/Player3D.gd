@@ -46,6 +46,7 @@ enum Mode {
 	Hidden,
 	MovingObject
 }
+
 var mode = Mode.Normal
 
 var last_on_ground_pos: Vector3

@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://falvrtr5sb5m"]
+[gd_scene load_steps=24 format=3 uid="uid://falvrtr5sb5m"]
 
 [ext_resource type="MeshLibrary" uid="uid://d00ge6jxao8rg" path="res://Art/Environment/MeshLibrary.tres" id="1_76fpt"]
 [ext_resource type="Script" path="res://Scripts/World.gd" id="1_l0fqf"]
@@ -14,6 +14,7 @@
 [ext_resource type="PackedScene" uid="uid://w4v1ajvmm7to" path="res://Scenes/camera_rig.tscn" id="13_kjij8"]
 [ext_resource type="PackedScene" uid="uid://cpqlmfxkym2m1" path="res://Scenes/scene_transition_door.tscn" id="14_bh1n0"]
 [ext_resource type="PackedScene" uid="uid://chawhftcwjlwv" path="res://Scenes/player3D.tscn" id="14_brqrk"]
+[ext_resource type="PackedScene" uid="uid://bgo3jvystm51p" path="res://Scenes/Pillar/pillar_one_breakable.tscn" id="15_meq5f"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_5spff"]
 
@@ -42,7 +43,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_b5385"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_fadgt"]
 resource_local_to_scene = true
 resource_name = "Root Scene_ChainHolder"
 _surfaces = [{
@@ -73,7 +74,7 @@ _surfaces = [{
 }]
 blend_shape_mode = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_i4seh"]
+[sub_resource type="ArrayMesh" id="ArrayMesh_j31b5"]
 resource_local_to_scene = true
 resource_name = "Root Scene_ChainHolder"
 _surfaces = [{
@@ -186,7 +187,7 @@ skeleton = NodePath("../..")
 
 [node name="ChainHolder" parent="Environment" node_paths=PackedStringArray("attached") instance=ExtResource("5_ct13f")]
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.00045, 1.69812, -8.49981)
-mesh = SubResource("ArrayMesh_b5385")
+mesh = SubResource("ArrayMesh_fadgt")
 skeleton = NodePath("../..")
 max_tiles = 3
 attached = NodePath("../Box11")
@@ -198,7 +199,7 @@ skeleton = NodePath("../..")
 
 [node name="ChainHolder2" parent="Environment" node_paths=PackedStringArray("attached") instance=ExtResource("5_ct13f")]
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 3.00034, 1.69824, -5.99989)
-mesh = SubResource("ArrayMesh_i4seh")
+mesh = SubResource("ArrayMesh_j31b5")
 max_tiles = 2
 attached = NodePath("../Box4")
 
@@ -207,17 +208,16 @@ transform = Transform3D(-4.07454e-08, 4.36597e-05, -1, 6.63333e-05, 1, 4.36597e-
 _alter = NodePath("../Alter")
 
 [node name="Button" parent="Environment" instance=ExtResource("8_0dfrb")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 7.00006, 0.699652, -0.499718)
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 7.00005, 0.524672, -0.499716)
 type = 2
 
-[node name="Button3" parent="Environment" instance=ExtResource("8_0dfrb")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 4.60188, 0.69979, 0.0411717)
-type = 4
-_one_time_dialog = true
-destination_scene = "res://Scenes/SecondRoomTest.tscn"
+[node name="Chisel" parent="Environment" instance=ExtResource("8_0dfrb")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 4.60183, 0.524903, 1.04117)
+has_collision = false
+_key_id = 2
 
 [node name="Alter" parent="Environment" instance=ExtResource("8_0dfrb")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 7.00024, 0.699604, -4.74428)
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 7.00023, 0.524672, -4.74428)
 type = 1
 _required_key = 1
 
@@ -227,7 +227,7 @@ type = 5
 _required_key = 1
 
 [node name="Key" parent="Environment" instance=ExtResource("8_0dfrb")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 4.94158, 0.699851, -4.07021)
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 4.94157, 0.524871, -4.07021)
 has_collision = false
 _key_id = 1
 
@@ -244,7 +244,7 @@ danger_min_wait_time_seconds = 5.0
 danger_max_wait_time_seconds = 10.0
 
 [node name="SceneTransitionDoor" parent="Environment" instance=ExtResource("14_bh1n0")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.50004, 0.700013, 0.000220216)
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.50003, 0.524816, 0.000222202)
 destination_scene = "res://Scenes/Rooms/TestRoom2.tscn"
 
 [node name="CanvasLayer" parent="." instance=ExtResource("9_tbvch")]
@@ -254,5 +254,8 @@ transform = Transform3D(1, 0, 0, 0, 0.898794, 0.438371, 0, -0.438371, 0.898794, 
 
 [node name="Player" parent="." instance=ExtResource("14_brqrk")]
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.99995, 0.599475, 2.00024)
+
+[node name="PillarOneBreakable" parent="." instance=ExtResource("15_meq5f")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 6.49999, 0.499654, 1.00026)
 
 [editable path="Player"]

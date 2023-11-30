@@ -1,0 +1,108 @@
+[gd_scene load_steps=9 format=3 uid="uid://bgo3jvystm51p"]
+
+[ext_resource type="PackedScene" uid="uid://bece0kkh8f7g1" path="res://Scenes/InteractableItem3D.tscn" id="1_i02m8"]
+[ext_resource type="Shape3D" uid="uid://djx2weknn0ibi" path="res://Scenes/Pillar/PillarFullMeshCollider.tres" id="2_2u6bq"]
+[ext_resource type="BoxMesh" uid="uid://dd8y3wv0qw735" path="res://Scenes/Pillar/PillarHalfMeshVisual.tres" id="2_53kbx"]
+[ext_resource type="BoxMesh" uid="uid://byrntmqejwift" path="res://Scenes/Pillar/PillarFullMeshVisual.tres" id="2_of2d2"]
+[ext_resource type="Shape3D" uid="uid://63hfwfhvr6jd" path="res://Scenes/Pillar/PillarHalfMeshCollider.tres" id="3_2xnm1"]
+
+[sub_resource type="Animation" id="Animation_0ejbd"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:mesh")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_of2d2")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.33, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshInstance3D/StaticBody3D/CollisionShape3D:shape")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_2u6bq")]
+}
+
+[sub_resource type="Animation" id="Animation_ds3m5"]
+resource_name = "break_half"
+length = 0.1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:mesh")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("2_53kbx")]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("MeshInstance3D:position")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.165, 0)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("MeshInstance3D/StaticBody3D/CollisionShape3D:shape")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [ExtResource("3_2xnm1")]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_l241r"]
+_data = {
+"RESET": SubResource("Animation_0ejbd"),
+"break": SubResource("Animation_ds3m5")
+}
+
+[node name="PillarOneBreakable" instance=ExtResource("1_i02m8")]
+type = 7
+
+[node name="MeshInstance3D" parent="." index="1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.33, 0)
+mesh = ExtResource("2_of2d2")
+
+[node name="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" index="0"]
+shape = ExtResource("2_2u6bq")
+
+[node name="AnimationPlayer" parent="." index="3"]
+autoplay = "RESET"
+libraries = {
+"": SubResource("AnimationLibrary_l241r")
+}
