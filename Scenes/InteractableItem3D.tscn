@@ -37,4 +37,6 @@ shape = SubResource("ConcavePolygonShape3D_ijad2")
 
 [node name="GameStateHelper" type="Node" parent="."]
 script = ExtResource("2_oq52q")
-save_properties = Array[String](["_toggled_on", "dialog_triggered"])
+save_properties = Array[String](["_toggled_on", "dialog_triggered", "saved"])
+
+[connection signal="loading_data" from="GameStateHelper" to="." method="_on_game_state_helper_loading_data"]

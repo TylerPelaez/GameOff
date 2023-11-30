@@ -128,6 +128,6 @@ libraries = {
 
 [node name="GameStateHelper" type="Node" parent="."]
 script = ExtResource("5_3w1xk")
-save_properties = Array[String](["opened"])
+save_properties = Array[String](["opened", "saved"])
 
 [connection signal="loading_data" from="GameStateHelper" to="." method="_on_game_state_helper_loading_data"]

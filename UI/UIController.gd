@@ -11,7 +11,6 @@ var camera: Camera3D
 
 @onready var effects = $Effects
 
-
 @onready var interaction_prompts = $InteractionPrompts
 
 var item_container_prefab = preload("res://UI/item_container.tscn")
@@ -35,7 +34,10 @@ func _ready():
 		add_item(item_id)
 
 func _process(delta):
-	if prompt_instance != null && prompt_origin_object != null:
+	if camera == null:
+		camera = get_tree().get_first_node_in_group("camera")
+	
+	if prompt_instance != null && prompt_origin_object != null && camera != null:
 		var pos = camera.unproject_position(prompt_origin_object.global_position + Vector3(0, .1, 0))
 		prompt_instance.position = pos
 		prompt_instance.position.x -= (prompt_instance.size.x / 4)

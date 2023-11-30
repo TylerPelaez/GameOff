@@ -3,6 +3,8 @@ extends Node
 signal state_load_completed()
 signal new_game_state_initialized()
 
+const default_save_data_file_path := "user://save.atoe"
+
 var _game_state_default := {
 	"meta_data": {
 		"current_scene_path": ""
@@ -114,6 +116,12 @@ func new_game() -> void:
 	_game_state = _game_state_default.duplicate(true)
 	new_game_state_initialized.emit()
 
+
+func load_data_from_default_path():
+	load_game_state(default_save_data_file_path, TransitionMgr.transition_to)
+
+func save_data_to_default_path():
+	save_game_state(default_save_data_file_path)
 
 """
 Saves game state to the given file path.  Another file with an md5 hash

@@ -20,10 +20,12 @@ signal toggled(val: bool)
 @export var _required_key: ItemData.ItemId
 
 @export var _toggled_on: bool
+
 @export_file("*.tscn", "*.scn") var destination_scene := "" 
 
 var dialog_triggered: bool = false
 
+var saved: bool = false
 
 enum Type {
 	Key,
@@ -38,6 +40,7 @@ enum Type {
 func set_type(val):
 	type = val
 
+
 func _ready():
 	collision_shape_3d.disabled = !has_collision
 
@@ -49,6 +52,10 @@ func interact():
 			var data = ItemData.data[_key_id]
 			DialogManager.play_dialog(DialogData.DialogId.PickupDialog, [data["name"]])
 			queue_free()
+			
+			if !saved:
+				saved = true
+				GameStateService.save_data_to_default_path()
 			print("Key Item Interacted!")
 		Type.Alter:
 			if PlayerInventory.has_item(_required_key):
@@ -85,3 +92,8 @@ func can_interact() -> bool:
 
 func get_player_spawn_point():
 	return $PlayerSpawnPoint
+
+
+func _on_game_state_helper_loading_data(data):
+	if type == Type.Key && saved:
+		queue_free()

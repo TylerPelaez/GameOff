@@ -1,9 +1,10 @@
-[gd_scene load_steps=38 format=3 uid="uid://chawhftcwjlwv"]
+[gd_scene load_steps=39 format=3 uid="uid://chawhftcwjlwv"]
 
 [ext_resource type="Script" path="res://Scripts/Player3D.gd" id="1_d4u14"]
 [ext_resource type="Shape3D" uid="uid://oc7x3yamxs54" path="res://Scenes/Player/player3DWorldCollider.tres" id="3_7r586"]
 [ext_resource type="Script" path="res://Scripts/PlayerLightFlicker.gd" id="4_lw1ik"]
 [ext_resource type="Material" uid="uid://c1y0pwcoki4bc" path="res://Art/Player/PlayerMaterial.tres" id="5_qa7qm"]
+[ext_resource type="Script" path="res://addons/game_state_helper/game_state_helper.gd" id="5_u0x8j"]
 
 [sub_resource type="Animation" id="Animation_c6rop"]
 resource_name = "IdleFront"
@@ -753,6 +754,7 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/blend_position = 1.0
 
 [node name="FlashlightHolder" type="Node3D" parent="."]
+transform = Transform3D(-1, 0, 2.53518e-06, 0, 1, 0, -2.53518e-06, 0, -1, 0, 0, 0)
 visible = false
 
 [node name="SpotLight3D" type="SpotLight3D" parent="FlashlightHolder"]
@@ -785,6 +787,10 @@ hit_from_inside = true
 [node name="RemoteTransform3D" type="RemoteTransform3D" parent="."]
 update_rotation = false
 update_scale = false
+
+[node name="GameStateHelper" type="Node" parent="."]
+script = ExtResource("5_u0x8j")
+save_properties = Array[String](["global_position"])
 
 [connection signal="area_entered" from="DraggableCheck" to="." method="_on_draggable_check_area_entered"]
 [connection signal="area_exited" from="DraggableCheck" to="." method="_on_draggable_check_area_exited"]

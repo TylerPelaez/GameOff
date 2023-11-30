@@ -20,6 +20,7 @@ var current_tween: Tween
 func _ready():
 	blend_pos = 0.0
 	player = get_tree().get_nodes_in_group(&"player")[0]
+
 	
 	EventManager.darken.connect(on_darken)
 	EventManager.lighten.connect(on_lighten)
@@ -49,6 +50,7 @@ func on_darken():
 		current_tween.stop()
 	current_tween = get_tree().create_tween().bind_node(self)
 	current_tween.tween_property(camera_environment_animation_tree, "parameters/blend_position", 0, 1.0)
+
 
 func on_lighten():
 	if current_tween != null:

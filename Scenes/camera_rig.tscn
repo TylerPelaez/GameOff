@@ -193,11 +193,11 @@ states/BlendSpace1D/position = Vector2(496, 88)
 states/Start/position = Vector2(252, 93)
 transitions = ["Start", "BlendSpace1D", SubResource("AnimationNodeStateMachineTransition_5scpu")]
 
-[node name="CameraRig" type="Node3D"]
+[node name="CameraRig" type="Node3D" groups=["camera_rig"]]
 transform = Transform3D(1, 0, 0, 0, 0.898794, 0.438371, 0, -0.438371, 0.898794, 0, 0, 0)
 script = ExtResource("1_eov5e")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera3D" type="Camera3D" parent="." groups=["camera"]]
 transform = Transform3D(1, 2.21024e-06, 3.87444e-05, -3.1149e-05, 0.641182, 0.767389, -2.31453e-05, -0.767389, 0.641182, 2.52724e-05, 0.93634, 0.731144)
 environment = ExtResource("2_l3dfq")
 attributes = SubResource("CameraAttributesPractical_a575m")

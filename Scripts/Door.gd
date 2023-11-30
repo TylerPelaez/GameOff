@@ -19,6 +19,7 @@ var mat_y_scale: float = 1.0
 var mat: StandardMaterial3D
 
 var opened = false
+var saved = false
 
 func set_opened_by(val):
 	opened_by = val
@@ -48,8 +49,13 @@ func _process(delta):
 func open():
 	if opened:
 		return
+
 	animation_player.play("Open")
 	opened = true
+	
+	if !saved:
+		saved = true
+		GameStateService.save_data_to_default_path()
 
 
 func _on_game_state_helper_loading_data(data):

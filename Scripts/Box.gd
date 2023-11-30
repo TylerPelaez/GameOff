@@ -139,9 +139,6 @@ func get_stack_height() -> int:
 		return upper_box.get_stack_height() + 1
 
 func can_move_by_amount(amount: Vector3, player_shape_cast: ShapeCast3D, player: Player3D) -> bool:
-	if get_stack_height() > 2:
-		return false
-	
 	if attached_to_chain && !attached_chain.can_reach(global_position + amount):
 		return false
 	
@@ -208,4 +205,4 @@ func get_anchor_for_player(player: Player3D) -> Anchor:
 
 
 func can_drag() -> bool:
-	return get_stack_height() <= 2
+	return true

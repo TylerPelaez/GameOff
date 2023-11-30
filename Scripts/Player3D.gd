@@ -284,3 +284,4 @@ func is_hidden() -> bool:
 
 func assign_camera_rig(camera_rig: Node3D):
 	remote_transform_3d.remote_path = remote_transform_3d.get_path_to(camera_rig)
+

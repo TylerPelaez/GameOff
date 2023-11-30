@@ -1,10 +1,12 @@
-[gd_scene load_steps=8 format=3 uid="uid://dao4rw1k7my24"]
+[gd_scene load_steps=10 format=3 uid="uid://dao4rw1k7my24"]
 
 [ext_resource type="Script" path="res://Scripts/World.gd" id="1_ws6w0"]
 [ext_resource type="MeshLibrary" uid="uid://d00ge6jxao8rg" path="res://Art/Environment/MeshLibrary.tres" id="2_mperq"]
 [ext_resource type="PackedScene" uid="uid://l7wxwtb8sjjg" path="res://Scenes/DraggableBox.tscn" id="3_8lttv"]
 [ext_resource type="PackedScene" uid="uid://cpqlmfxkym2m1" path="res://Scenes/scene_transition_door.tscn" id="4_yaw3e"]
 [ext_resource type="PackedScene" uid="uid://bw8btg3rvl7hi" path="res://UI/UIController.tscn" id="5_70ro7"]
+[ext_resource type="PackedScene" uid="uid://w4v1ajvmm7to" path="res://Scenes/camera_rig.tscn" id="6_8g0oc"]
+[ext_resource type="PackedScene" uid="uid://chawhftcwjlwv" path="res://Scenes/player3D.tscn" id="7_tmt0s"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_5spff"]
 
@@ -55,4 +57,12 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, -3.63798e-12, 6.40182e-14, 0, 1, -5.68434e-14, 2.73941e-11, 0, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_58wq8")
 
-[node name="CanvasLayer" parent="." instance=ExtResource("5_70ro7")]
+[node name="CanvasLayer" parent="." groups=["ui_controller"] instance=ExtResource("5_70ro7")]
+
+[node name="CameraRig" parent="." instance=ExtResource("6_8g0oc")]
+transform = Transform3D(1, 0, 0, 0, 0.898794, 0.438371, 0, -0.438371, 0.898794, 0, 0, 0)
+
+[node name="Player" parent="." instance=ExtResource("7_tmt0s")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.99995, 0.59974, 2.00024)
+
+[editable path="Player"]
