@@ -12,6 +12,7 @@ signal toggled(val: bool)
 
 @onready var collision_shape_3d = $MeshInstance3D/StaticBody3D/CollisionShape3D
 @onready var animation_player = $AnimationPlayer
+@onready var interaction_area = $InteractionArea
 
 
 @export var _key_id: ItemData.ItemId
@@ -28,6 +29,8 @@ signal toggled(val: bool)
 var dialog_triggered: bool = false
 
 var saved: bool = false
+var broken: bool = false
+
 
 enum Type {
 	Key,
@@ -39,6 +42,10 @@ enum Type {
 	SceneTransitionDoor,
 	Breakable,
 }
+
+
+func get_interaction_area_global_pos():
+	return interaction_area.global_position
 
 func set_type(val):
 	type = val
@@ -85,10 +92,11 @@ func interact():
 			GameStateService.set_global_state_value(Room.ENTERING_ROOM_FROM_SCENE_STATE_KEY, get_owner().scene_file_path)
 			TransitionMgr.transition_to(destination_scene)
 		Type.Breakable:
-			if PlayerInventory.has_item(ItemData.ItemId.Chisel):
+			if !broken && PlayerInventory.has_item(ItemData.ItemId.Chisel):
 				explode()
 
 func explode():
+	broken = true
 	animation_player.play("break")
 
 func can_interact() -> bool:
@@ -96,14 +104,15 @@ func can_interact() -> bool:
 		Type.Dialog:
 			return !_one_time_dialog || !dialog_triggered
 		Type.Breakable:
-			return PlayerInventory.has_item(ItemData.ItemId.Chisel)
+			return PlayerInventory.has_item(ItemData.ItemId.Chisel) and !broken
 		_:
 			return true
 
 func get_player_spawn_point():
 	return $PlayerSpawnPoint
 
-
 func _on_game_state_helper_loading_data(data):
 	if type == Type.Key && saved:
 		queue_free()
+	if type == Type.Breakable && broken:
+		explode()

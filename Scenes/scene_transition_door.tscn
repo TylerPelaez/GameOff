@@ -6,4 +6,4 @@
 type = 6
 
 [node name="PlayerSpawnPoint" type="Node3D" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.333, -0.105, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.333, 0.1, 0)

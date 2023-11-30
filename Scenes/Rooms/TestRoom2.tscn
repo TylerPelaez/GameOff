@@ -42,7 +42,7 @@ transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.5, 0.6
 skeleton = NodePath("../..")
 
 [node name="SceneTransitionDoor" parent="Environment" instance=ExtResource("4_yaw3e")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 7.00004, 0.700041, 0.000282438)
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 7.00003, 0.524672, 0.000284426)
 destination_scene = "res://Scenes/Rooms/TestRoom1.tscn"
 
 [node name="Floor" type="MeshInstance3D" parent="Environment"]
