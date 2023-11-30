@@ -1,4 +1,4 @@
-[gd_scene load_steps=23 format=3 uid="uid://falvrtr5sb5m"]
+[gd_scene load_steps=24 format=3 uid="uid://falvrtr5sb5m"]
 
 [ext_resource type="MeshLibrary" uid="uid://d00ge6jxao8rg" path="res://Art/Environment/MeshLibrary.tres" id="1_76fpt"]
 [ext_resource type="Script" path="res://Scripts/World.gd" id="1_l0fqf"]
@@ -18,6 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://cx3ntgq3ckxjn" path="res://Scenes/BreakableWalls/LeftBreakableWall.tscn" id="16_ngm8r"]
 [ext_resource type="PackedScene" uid="uid://dypilgmsthva5" path="res://Scenes/BreakableWalls/RightBreakableWall.tscn" id="17_bbbwy"]
 [ext_resource type="PackedScene" uid="uid://bp2uef1fiex7s" path="res://Scenes/BreakableWalls/BothBreakableWall.tscn" id="18_ij7f8"]
+[ext_resource type="PackedScene" uid="uid://b7met5twjplbs" path="res://Scenes/Water.tscn" id="19_eopqi"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_5spff"]
 
@@ -214,8 +215,11 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0.25)
 mesh_library = ExtResource("15_ba4md")
 cell_size = Vector3(1, 0.333, 1)
 data = {
-"cells": PackedInt32Array(65542, 3, 1441792, 131079, 3, 1441795, 65543, 2, 655360)
+"cells": PackedInt32Array(65542, 3, 1441792, 131079, 3, 1441795, 65543, 2, 655360, 65542, 65529, 1048576, 131077, 65529, 1048579, 65541, 65530, 1048580, 65542, 65530, 1048576, 131077, 65530, 1048579)
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
+
+[node name="Water" parent="." instance=ExtResource("19_eopqi")]
+transform = Transform3D(2.26, 1.15909e-10, -4.36557e-11, -2.04463e-10, 2.26, -1.81899e-12, -4.36557e-11, 1.81899e-12, 2.26, 4.75481, -0.388268, -5.92508)
 
 [editable path="Player"]
