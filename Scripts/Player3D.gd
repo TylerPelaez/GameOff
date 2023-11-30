@@ -21,6 +21,7 @@ class_name Player3D
 
 @onready var remote_transform_3d = $RemoteTransform3D
 
+var facing_dir
 
 var hold_positions = {
 	Vector2.LEFT: Vector3(-.064, 0, 0),
@@ -115,6 +116,9 @@ func moving_object_mode(delta):
 		input.z = 0
 		input = input.normalized()
 
+	if input != facing_dir && input != -facing_dir:
+		return
+
 	var offset = (current_interactable.GRID_SIZE * input)
 	if input != Vector3.ZERO && current_interactable.can_move_by_amount(offset, shape_cast, self):
 		var new_pos = movable_anchor.global_position - hold_position.position
@@ -167,6 +171,8 @@ func start_moving(object: Box):
 	movable_anchor = anchor.node
 	hold_position.position = hold_positions[anchor.player_face_direction]
 
+
+	facing_dir = anchor.player_face_direction
 	animation_tree.set("parameters/Idle/blend_position", anchor.player_face_direction)
 	animation_tree.set("parameters/Walk/blend_position", anchor.player_face_direction)
 	animation_state.travel("Idle")
