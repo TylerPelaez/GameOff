@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="Game Off"
-run/main_scene="res://Scenes/Rooms/TestRoom1.tscn"
+run/main_scene="res://UI/main_menu.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
@@ -102,7 +102,6 @@ jump={
 3d_physics/layer_7="PlayerDraggableCheck"
 3d_physics/layer_8="PlayerInteractCheck"
 3d_physics/layer_9="DangerZone"
-3d_physics/layer_10="Water"
 2d_physics/layer_20="Level0"
 2d_physics/layer_21="Level1"
 2d_physics/layer_22="Level2"
