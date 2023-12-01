@@ -30,7 +30,7 @@ func _on_the_holy_noobness_pressed():
 	OS.shell_open("https://itch.io/profile/the-holy-noobness")
 
 func _on_music_pressed():
-	OS.shell_open("")
+	OS.shell_open("https://linktr.ee/sugonugo")
 
 
 func _on_back_pressed():
