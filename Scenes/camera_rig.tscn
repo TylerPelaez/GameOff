@@ -215,6 +215,7 @@ parameters/blend_position = 1.00094
 
 [node name="UpperRayCast" type="RayCast3D" parent="."]
 transform = Transform3D(1, 5.4997e-05, -4.14811e-05, -5.4996e-05, 1, 1.13987e-05, 4.14824e-05, -1.13941e-05, 1, 2.52724e-05, 0.93634, 0.731144)
+visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 autoplay = "BottomView"
@@ -230,3 +231,4 @@ parameters/BlendSpace1D/blend_position = -0.121837
 
 [node name="LowerRayCast" type="RayCast3D" parent="."]
 transform = Transform3D(1, 5.4997e-05, -4.14811e-05, -6.76148e-05, 0.898799, -0.438361, 1.31755e-05, 0.438361, 0.898799, 2.57492e-05, 0.521064, 1.06761)
+visible = false

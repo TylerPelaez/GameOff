@@ -15,6 +15,7 @@ script = ExtResource("1_xq7ro")
 
 [node name="InteractionArea" type="Area3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.165, 0)
+visible = false
 collision_layer = 16
 collision_mask = 128
 

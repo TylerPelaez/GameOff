@@ -3,7 +3,7 @@ extends Node
 signal state_load_completed()
 signal new_game_state_initialized()
 
-const default_save_data_file_path := "user://save.atoe"
+const default_save_data_file_path := "user://sav1e.atoe"
 
 var _game_state_default := {
 	"meta_data": {

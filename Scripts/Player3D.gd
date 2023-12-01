@@ -1,7 +1,7 @@
 extends CharacterBody3D
 class_name Player3D
 
-@export var max_speed = 400
+@export var max_speed = 400.0
 @export var accel = 1500
 @export var friction = 600
 @export var jump_strength = 1000
@@ -21,13 +21,18 @@ class_name Player3D
 
 @onready var remote_transform_3d = $RemoteTransform3D
 
+@onready var collider = $Collider
+@onready var alt_shape_caster = $AltShapeCaster
+
+
+
 var facing_dir
 
 var hold_positions = {
-	Vector2.LEFT: Vector3(-.064, 0, 0),
-	Vector2.RIGHT: Vector3(.064, 0, 0),
-	Vector2.UP: Vector3(0, 0, -0.064),
-	Vector2.DOWN: Vector3(0, 0, 0.064),
+	Vector2.LEFT: Vector3(-.2, 0, 0),
+	Vector2.RIGHT: Vector3(.2, 0, 0),
+	Vector2.UP: Vector3(0, 0, -0.2),
+	Vector2.DOWN: Vector3(0, 0, 0.2),
 }
 
 var input = Vector3.ZERO
@@ -178,13 +183,13 @@ func start_moving(object: Box):
 	var anchor = object.get_anchor_for_player(self)
 	movable_anchor = anchor.node
 	hold_position.position = hold_positions[anchor.player_face_direction]
-
-
+	
+	
 	facing_dir = anchor.player_face_direction
 	animation_tree.set("parameters/Idle/blend_position", anchor.player_face_direction)
 	animation_tree.set("parameters/Walk/blend_position", anchor.player_face_direction)
 	animation_state.travel("Idle")
-
+	
 	var new_pos = movable_anchor.global_position - hold_position.position
 	global_position.x = new_pos.x
 	global_position.z = new_pos.z
@@ -232,6 +237,7 @@ func update_objects():
 		interactable_not_blocked_ray_cast.target_position = interactable_not_blocked_ray_cast.to_local(target_pos)
 		interactable_not_blocked_ray_cast.force_raycast_update()
 		if interactable_not_blocked_ray_cast.is_colliding() && interactable_not_blocked_ray_cast.get_collider().get_parent().get_parent() != object && interactable_not_blocked_ray_cast.get_collider().get_parent() != object:
+			print(1)
 			continue
 		
 		# If this is a box, check if the player would be able to even grab the box at a valid point
@@ -242,27 +248,44 @@ func update_objects():
 			candidate_position.y = global_position.y
 
 			interactable_not_blocked_ray_cast.global_position = candidate_position
-			interactable_not_blocked_ray_cast.target_position = Vector3(0, -0.11, 0) # height of the player currently
+			interactable_not_blocked_ray_cast.target_position = Vector3(0, -(collider.shape.height + 0.01), 0) # height of the player currently
 			interactable_not_blocked_ray_cast.force_raycast_update()
 			# this means the player would not have ground beneath them, so we should not allow holding the box here
 			if !interactable_not_blocked_ray_cast.is_colliding():
+				print(2)
 				continue
 			
-			shape_cast.clear_exceptions()
+			alt_shape_caster.clear_exceptions()
 			var children = object.get_children()
 			for child in children:
 				if child is CollisionObject3D:
-					shape_cast.add_exception(child)
+					alt_shape_caster.add_exception(child)
 				children.append_array(child.get_children())
 			
 			var dir_to_anchor = (candidate_position - object.global_position)
 			dir_to_anchor.y = 0
-			shape_cast.global_position = object.global_position
-			shape_cast.target_position = dir_to_anchor.normalized() * (Box.GRID_SIZE / 2)
-			shape_cast.force_shapecast_update()
-			if shape_cast.is_colliding():
+			
+			
+			var test_origin_a = candidate_position
+			var offset = (shape_cast.shape.height / 2.0) - (alt_shape_caster.shape.radius + 0.01)
+			test_origin_a.y += offset
+			var test_origin_b = test_origin_a
+			test_origin_b.y -= (shape_cast.shape.height / 2.0)
+			
+			alt_shape_caster.global_position = test_origin_a
+			alt_shape_caster.target_position = Vector3(0, -(shape_cast.shape.height / 2.0), 0)
+			alt_shape_caster.force_shapecast_update()
+			if alt_shape_caster.is_colliding():
+				print(alt_shape_caster.get_collider(0).name)
 				continue
 			
+			alt_shape_caster.global_position = test_origin_b
+			alt_shape_caster.target_position = Vector3(0, (shape_cast.shape.height / 2.0), 0)
+			alt_shape_caster.force_shapecast_update()
+			if alt_shape_caster.is_colliding():
+				print(alt_shape_caster.get_collider(0).name)
+				continue
+		
 		
 		var distance_sq = global_position.distance_squared_to(object.global_position)
 		if current_interactable == null || max_distance_sq > distance_sq:

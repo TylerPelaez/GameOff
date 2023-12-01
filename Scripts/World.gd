@@ -24,7 +24,6 @@ func _ready():
 	var player_origin_scene = GameStateService.get_global_state_value(ENTERING_ROOM_FROM_SCENE_STATE_KEY)
 	if player_origin_scene == null or player_origin_scene == "":
 		return
-
 	
 	var player_spawn_position = null
 	var transition_doors = get_tree().get_nodes_in_group("scene_transition_door")

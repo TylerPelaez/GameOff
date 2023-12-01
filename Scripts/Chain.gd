@@ -25,6 +25,7 @@ func _ready():
 	if attached != null and attached is Box:
 		attached.attached_to_chain = true
 		attached.attached_chain = self
+		
 
 func _process(delta):
 	if attached != null:
@@ -35,6 +36,9 @@ func _process(delta):
 		
 		var distance = target.distance_to(global_position)
 		material.uv1_scale.x = distance
+		var max_distance = get_max_distance()
+		var bgval = clampf(1.0 - (distance / get_max_distance()), 0.0, 1.0)
+		chain.mesh.surface_get_material(0).albedo_color = Color(1.0, bgval, bgval)
 		chain.scale.z = distance
 		chain.look_at(target, Vector3.UP, true)
 	

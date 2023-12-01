@@ -1,7 +1,7 @@
 extends MeshInstance3D
 class_name Box
 
-const FALL_DISTANCE_MARGIN = 0.01
+const FALL_DISTANCE_MARGIN = 0.1
 
 const GRID_SIZE = .5
 const GRID_SIZE_Y = 0.333333333333
@@ -41,29 +41,36 @@ enum State {
 var state = State.Default
 
 func _ready():
+	ray_cast_3d.position = Vector3.ZERO
 	ray_cast_3d.target_position = Vector3(0, -20, 0)
 	ray_cast_3d.force_raycast_update()
-	
 	
 	if ray_cast_3d.is_colliding():
 		var obj = ray_cast_3d.get_collider().get_parent()
 		if obj is Box:
 			obj.upper_box = self
 			lower_box = obj
+
+func _physics_process(delta):
+	if !attached_to_chain:
+		return
 	
-	ray_cast_3d.target_position = Vector3(0, .167, 0)
+	ray_cast_3d.target_position = Vector3(0, -(GRID_SIZE_Y / 2.0) - .5, 0)
 	ray_cast_3d.force_raycast_update()
 	
-	
-	if !ray_cast_3d.is_colliding() and attached_to_chain:
+	if !ray_cast_3d.is_colliding():
+		if state == State.Falling:
+			return
 		use_attachment_pos = true
 		var chain_dir = global_position.direction_to(attached_chain.global_position)
 		chain_dir.y = 0
 		chain_dir = chain_dir.normalized()
 		attachment_pos = global_position + (chain_dir * GRID_SIZE / 2.0)
 		attachment_pos.y += GRID_SIZE_Y / 2.0
-		
-		
+	else:
+		use_attachment_pos = false
+
+
 func start_moving():
 	state = State.Moving
 	if upper_box != null:
@@ -90,11 +97,14 @@ func on_drag_complete() -> bool:
 func try_fall_and_update_lower_box(target_pos = null) -> bool:
 	if target_pos == null:
 		ray_cast_3d.position = Vector3.ZERO
-		ray_cast_3d.target_position = Vector3(0, -20, 0)
+		ray_cast_3d.target_position = Vector3(0, -6, 0)
 		ray_cast_3d.force_raycast_update()
 		if ray_cast_3d.is_colliding():
 			var collision_position = ray_cast_3d.get_collision_point()
-			target_pos = collision_position + Vector3(0, GRID_SIZE_Y / 2.0, 0) if !attached_to_chain else global_position - Vector3(0, GRID_SIZE_Y, 0)
+			if global_position.y - (collision_position.y + GRID_SIZE_Y / 2.0) > FALL_DISTANCE_MARGIN:
+				target_pos = (collision_position + Vector3(0, GRID_SIZE_Y / 2.0, 0)) if !attached_to_chain else (global_position - Vector3(0, GRID_SIZE_Y, 0))
+			else:
+				return false
 			
 			var obj = ray_cast_3d.get_collider().get_parent()
 		
@@ -117,10 +127,6 @@ func try_fall_and_update_lower_box(target_pos = null) -> bool:
 	return false
 	
 	
-	
-
-
-
 
 func fall(target_position: Vector3, suspend: bool):
 	var tween = get_tree().create_tween().bind_node(self)
@@ -244,6 +250,8 @@ func can_move_by_amount(amount: Vector3, player_shape_cast: ShapeCast3D, player:
 	shape_cast.force_shapecast_update()
 	
 	if shape_cast.is_colliding():
+		var col = shape_cast.get_collider(0)
+		print(shape_cast.get_collider(0))
 		return false
 	
 	if ignore_player_shape:
@@ -253,17 +261,32 @@ func can_move_by_amount(amount: Vector3, player_shape_cast: ShapeCast3D, player:
 	for child in children:
 		if child is CollisionObject3D:
 			player_shape_cast.add_exception(child)
+	if upper_box != null:
+		var children2 = upper_box.get_children()
+		for child in children2:
+			if child is CollisionObject3D:
+				player_shape_cast.add_exception(child)
+			children2.append_array(child.get_children())
 			
-	player_shape_cast.position = Vector3.ZERO
+	player_shape_cast.position = Vector3(0, 0.01, 0)
 	player_shape_cast.target_position = amount
 	player_shape_cast.force_shapecast_update()
 	if player_shape_cast.is_colliding():
+		var col = player_shape_cast.get_collider(0)
+		print(player_shape_cast.get_collider(0).name)
 		return false
+	
+	var shape = player_shape_cast.shape
+	if !(shape is CapsuleShape3D):
+		print("Player shape is wrong")
+		return false
+	
 	
 	var new_pos = player.global_position + amount
 	ray_cast_3d.global_position = new_pos
-	ray_cast_3d.target_position = Vector3(0, -0.11, 0) # height of the player currently
+	ray_cast_3d.target_position = Vector3(0, -(shape.height + 0.01), 0)
 	ray_cast_3d.force_raycast_update()
+	
 	# if the player would have the ground below them, then we can move the box
 	return ray_cast_3d.is_colliding() 
 

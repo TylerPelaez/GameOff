@@ -1,4 +1,4 @@
-[gd_scene load_steps=39 format=3 uid="uid://chawhftcwjlwv"]
+[gd_scene load_steps=40 format=3 uid="uid://chawhftcwjlwv"]
 
 [ext_resource type="Script" path="res://Scripts/Player3D.gd" id="1_d4u14"]
 [ext_resource type="Shape3D" uid="uid://oc7x3yamxs54" path="res://Scenes/Player/player3DWorldCollider.tres" id="3_7r586"]
@@ -32,27 +32,15 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(0.083, 0, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Visual:mesh:material:uv1_scale")
+tracks/2/path = NodePath("OmniLight3D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector3(0.083, 1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("OmniLight3D:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -90,22 +78,10 @@ tracks/1/keys = {
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Visual:mesh:material:uv1_scale")
+tracks/2/path = NodePath("OmniLight3D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector3(0.083, 1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("OmniLight3D:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -138,27 +114,15 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector3(0.417, 0, 0)]
+"values": [Vector3(0.583, 0, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Visual:mesh:material:uv1_scale")
+tracks/2/path = NodePath("OmniLight3D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector3(-0.083, 1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("OmniLight3D:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -184,34 +148,22 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Visual:mesh:material:uv1_scale")
+tracks/1/path = NodePath("Visual:mesh:material:uv1_offset")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 1,
-"values": [Vector3(0.083, 1, 1)]
+"values": [Vector3(0.834, 0, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Visual:mesh:material:uv1_offset")
+tracks/2/path = NodePath("OmniLight3D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector3(0.667, 0, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("OmniLight3D:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -242,27 +194,15 @@ tracks/1/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
-"values": [Vector3(0, 0, 0)]
+"values": [Vector3(0.083, 0, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Visual:mesh:material:uv1_scale")
+tracks/2/path = NodePath("OmniLight3D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 0,
-"values": [Vector3(0.083, 1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("OmniLight3D:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -271,8 +211,9 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_hyrc5"]
 resource_name = "WalkDown"
-length = 0.8
+length = 0.6
 loop_mode = 1
+step = 0.15
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -292,30 +233,18 @@ tracks/1/path = NodePath("Visual:mesh:material:uv1_offset")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector3(0, 0, 0), Vector3(0.083, 0, 0), Vector3(0.167, 0, 0), Vector3(0.25, 0, 0)]
+"values": [Vector3(0, 0, 0), Vector3(0.083, 0, 0), Vector3(0.166, 0, 0), Vector3(0.083, 0, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Visual:mesh:material:uv1_scale")
+tracks/2/path = NodePath("OmniLight3D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector3(0.083, 1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("OmniLight3D:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -324,8 +253,9 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_bfjqw"]
 resource_name = "WalkLeft"
-length = 0.8
+length = 0.6
 loop_mode = 1
+step = 0.15
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -345,30 +275,18 @@ tracks/1/path = NodePath("Visual:mesh:material:uv1_offset")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector3(0.333, 0, 0), Vector3(0.417, 0, 0), Vector3(0.5, 0, 0), Vector3(0.583, 0, 0)]
+"values": [Vector3(0.251, 0, 0), Vector3(0.334, 0, 0), Vector3(0.417, 0, 0), Vector3(0.334, 0, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Visual:mesh:material:uv1_scale")
+tracks/2/path = NodePath("OmniLight3D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector3(0.083, 1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("OmniLight3D:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -377,8 +295,9 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_pu1yf"]
 resource_name = "WalkRight"
-length = 0.8
+length = 0.6
 loop_mode = 1
+step = 0.15
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -398,30 +317,18 @@ tracks/1/path = NodePath("Visual:mesh:material:uv1_offset")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
 "transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector3(0.417, 0, 0), Vector3(0.5, 0, 0), Vector3(0.583, 0, 0), Vector3(0.666, 0, 0)]
+"values": [Vector3(0.5, 0, 0), Vector3(0.583, 0, 0), Vector3(0.666, 0, 0), Vector3(0.583, 0, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Visual:mesh:material:uv1_scale")
+tracks/2/path = NodePath("OmniLight3D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
-"update": 1,
-"values": [Vector3(-0.083, 1, 1)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("OmniLight3D:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -430,8 +337,9 @@ tracks/3/keys = {
 
 [sub_resource type="Animation" id="Animation_tv1lq"]
 resource_name = "WalkUp"
-length = 0.8
+length = 0.6
 loop_mode = 1
+step = 0.15
 tracks/0/type = "value"
 tracks/0/imported = false
 tracks/0/enabled = true
@@ -447,34 +355,22 @@ tracks/0/keys = {
 tracks/1/type = "value"
 tracks/1/imported = false
 tracks/1/enabled = true
-tracks/1/path = NodePath("Visual:mesh:material:uv1_scale")
+tracks/1/path = NodePath("Visual:mesh:material:uv1_offset")
 tracks/1/interp = 1
 tracks/1/loop_wrap = true
 tracks/1/keys = {
-"times": PackedFloat32Array(0),
-"transitions": PackedFloat32Array(1),
+"times": PackedFloat32Array(0, 0.15, 0.3, 0.45),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
 "update": 1,
-"values": [Vector3(0.083, 1, 1)]
+"values": [Vector3(0.75, 0, 0), Vector3(0.833, 0, 0), Vector3(0.917, 0, 0), Vector3(0.833, 0, 0)]
 }
 tracks/2/type = "value"
 tracks/2/imported = false
 tracks/2/enabled = true
-tracks/2/path = NodePath("Visual:mesh:material:uv1_offset")
+tracks/2/path = NodePath("OmniLight3D:position")
 tracks/2/interp = 1
 tracks/2/loop_wrap = true
 tracks/2/keys = {
-"times": PackedFloat32Array(0, 0.2, 0.4, 0.6),
-"transitions": PackedFloat32Array(1, 1, 1, 1),
-"update": 1,
-"values": [Vector3(0.667, 0, 0), Vector3(0.75, 0, 0), Vector3(0.833, 0, 0), Vector3(0.917, 0, 0)]
-}
-tracks/3/type = "value"
-tracks/3/imported = false
-tracks/3/enabled = true
-tracks/3/path = NodePath("OmniLight3D:position")
-tracks/3/interp = 1
-tracks/3/loop_wrap = true
-tracks/3/keys = {
 "times": PackedFloat32Array(0),
 "transitions": PackedFloat32Array(1),
 "update": 0,
@@ -560,7 +456,7 @@ graph_offset = Vector2(34, 26)
 
 [sub_resource type="QuadMesh" id="QuadMesh_1aga6"]
 material = ExtResource("5_qa7qm")
-size = Vector2(0.25, 0.25)
+size = Vector2(0.6, 0.6)
 
 [sub_resource type="Animation" id="Animation_yj2dv"]
 resource_name = "Flicker"
@@ -693,7 +589,10 @@ min_space = 0.0
 sync = true
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_e6j8c"]
-size = Vector3(0.234684, 0.106756, 0.17562)
+size = Vector3(0.369, 0.165, 0.363)
+
+[sub_resource type="SphereShape3D" id="SphereShape3D_6ebfs"]
+radius = 0.07
 
 [node name="Player" type="CharacterBody3D" groups=["player"]]
 collision_layer = 2
@@ -704,7 +603,7 @@ axis_lock_angular_z = true
 floor_block_on_wall = false
 floor_snap_length = 0.15
 script = ExtResource("1_d4u14")
-max_speed = 1
+max_speed = 1.0
 accel = 1501
 friction = 2000
 jump_strength = 3
@@ -722,18 +621,18 @@ parameters/Idle/blend_position = Vector2(-0.282051, -0.12)
 parameters/Walk/blend_position = Vector2(0.000944257, -0.0538923)
 
 [node name="Visual" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, -2.57152e-12, 9.09495e-12, 2.57152e-12, 1, 9.09495e-12, -9.09495e-12, -9.09495e-12, 1, 0, 0.025, 0)
+transform = Transform3D(1, -2.57152e-12, 9.09495e-12, 2.57152e-12, 1, 9.09495e-12, -9.09495e-12, -9.09495e-12, 1, 0, 0.0270278, 0)
 cast_shadow = 2
 mesh = SubResource("QuadMesh_1aga6")
 skeleton = NodePath("../..")
 
 [node name="Collider" type="CollisionShape3D" parent="."]
-transform = Transform3D(1, 2.67397e-12, 0, -4.70429e-12, 1, 1.54614e-11, 0, -1.54614e-11, 1, -1.43051e-06, -0.024736, 2.80372e-07)
+transform = Transform3D(1, 2.67397e-12, 0, -4.70429e-12, 1, 1.54614e-11, 0, -1.54614e-11, 1, 0, 0, 0)
 shape = ExtResource("3_7r586")
 
 [node name="OmniLight3D" type="OmniLight3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.0341352, 0.0461332)
-light_color = Color(0.913725, 0.611765, 0, 1)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.041, 0.034, 0.046)
+light_color = Color(1, 0.878431, 0.721569, 1)
 light_energy = 0.7
 light_volumetric_fog_energy = 0.2
 shadow_enabled = true
@@ -754,7 +653,7 @@ anim_player = NodePath("../AnimationPlayer")
 parameters/blend_position = 1.0
 
 [node name="FlashlightHolder" type="Node3D" parent="."]
-transform = Transform3D(-1, 0, 2.53518e-06, 0, 1, 0, -2.53518e-06, 0, -1, 0, 0, 0)
+transform = Transform3D(-3.61999e-06, 0, -1, 0, 1, 0, 1, 0, -3.61999e-06, 0, 0, 0)
 visible = false
 
 [node name="SpotLight3D" type="SpotLight3D" parent="FlashlightHolder"]
@@ -767,11 +666,12 @@ shadow_bias = 0.01
 spot_attenuation = 0.574349
 
 [node name="DraggableCheck" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0996924, 0)
 collision_layer = 192
 collision_mask = 48
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="DraggableCheck"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0257546, 0)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.0257546, 0.010262)
 shape = SubResource("BoxShape3D_e6j8c")
 
 [node name="ShapeCast3D" type="ShapeCast3D" parent="."]
@@ -791,6 +691,10 @@ update_scale = false
 [node name="GameStateHelper" type="Node" parent="."]
 script = ExtResource("5_u0x8j")
 save_properties = Array[String](["global_position"])
+
+[node name="AltShapeCaster" type="ShapeCast3D" parent="."]
+shape = SubResource("SphereShape3D_6ebfs")
+target_position = Vector3(0, 0, 0)
 
 [connection signal="area_entered" from="DraggableCheck" to="." method="_on_draggable_check_area_entered"]
 [connection signal="area_exited" from="DraggableCheck" to="." method="_on_draggable_check_area_exited"]

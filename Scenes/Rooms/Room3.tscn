@@ -2,14 +2,14 @@
 
 [ext_resource type="Script" path="res://Scripts/World.gd" id="1_e3v7r"]
 [ext_resource type="MeshLibrary" uid="uid://d00ge6jxao8rg" path="res://Art/Environment/MeshLibrary.tres" id="2_ggfdy"]
-[ext_resource type="MeshLibrary" uid="uid://dfwblhvr8e5rl" path="res://Art/ShortWallMeshLibrary.tres" id="3_ixjjp"]
+[ext_resource type="MeshLibrary" uid="uid://03lh43oktafn" path="res://Art/ShortWallMeshLibrary.tres" id="3_ixjjp"]
 [ext_resource type="PackedScene" uid="uid://l7wxwtb8sjjg" path="res://Scenes/DraggableBox.tscn" id="4_34wsi"]
 [ext_resource type="PackedScene" uid="uid://djdn7qbr08owm" path="res://Scenes/chain.tscn" id="5_wyp0f"]
 [ext_resource type="PackedScene" uid="uid://btleuhp1kmvle" path="res://Scenes/door.tscn" id="6_keptd"]
-[ext_resource type="PackedScene" path="res://Scenes/InteractableItem3D.tscn" id="7_17wy3"]
-[ext_resource type="PackedScene" path="res://Scenes/hallway_light_transition.tscn" id="8_ub2lw"]
-[ext_resource type="PackedScene" path="res://Scenes/danger_zone.tscn" id="9_q4hlb"]
-[ext_resource type="PackedScene" path="res://UI/UIController.tscn" id="10_ipnrv"]
+[ext_resource type="PackedScene" uid="uid://bece0kkh8f7g1" path="res://Scenes/InteractableItem3D.tscn" id="7_17wy3"]
+[ext_resource type="PackedScene" uid="uid://bny3ql5dweqei" path="res://Scenes/hallway_light_transition.tscn" id="8_ub2lw"]
+[ext_resource type="PackedScene" uid="uid://kb7mnexxt38o" path="res://Scenes/danger_zone.tscn" id="9_q4hlb"]
+[ext_resource type="PackedScene" uid="uid://bw8btg3rvl7hi" path="res://UI/UIController.tscn" id="10_ipnrv"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_5spff"]
 
