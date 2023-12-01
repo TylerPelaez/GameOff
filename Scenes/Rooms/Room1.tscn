@@ -1,0 +1,182 @@
+[gd_scene load_steps=15 format=3 uid="uid://0hfuqbytrpgo"]
+
+[ext_resource type="Script" path="res://Scripts/World.gd" id="1_e3v7r"]
+[ext_resource type="MeshLibrary" uid="uid://d00ge6jxao8rg" path="res://Art/Environment/MeshLibrary.tres" id="2_ggfdy"]
+[ext_resource type="MeshLibrary" uid="uid://dfwblhvr8e5rl" path="res://Art/ShortWallMeshLibrary.tres" id="3_ixjjp"]
+[ext_resource type="PackedScene" uid="uid://l7wxwtb8sjjg" path="res://Scenes/DraggableBox.tscn" id="4_34wsi"]
+[ext_resource type="PackedScene" uid="uid://djdn7qbr08owm" path="res://Scenes/chain.tscn" id="5_wyp0f"]
+[ext_resource type="PackedScene" uid="uid://btleuhp1kmvle" path="res://Scenes/door.tscn" id="6_keptd"]
+[ext_resource type="PackedScene" path="res://Scenes/InteractableItem3D.tscn" id="7_17wy3"]
+[ext_resource type="PackedScene" path="res://Scenes/hallway_light_transition.tscn" id="8_ub2lw"]
+[ext_resource type="PackedScene" path="res://Scenes/danger_zone.tscn" id="9_q4hlb"]
+[ext_resource type="PackedScene" path="res://UI/UIController.tscn" id="10_ipnrv"]
+
+[sub_resource type="QuadMesh" id="QuadMesh_5spff"]
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_58wq8"]
+data = PackedVector3Array(0.5, -0.5, 0, -0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, -0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_780s3"]
+transparency = 1
+texture_filter = 0
+
+[sub_resource type="PlaneMesh" id="PlaneMesh_pymdc"]
+material = SubResource("StandardMaterial3D_780s3")
+size = Vector2(0.2, 0.2)
+
+[node name="Room" type="Node3D"]
+transform = Transform3D(1, -5.49965e-05, 4.14818e-05, 5.49965e-05, 1, -1.13368e-05, -4.14818e-05, 1.13368e-05, 1, 0, 0, 0)
+script = ExtResource("1_e3v7r")
+
+[node name="GridMap" type="GridMap" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0.25)
+mesh_library = ExtResource("2_ggfdy")
+cell_size = Vector3(1, 1, 1)
+data = {
+"cells": PackedInt32Array(4, 0, 655360, 5, 0, 655360, 6, 0, 655360, 4, 1, 655360, 5, 1, 655360, 6, 1, 655360, 4, 2, 655360, 5, 2, 655360, 6, 2, 655360, 5, 65534, 1, 3, 65534, 2, 7, 65534, 1441794, 4, 65534, 4, 7, 3, 655362, 3, 3, 1048578, 3, 65535, 1048580, 3, 0, 1048580, 3, 2, 1048580, 3, 1, 1048580, 4, 3, 655364, 5, 3, 655364, 6, 3, 655364, 7, 2, 1441796, 7, 1, 1441796, 7, 0, 1441796, 7, 65535, 1441796, 4, 65535, 1441792, 5, 65535, 1441792, 6, 65533, 1441796, 6, 65535, 1441792, 6, 65534, 4, 65541, 65528, 0, 65538, 65529, 0, 65538, 65528, 0, 65538, 65527, 0, 65539, 65527, 0, 65540, 65526, 4, 65541, 65526, 4, 65538, 65526, 4, 65537, 65529, 1048580, 65537, 65528, 1048580, 65537, 65527, 1048580, 65537, 65526, 2, 7, 65530, 1441795, 8, 65531, 655362, 8, 65530, 1441796, 7, 65531, 655365, 65545, 65531, 1048582, 65543, 65533, 655366, 65542, 65533, 1441799, 65543, 65534, 1441798, 65543, 65535, 1441799, 65543, 0, 1441799, 65543, 1, 1441799, 65543, 2, 1441799, 65543, 3, 1441799, 65538, 1, 1441799, 65538, 2, 1441799, 65538, 0, 1441799, 65538, 3, 1441800, 65539, 65534, 1048584, 65539, 65535, 1048583, 65537, 65534, 1441795, 65537, 65535, 8, 65536, 65534, 1441800, 8, 65529, 1, 10, 65527, 655364, 11, 65527, 655364, 12, 65526, 1048579, 12, 65525, 1441796, 12, 65523, 1441796, 12, 65524, 1441796, 12, 65527, 655362, 11, 65526, 655366, 10, 65526, 655367, 11, 65525, 1441799, 11, 65524, 1441799, 13, 65526, 1048583, 9, 65529, 1048583, 12, 65522, 655367, 6, 65530, 1441795, 65541, 65529, 1441792, 65540, 65529, 1441792, 65541, 65530, 1441792, 65540, 65530, 1441792, 65539, 65530, 1441792, 65538, 65530, 1441792, 65537, 65530, 1048580, 1, 65530, 655367, 0, 65528, 1441795, 1, 65529, 1441795, 1, 65533, 1048578, 2, 65533, 655363, 1, 65531, 1048580)
+}
+metadata/_editor_floor_ = Vector3(0, 1, 0)
+
+[node name="GridMap2" type="GridMap" parent="."]
+transform = Transform3D(1, -9.64521e-13, 0, -1.06619e-12, 1, 0, 0, 0, 1, 0.25, -7.29897e-13, 0.25)
+mesh_library = ExtResource("3_ixjjp")
+cell_size = Vector3(1, 0.333, 1)
+data = {
+"cells": PackedInt32Array(262165, 65535, 655361)
+}
+metadata/_editor_floor_ = Vector3(0, 9, 0)
+
+[node name="Environment" type="Node3D" parent="."]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 0, 0, 0)
+
+[node name="OmniLight3D" type="OmniLight3D" parent="Environment"]
+transform = Transform3D(1, 4.68335e-10, 6.22094e-10, -1.0662e-12, 1, 2.28101e-09, 0, 0, 1, 5.45957, 1.66056, 0.76713)
+light_color = Color(0.461647, 0.568522, 0.267637, 1)
+light_energy = 0.8
+light_volumetric_fog_energy = 0.6
+shadow_enabled = true
+distance_fade_enabled = true
+
+[node name="OmniLight3D2" type="OmniLight3D" parent="Environment"]
+transform = Transform3D(1, 4.68335e-10, 6.22094e-10, -1.0662e-12, 1, 2.28101e-09, 0, 0, 1, 4.77898, 2.96775, -5.96202)
+light_color = Color(0.462745, 0.568627, 0.266667, 1)
+light_energy = 0.8
+light_volumetric_fog_energy = 0.6
+shadow_enabled = true
+distance_fade_enabled = true
+
+[node name="Box2" parent="Environment" instance=ExtResource("4_34wsi")]
+transform = Transform3D(1, -9.64521e-13, 0, -1.06619e-12, 1, 0, 0, 0, 1, 6.4999, 0.664946, 2.00006)
+skeleton = NodePath("../..")
+
+[node name="Box5" parent="Environment" instance=ExtResource("4_34wsi")]
+transform = Transform3D(1, -9.64521e-13, 0, -1.06619e-12, 1, 0, 0, 0, 1, 5.49996, 0.664984, 0.500023)
+skeleton = NodePath("../..")
+
+[node name="Box7" parent="Environment" instance=ExtResource("4_34wsi")]
+transform = Transform3D(1, -9.64521e-13, 0, -1.06619e-12, 1, 0, 0, 0, 1, 5.49998, 0.998001, 0.500013)
+skeleton = NodePath("../..")
+
+[node name="Box8" parent="Environment" instance=ExtResource("4_34wsi")]
+transform = Transform3D(1, -9.64521e-13, 0, -1.06619e-12, 1, 0, 0, 0, 1, 3.4999, 0.666521, 1.99994)
+skeleton = NodePath("../..")
+
+[node name="Box3" parent="Environment" instance=ExtResource("4_34wsi")]
+transform = Transform3D(1, -9.64521e-13, 0, -1.06619e-12, 1, 0, 0, 0, 1, 5, 0.666, 2.5)
+skeleton = NodePath("../..")
+
+[node name="Box6" parent="Environment" instance=ExtResource("4_34wsi")]
+transform = Transform3D(1, -9.64521e-13, 0, -1.06619e-12, 1, 0, 0, 0, 1, 5.49988, 0.666924, 1.50008)
+skeleton = NodePath("../..")
+
+[node name="Floor" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(94.1028, -0.000620166, 9.65473e-05, -0.00907888, 3.59042e-06, 1.00071, -0.00127177, -45.8884, 8.15407e-08, 3.24997, 0.5, 4.75001)
+visible = false
+mesh = SubResource("QuadMesh_5spff")
+skeleton = NodePath("../..")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="Environment/Floor"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Environment/Floor/StaticBody3D"]
+transform = Transform3D(1, -3.63798e-12, 6.40182e-14, 0, 1, -5.68434e-14, 2.73941e-11, 0, 1, 0, 0, 0)
+shape = SubResource("ConcavePolygonShape3D_58wq8")
+
+[node name="Box4" parent="Environment" node_paths=PackedStringArray("attached_chain") instance=ExtResource("4_34wsi")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 2.99887, 1.66691, -5.00158)
+skeleton = NodePath("../..")
+attached_to_chain = true
+attached_chain = NodePath("../ChainHolder2")
+
+[node name="Box11" parent="Environment" node_paths=PackedStringArray("attached_chain") instance=ExtResource("4_34wsi")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 3.50018, 1.65998, -8)
+skeleton = NodePath("../..")
+attached_to_chain = true
+attached_chain = NodePath("../ChainHolder")
+
+[node name="Box12" parent="Environment" instance=ExtResource("4_34wsi")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 4.50016, 1.65993, -7.49996)
+skeleton = NodePath("../..")
+
+[node name="Box10" parent="Environment" instance=ExtResource("4_34wsi")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 3.00008, 1.98005, -5.00002)
+skeleton = NodePath("../..")
+
+[node name="Pot" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(1, -9.64783e-05, -1.35146e-05, -1.35147e-05, -4.06872e-08, -1, 9.64783e-05, 1, -4.19905e-08, 4.75002, 0.599995, -1.7119)
+mesh = SubResource("PlaneMesh_pymdc")
+skeleton = NodePath("../..")
+
+[node name="ChainHolder" parent="Environment" node_paths=PackedStringArray("attached") instance=ExtResource("5_wyp0f")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.00045, 1.69812, -8.49981)
+max_tiles = 3
+attached = NodePath("../Box11")
+
+[node name="Pot2" type="MeshInstance3D" parent="Environment"]
+transform = Transform3D(1, -9.64783e-05, -1.35146e-05, -1.35147e-05, -4.06872e-08, -1, 9.64783e-05, 1, -4.19905e-08, 6.46276, 0.599901, -1.71183)
+mesh = SubResource("PlaneMesh_pymdc")
+skeleton = NodePath("../..")
+
+[node name="ChainHolder2" parent="Environment" node_paths=PackedStringArray("attached") instance=ExtResource("5_wyp0f")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 3.00034, 1.69824, -5.99989)
+max_tiles = 2
+attached = NodePath("../Box4")
+
+[node name="Door2" parent="Environment" node_paths=PackedStringArray("_alter") instance=ExtResource("6_keptd")]
+transform = Transform3D(-4.07454e-08, 4.36597e-05, -1, 6.63333e-05, 1, 4.36597e-05, 1, -6.63333e-05, -4.3583e-08, 7.23267, 0.499879, -5.24956)
+_alter = NodePath("../Alter")
+
+[node name="Alter" parent="Environment" instance=ExtResource("7_17wy3")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 7.00024, 0.699604, -4.74428)
+type = 1
+_required_key = 1
+
+[node name="Alter2" parent="Environment" instance=ExtResource("7_17wy3")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 13.2172, 0.699204, -9.83644)
+type = 5
+_required_key = 1
+
+[node name="Key2" parent="Environment" instance=ExtResource("7_17wy3")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 4.94158, 0.699851, -4.07021)
+has_collision = false
+_key_id = 1
+
+[node name="Key4" parent="Environment" instance=ExtResource("7_17wy3")]
+transform = Transform3D(1, -9.64521e-13, 0, -1.06619e-12, 1, 0, 0, 0, 1, 21.4418, 1.80007, -0.0700209)
+has_collision = false
+_key_id = 1
+
+[node name="Door" parent="Environment" instance=ExtResource("6_keptd")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.75, 0.5, -1.74)
+opened_by = 0
+
+[node name="HallwayLightTransition" parent="Environment" instance=ExtResource("8_ub2lw")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 8.72368, 0.745129, -6.72066)
+
+[node name="DangerZone" parent="Environment" instance=ExtResource("9_q4hlb")]
+danger_min_wait_time_seconds = 5.0
+danger_max_wait_time_seconds = 10.0
+
+[node name="PlayerSpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.49999, 0.817121, 1.50022)
+
+[node name="CanvasLayer" parent="." instance=ExtResource("10_ipnrv")]
