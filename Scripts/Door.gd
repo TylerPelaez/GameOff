@@ -55,7 +55,7 @@ func open():
 	
 	if !saved:
 		saved = true
-		GameStateService.save_data_to_default_path()
+		#GameStateService.save_data_to_default_path()
 
 
 func _on_game_state_helper_loading_data(data):

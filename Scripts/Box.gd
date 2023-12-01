@@ -4,7 +4,7 @@ class_name Box
 const FALL_DISTANCE_MARGIN = 0.01
 
 const GRID_SIZE = .5
-const GRID_SIZE_Y = 0.33
+const GRID_SIZE_Y = 0.333333333333
 
 const PUSH_CHAIN_LIMIT = 3
 
@@ -87,36 +87,38 @@ func on_drag_start():
 func on_drag_complete() -> bool:
 	return try_fall_and_update_lower_box()
 
-func try_fall_and_update_lower_box() -> bool:
-	ray_cast_3d.position = Vector3.ZERO
-	ray_cast_3d.target_position = Vector3(0, -20, 0)
-	ray_cast_3d.force_raycast_update()
-	if ray_cast_3d.is_colliding():
-		var collision_position = ray_cast_3d.get_collision_point()
+func try_fall_and_update_lower_box(target_pos = null) -> bool:
+	if target_pos == null:
+		ray_cast_3d.position = Vector3.ZERO
+		ray_cast_3d.target_position = Vector3(0, -20, 0)
+		ray_cast_3d.force_raycast_update()
+		if ray_cast_3d.is_colliding():
+			var collision_position = ray_cast_3d.get_collision_point()
+			target_pos = collision_position + Vector3(0, GRID_SIZE_Y / 2.0, 0) if !attached_to_chain else global_position - Vector3(0, GRID_SIZE_Y, 0)
+			
+			var obj = ray_cast_3d.get_collider().get_parent()
 		
-		var obj = ray_cast_3d.get_collider().get_parent()
+			if obj is Box:
+				obj.upper_box = self
+				lower_box = obj
+		else:
+			push_error("Box cannot find ground, will now float")
+			return false
 	
-		if obj is Box:
-			obj.upper_box = self
-			lower_box = obj
+	
+	if global_position.y - target_pos.y > FALL_DISTANCE_MARGIN:
+		fall(Vector3(global_position.x, target_pos.y, global_position.z), attached_to_chain)
+		if upper_box != null:
+			upper_box.try_fall_and_update_lower_box(target_pos + Vector3(0, GRID_SIZE_Y, 0))
 		
-		var min_y = 999999
-		if collision_shape_3d.shape is ConcavePolygonShape3D:
-			var faces: PackedVector3Array = collision_shape_3d.shape.get_faces()
 		
-			for face in faces:
-				if face.y < min_y:
-					min_y = face.y
-		
-		if (global_position.y + min_y) - collision_position.y > FALL_DISTANCE_MARGIN:
-			if attached_to_chain:
-				fall(Vector3(global_position.x, global_position.y - GRID_SIZE_Y, global_position.z), true)
-			else:	
-				fall(Vector3(global_position.x, collision_position.y - min_y, global_position.z), false)
-			return true
-	else:
-		push_error("Box cannot find ground, will now float")
+		return true
+
 	return false
+	
+	
+	
+
 
 
 
@@ -160,11 +162,15 @@ func get_all_boxes_in_row(amount: Vector3, player: Player3D, depth: int = PUSH_C
 	player_dir.y = 0
 	player_dir = player_dir.normalized()
 	
+	var result = {}
 	
+	if upper_box != null:
+		result.merge(upper_box.get_all_boxes_in_row(amount, player, depth))
 	
 	
 	if (player_dir - dir).length() > .1:
-		return {get_instance_id(): self}
+		result[get_instance_id()] = self
+		return result
 	
 	ray_cast_3d.position = Vector3.ZERO
 	ray_cast_3d.clear_exceptions()
@@ -176,10 +182,7 @@ func get_all_boxes_in_row(amount: Vector3, player: Player3D, depth: int = PUSH_C
 	
 	ray_cast_3d.target_position = amount 
 	ray_cast_3d.force_raycast_update()
-	var result = {}
-	
-	if upper_box != null:
-		result.merge(upper_box.get_all_boxes_in_row(amount, player, depth))
+
 	
 	if ray_cast_3d.is_colliding():
 		var collider = ray_cast_3d.get_collider()
@@ -205,12 +208,11 @@ func can_move_by_amount(amount: Vector3, player_shape_cast: ShapeCast3D, player:
 	shape_cast.position = Vector3.ZERO
 	ray_cast_3d.clear_exceptions()
 	shape_cast.clear_exceptions()
-	player_shape_cast.clear_exceptions()
+
 	var children = get_children()
 	for child in children:
 		if child is CollisionObject3D:
 			shape_cast.add_exception(child)
-			player_shape_cast.add_exception(child)
 			ray_cast_3d.add_exception(child)
 		children.append_array(child.get_children())
 	
@@ -247,6 +249,12 @@ func can_move_by_amount(amount: Vector3, player_shape_cast: ShapeCast3D, player:
 	if ignore_player_shape:
 		return true
 	
+	player_shape_cast.clear_exceptions()
+	for child in children:
+		if child is CollisionObject3D:
+			player_shape_cast.add_exception(child)
+			
+	player_shape_cast.position = Vector3.ZERO
 	player_shape_cast.target_position = amount
 	player_shape_cast.force_shapecast_update()
 	if player_shape_cast.is_colliding():

@@ -138,11 +138,15 @@ func moving_object_mode(delta):
 		for box in result.values():
 			tween.tween_method(box.move_to, box.global_position, box.global_position + offset, drag_object_animation_time_seconds)
 		
-		tween.chain().tween_callback(on_object_drag_complete)
+		tween.chain().tween_callback(on_object_drag_complete.bind(result))
 		tween.play()
 
-func on_object_drag_complete():
+func on_object_drag_complete(result: Dictionary):
 	dragging_object_playing = false
+	for box in result.values():
+		if box.lower_box == null && box != current_interactable:
+			box.on_drag_complete()
+	
 	if current_interactable.on_drag_complete():
 		stop_moving()
 
