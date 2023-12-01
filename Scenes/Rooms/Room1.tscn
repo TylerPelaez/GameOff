@@ -162,7 +162,6 @@ shape = SubResource("ConcavePolygonShape3D_58wq8")
 [node name="CanvasLayer" parent="." instance=ExtResource("10_ipnrv")]
 
 [node name="CameraRig" parent="." instance=ExtResource("7_6nc1r")]
-transform = Transform3D(1, 0, 0, 0, 0.898794, 0.438371, 0, -0.438371, 0.898794, 0, 0, 0)
 
 [node name="Player" parent="." instance=ExtResource("8_53baf")]
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.67626, 0.775434, 10.3132)
