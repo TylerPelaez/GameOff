@@ -1,0 +1,11 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://cktx25avom6by"]
+
+[ext_resource type="Texture2D" uid="uid://cxfqnbgyrwyrj" path="res://Art/boy.png" id="1_xy1jk"]
+
+[resource]
+transparency = 1
+albedo_color = Color(1, 1, 1, 0.933333)
+albedo_texture = ExtResource("1_xy1jk")
+metallic_specular = 0.0
+emission = Color(0.0196078, 0.0196078, 0.0196078, 1)
+texture_filter = 0

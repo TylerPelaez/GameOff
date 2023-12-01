@@ -1,0 +1,9 @@
+[gd_resource type="StandardMaterial3D" load_steps=2 format=3 uid="uid://drqvht1lyl57k"]
+
+[ext_resource type="Texture2D" uid="uid://cm6ikatbqpi6f" path="res://Art/Environment/WholeColumn-0c3f8694aa012a9694d9301cf9f168b6_column.png" id="1_457lt"]
+
+[resource]
+resource_name = "column"
+albedo_texture = ExtResource("1_457lt")
+metallic_specular = 0.0
+texture_filter = 0

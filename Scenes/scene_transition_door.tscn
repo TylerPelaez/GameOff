@@ -1,9 +1,55 @@
-[gd_scene load_steps=2 format=3 uid="uid://cpqlmfxkym2m1"]
+[gd_scene load_steps=8 format=3 uid="uid://cpqlmfxkym2m1"]
 
-[ext_resource type="PackedScene" uid="uid://bece0kkh8f7g1" path="res://Scenes/InteractableItem3D.tscn" id="1_tohto"]
+[ext_resource type="Script" path="res://Scripts/InteractableItem.gd" id="1_rhokp"]
+[ext_resource type="ArrayMesh" uid="uid://1p3y17kk7o6v" path="res://Art/Environment/Meshes/Door_Only.res" id="2_fe1n8"]
+[ext_resource type="Script" path="res://addons/game_state_helper/game_state_helper.gd" id="3_fhv6b"]
 
-[node name="SceneTransitionDoor" groups=["scene_transition_door"] instance=ExtResource("1_tohto")]
+[sub_resource type="BoxShape3D" id="BoxShape3D_m0v11"]
+size = Vector3(1, 0.653704, 1)
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_r8klp"]
+data = PackedVector3Array(0.1664, 0, -0.0116, -0.1664, 0.6878, -0.0116, 0.1664, 0.6878, -0.0116, -0.1664, 0.6878, -0.0116, 0.1664, 0, -0.0116, -0.1664, 0, -0.0116)
+
+[sub_resource type="Animation" id="Animation_vqirh"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_t38xh"]
+_data = {
+"RESET": SubResource("Animation_vqirh")
+}
+
+[node name="SceneTransitionDoor" type="Node3D" groups=["scene_transition_door"]]
+script = ExtResource("1_rhokp")
 type = 6
 
-[node name="PlayerSpawnPoint" type="Node3D" parent="." index="3"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.333, 0.1, 0)
+[node name="InteractionArea" type="Area3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.165, 0)
+collision_layer = 16
+collision_mask = 128
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="InteractionArea"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.154041, 0)
+shape = SubResource("BoxShape3D_m0v11")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.183997, 0)
+mesh = ExtResource("2_fe1n8")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_r8klp")
+
+[node name="GameStateHelper" type="Node" parent="."]
+script = ExtResource("3_fhv6b")
+save_properties = Array[String](["_toggled_on", "dialog_triggered", "saved", "broken", "trans_door_can_open"])
+
+[node name="PlayerSpawnPoint" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.219)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+"": SubResource("AnimationLibrary_t38xh")
+}
+
+[connection signal="loading_data" from="GameStateHelper" to="." method="_on_game_state_helper_loading_data" flags=18]

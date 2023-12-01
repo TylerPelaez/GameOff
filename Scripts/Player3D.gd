@@ -7,7 +7,7 @@ class_name Player3D
 @export var jump_strength = 1000
 
 @export var drag_object_animation_time_seconds: float = 0.75
-@export var max_fallible_tiles: int = 2
+@export var max_fallible_tiles: int = 20
 
 @onready var animation_tree = $AnimationTree
 @onready var animation_state = animation_tree["parameters/playback"]
@@ -23,6 +23,16 @@ class_name Player3D
 
 @onready var collider = $Collider
 @onready var alt_shape_caster = $AltShapeCaster
+
+
+@export var slide_sfx: Array[AudioStream]
+@export var rock_break_sfx: Array[AudioStream]
+
+@onready var jump = $Jump
+@onready var slide = $Slide
+@onready var footsteps = $Footsteps
+@onready var rockbreak = $rockbreak
+
 
 
 
@@ -81,15 +91,22 @@ func normal_mode(delta):
 			ground_velocity -= ground_velocity.normalized() * (friction * delta)
 		else:
 			ground_velocity = Vector3.ZERO
+			
+		footsteps.stream_paused = true
 	else:
 		ground_velocity += (Vector2(input.x, input.z) * accel * delta)
 		ground_velocity = ground_velocity.limit_length(max_speed)
+		
+		if is_on_floor():
+			footsteps.stream_paused = false
 
 	velocity.x = ground_velocity.x
 	velocity.z = ground_velocity.y
 
 	if Input.is_action_just_pressed("jump") and is_on_floor():
 		velocity.y = jump_strength
+		jump.play()
+
 
 	var gravity = ProjectSettings.get_setting("physics/3d/default_gravity", 9.8)
 	velocity.y -= delta * gravity
@@ -145,6 +162,11 @@ func moving_object_mode(delta):
 		
 		tween.chain().tween_callback(on_object_drag_complete.bind(result))
 		tween.play()
+		
+		if !slide.is_playing():
+			slide.stream = slide_sfx.pick_random()
+			slide.play()
+			
 
 func on_object_drag_complete(result: Dictionary):
 	dragging_object_playing = false
@@ -328,3 +350,7 @@ func is_hidden() -> bool:
 func assign_camera_rig(camera_rig: Node3D):
 	remote_transform_3d.remote_path = remote_transform_3d.get_path_to(camera_rig)
 
+func playrockbreak():
+	if !rockbreak.is_playing():
+		rockbreak.stream = rock_break_sfx.pick_random()
+		rockbreak.play()

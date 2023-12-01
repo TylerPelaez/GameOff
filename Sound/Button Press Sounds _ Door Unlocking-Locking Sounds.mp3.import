@@ -1,0 +1,19 @@
+[remap]
+
+importer="mp3"
+type="AudioStreamMP3"
+uid="uid://c683bb8pyprcq"
+path="res://.godot/imported/Button Press Sounds _ Door Unlocking-Locking Sounds.mp3-ae65424b954e22704602338b6ebeaee4.mp3str"
+
+[deps]
+
+source_file="res://Sound/Button Press Sounds _ Door Unlocking-Locking Sounds.mp3"
+dest_files=["res://.godot/imported/Button Press Sounds _ Door Unlocking-Locking Sounds.mp3-ae65424b954e22704602338b6ebeaee4.mp3str"]
+
+[params]
+
+loop=false
+loop_offset=0
+bpm=0
+beat_count=0
+bar_beats=4

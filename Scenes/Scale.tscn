@@ -1,0 +1,34 @@
+[gd_scene load_steps=6 format=3 uid="uid://bn1bbpqcqcu34"]
+
+[ext_resource type="PackedScene" uid="uid://bece0kkh8f7g1" path="res://Scenes/InteractableItem3D.tscn" id="1_01h77"]
+[ext_resource type="Texture2D" uid="uid://iayhrmqj1aps" path="res://Art/scale.png" id="2_klm0q"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_lful8"]
+size = Vector3(1, 0.674062, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_7ylt8"]
+transparency = 1
+albedo_texture = ExtResource("2_klm0q")
+texture_filter = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_ukr4q"]
+material = SubResource("StandardMaterial3D_7ylt8")
+
+[node name="Scale" instance=ExtResource("1_01h77")]
+type = 1
+has_collision = false
+
+[node name="InteractionArea" parent="." index="0"]
+visible = true
+
+[node name="CollisionShape3D" parent="InteractionArea" index="0"]
+shape = SubResource("BoxShape3D_lful8")
+
+[node name="MeshInstance3D" parent="." index="1"]
+mesh = SubResource("QuadMesh_ukr4q")
+
+[node name="CollisionShape3D" parent="MeshInstance3D/StaticBody3D" index="0"]
+shape = null
+
+[node name="GameStateHelper" parent="." index="2"]
+save_properties = Array[String](["_toggled_on", "dialog_triggered", "saved", "broken", "alter_unlocked"])

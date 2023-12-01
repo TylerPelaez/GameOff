@@ -35,6 +35,8 @@ func _ready():
 	EventManager.hide_interaction_prompt.connect(_on_hide_interaction_prompt)
 	EventManager.show_hunt_visuals.connect(_on_show_hunt_visuals)
 	EventManager.stop_hunt_visuals.connect(_on_hide_hunt_visuals)
+
+func add_inventory():
 	for item_id in PlayerInventory.items.keys():
 		add_item(item_id)
 
@@ -125,6 +127,12 @@ func _on_show_interaction_prompt(prompt_src):
 	prompt_instance = prompt_prefab.instantiate()
 	interaction_prompts.add_child(prompt_instance)
 	prompt_origin_object = prompt_src
+	if prompt_src is InteractableItem:
+		if prompt_src.type == InteractableItem.Type.SceneTransitionDoor and !prompt_src.trans_door_can_open:
+			prompt_instance.get_child(0).text = "Locked"
+		if prompt_src.type == InteractableItem.Type.Alter and !prompt_src.alter_unlocked:
+			if !PlayerInventory.has_item(prompt_src._required_key):
+				prompt_instance.get_child(0).text = "Heart Needed"
 
 func _on_hide_interaction_prompt():
 	if prompt_instance != null:

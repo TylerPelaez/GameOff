@@ -43,9 +43,8 @@ script = ExtResource("1_ot0t8")
 [node name="ItemInventory" type="HBoxContainer" parent="."]
 offset_left = 16.0
 offset_top = 16.0
-offset_right = 48.0
-offset_bottom = 48.0
-scale = Vector2(0.5, 0.5)
+offset_right = 80.0
+offset_bottom = 80.0
 
 [node name="DialogContainer" type="Control" parent="."]
 visible = false

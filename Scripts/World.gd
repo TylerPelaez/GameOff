@@ -1,6 +1,8 @@
 extends Node3D
 class_name Room
 
+@export var scene_index: int = 0
+
 static var ENTERING_ROOM_FROM_SCENE_STATE_KEY = "entering_room_from_scene"
 
 @onready var ui_controller: UIController = $CanvasLayer
@@ -9,6 +11,21 @@ static var ENTERING_ROOM_FROM_SCENE_STATE_KEY = "entering_room_from_scene"
 
 # Called when the node enters the scene tree for the first time.
 func _ready():
+	SceneTracker.last_scene_loaded = scene_index
+	
+	PlayerInventory.clear()
+	if scene_index > 1:
+		if !PlayerInventory.has_item(ItemData.ItemId.Chisel):
+			PlayerInventory.add_item(ItemData.ItemId.Chisel)
+		ui_controller.add_inventory()
+		
+	
+	if scene_index == 3:
+		BgmManager.play_odd()
+	
+	if scene_index == 5:
+		BgmManager.play_scary()
+	
 	# wait for game state load to finish
 	await GameStateService.state_load_completed
 	
@@ -16,6 +33,9 @@ func _ready():
 	PlayerInventory.item_removed.connect(on_player_inventory_item_removed)
 	
 	DialogManager.dialog_played.connect(on_dialog_played)
+	
+	
+
 	
 	if player.remote_transform_3d.remote_path == null || player.remote_transform_3d.remote_path.is_empty():
 		player.assign_camera_rig(camera_rig)
@@ -37,6 +57,7 @@ func _ready():
 		
 	
 	GameStateService.set_global_state_value(ENTERING_ROOM_FROM_SCENE_STATE_KEY, null)
+	
 
 
 func on_player_inventory_item_added(item_id: ItemData.ItemId):

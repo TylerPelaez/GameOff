@@ -1,12 +1,6 @@
-[gd_scene load_steps=3 format=3 uid="uid://bm5fv2p150lbk"]
+[gd_scene load_steps=2 format=3 uid="uid://bm5fv2p150lbk"]
 
 [ext_resource type="Script" path="res://Scripts/PlayerInventory.gd" id="1_isrfv"]
-[ext_resource type="Script" path="res://addons/game_state_helper/game_state_helper.gd" id="2_lol67"]
 
 [node name="PlayerInventory" type="Node"]
 script = ExtResource("1_isrfv")
-
-[node name="GameStateHelper" type="Node" parent="."]
-script = ExtResource("2_lol67")
-save_properties = Array[String](["items"])
-global = true

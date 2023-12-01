@@ -24,6 +24,9 @@ signal toggled(val: bool)
 
 @export var _toggled_on: bool
 
+
+@export var required_alter: InteractableItem
+
 @export_file("*.tscn", "*.scn") var destination_scene := "" 
 
 var dialog_triggered: bool = false
@@ -31,6 +34,9 @@ var dialog_triggered: bool = false
 var saved: bool = false
 var broken: bool = false
 
+
+var alter_unlocked: bool = false
+var trans_door_can_open: bool = false
 
 enum Type {
 	Key,
@@ -53,6 +59,11 @@ func set_type(val):
 
 func _ready():
 	collision_shape_3d.disabled = !has_collision
+	if Type.SceneTransitionDoor == type:
+		required_alter.unlocked.connect(on_alter_unlocked)
+
+func on_alter_unlocked():
+	trans_door_can_open = true
 
 func interact():
 	# TODO: Fill this in as needed
@@ -70,6 +81,7 @@ func interact():
 		Type.Alter:
 			if PlayerInventory.has_item(_required_key):
 				PlayerInventory.remove_item(_required_key)
+				alter_unlocked = true
 				unlocked.emit()
 			print("Lock Interacted")
 		Type.InstantButton:
@@ -89,14 +101,16 @@ func interact():
 			var player = players[0]
 			player.hide_inside_object(self)
 		Type.SceneTransitionDoor:
-			GameStateService.set_global_state_value(Room.ENTERING_ROOM_FROM_SCENE_STATE_KEY, get_owner().scene_file_path)
-			TransitionMgr.transition_to(destination_scene)
+			if trans_door_can_open:
+				GameStateService.set_global_state_value(Room.ENTERING_ROOM_FROM_SCENE_STATE_KEY, get_owner().scene_file_path)
+				TransitionMgr.transition_to(destination_scene)
 		Type.Breakable:
 			if !broken && PlayerInventory.has_item(ItemData.ItemId.Chisel):
 				explode()
 
 func explode():
 	broken = true
+	get_tree().get_first_node_in_group("player").playrockbreak()
 	animation_player.play("break")
 
 func can_interact() -> bool:

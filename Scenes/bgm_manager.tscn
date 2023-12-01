@@ -1,0 +1,24 @@
+[gd_scene load_steps=6 format=3 uid="uid://8x00opjb3m5k"]
+
+[ext_resource type="AudioStream" uid="uid://dkg3mnd16uhuk" path="res://Sound/music/Doomsday V2.mp3" id="1_aitfd"]
+[ext_resource type="Script" path="res://Scenes/bgm_manager.gd" id="2_u0jjp"]
+[ext_resource type="AudioStream" uid="uid://bm52hbrnqboug" path="res://Sound/walking-cartoon-3-29625.mp3" id="3_0anfa"]
+[ext_resource type="AudioStream" uid="uid://duhu8tollb8lq" path="res://Sound/SugO -Stressful Hunting Music.mp3" id="3_5l4ic"]
+[ext_resource type="AudioStream" uid="uid://b1vl88vvkrxu6" path="res://Sound/music/hyprbolicV2.mp3" id="4_yim1l"]
+
+[node name="BGMManager" type="AudioStreamPlayer"]
+process_mode = 3
+stream = ExtResource("1_aitfd")
+autoplay = true
+bus = &"Music"
+script = ExtResource("2_u0jjp")
+music_normal = ExtResource("1_aitfd")
+music_scary = ExtResource("3_5l4ic")
+music_odd = ExtResource("4_yim1l")
+
+[node name="Ambience" type="AudioStreamPlayer" parent="."]
+process_mode = 3
+stream = ExtResource("3_0anfa")
+volume_db = -80.0
+autoplay = true
+bus = &"SFX"

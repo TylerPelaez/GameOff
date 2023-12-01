@@ -15,3 +15,7 @@ func remove_item(id: ItemData.ItemId):
 
 func has_item(id: ItemData.ItemId) -> bool:
 	return items.has(id)
+
+func clear():
+	for id in items.keys():
+		remove_item(id)

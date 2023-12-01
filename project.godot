@@ -15,6 +15,10 @@ run/main_scene="res://UI/main_menu.tscn"
 config/features=PackedStringArray("4.1", "Forward Plus")
 config/icon="res://icon.svg"
 
+[audio]
+
+driver/output_latency=50
+
 [autoload]
 
 DialogManager="*res://Scripts/DialogManager.gd"
@@ -24,6 +28,8 @@ DangerOrchestrator="*res://Scenes/danger_orchestrator.tscn"
 GameStateService="*res://addons/game_state_helper/game_state_service.gd"
 TransitionMgr="*res://addons/transition_mgr/transition_mgr.tscn"
 PlayerInventory="*res://Scenes/PlayerInventory.tscn"
+SceneTracker="*res://Scripts/SceneTracker.gd"
+BgmManager="*res://Scenes/bgm_manager.tscn"
 
 [display]
 

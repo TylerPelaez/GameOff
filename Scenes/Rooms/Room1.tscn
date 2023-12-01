@@ -1,28 +1,106 @@
-[gd_scene load_steps=15 format=3 uid="uid://0hfuqbytrpgo"]
+[gd_scene load_steps=33 format=3 uid="uid://0hfuqbytrpgo"]
 
 [ext_resource type="Script" path="res://Scripts/World.gd" id="1_e3v7r"]
 [ext_resource type="MeshLibrary" uid="uid://d00ge6jxao8rg" path="res://Art/Environment/MeshLibrary.tres" id="2_ggfdy"]
 [ext_resource type="MeshLibrary" uid="uid://03lh43oktafn" path="res://Art/ShortWallMeshLibrary.tres" id="3_ixjjp"]
 [ext_resource type="PackedScene" uid="uid://l7wxwtb8sjjg" path="res://Scenes/DraggableBox.tscn" id="4_34wsi"]
-[ext_resource type="PackedScene" uid="uid://djdn7qbr08owm" path="res://Scenes/chain.tscn" id="5_wyp0f"]
-[ext_resource type="PackedScene" uid="uid://btleuhp1kmvle" path="res://Scenes/door.tscn" id="6_keptd"]
-[ext_resource type="PackedScene" uid="uid://bece0kkh8f7g1" path="res://Scenes/InteractableItem3D.tscn" id="7_17wy3"]
-[ext_resource type="PackedScene" uid="uid://bny3ql5dweqei" path="res://Scenes/hallway_light_transition.tscn" id="8_ub2lw"]
-[ext_resource type="PackedScene" uid="uid://kb7mnexxt38o" path="res://Scenes/danger_zone.tscn" id="9_q4hlb"]
+[ext_resource type="PackedScene" uid="uid://w4v1ajvmm7to" path="res://Scenes/camera_rig.tscn" id="7_6nc1r"]
+[ext_resource type="PackedScene" uid="uid://chawhftcwjlwv" path="res://Scenes/player3D.tscn" id="8_53baf"]
 [ext_resource type="PackedScene" uid="uid://bw8btg3rvl7hi" path="res://UI/UIController.tscn" id="10_ipnrv"]
+[ext_resource type="Material" uid="uid://i4trcidoqn21" path="res://UI/Room1.tres" id="10_w3ono"]
+[ext_resource type="Texture2D" uid="uid://cvfxc677xjqkr" path="res://UI/Space To Jump.png" id="11_dwymd"]
+[ext_resource type="Texture2D" uid="uid://bwij7dng5hxuq" path="res://UI/E To Interact.png" id="12_3w3rf"]
+[ext_resource type="Texture2D" uid="uid://vbtkia25bxh1" path="res://UI/Escape To Restart Level.png" id="13_1otub"]
+[ext_resource type="PackedScene" uid="uid://sntsiehnprdd" path="res://Scenes/heart.tscn" id="14_kwevs"]
+[ext_resource type="PackedScene" uid="uid://bn1bbpqcqcu34" path="res://Scenes/Scale.tscn" id="14_q72uw"]
+[ext_resource type="PackedScene" uid="uid://dndj3h43iekxf" path="res://Scenes/npc.tscn" id="15_4lhjo"]
+[ext_resource type="Script" path="res://Scripts/InteractableItem.gd" id="15_5fqo8"]
+[ext_resource type="Material" uid="uid://bsm2v2h5iddf5" path="res://Art/Environment/Materials/door.tres" id="16_mu2yj"]
+[ext_resource type="Script" path="res://addons/game_state_helper/game_state_helper.gd" id="17_h31vg"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_5spff"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_58wq8"]
 data = PackedVector3Array(0.5, -0.5, 0, -0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, -0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0)
 
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_780s3"]
+[sub_resource type="QuadMesh" id="QuadMesh_pn0c7"]
+material = ExtResource("10_w3ono")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_46irt"]
 transparency = 1
+albedo_texture = ExtResource("11_dwymd")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
 texture_filter = 0
 
-[sub_resource type="PlaneMesh" id="PlaneMesh_pymdc"]
-material = SubResource("StandardMaterial3D_780s3")
-size = Vector2(0.2, 0.2)
+[sub_resource type="QuadMesh" id="QuadMesh_wqihi"]
+material = SubResource("StandardMaterial3D_46irt")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lh65c"]
+transparency = 1
+albedo_texture = ExtResource("12_3w3rf")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+texture_filter = 0
+
+[sub_resource type="QuadMesh" id="QuadMesh_qb13h"]
+material = SubResource("StandardMaterial3D_lh65c")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_4xq0t"]
+transparency = 1
+albedo_texture = ExtResource("13_1otub")
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+texture_filter = 0
+texture_repeat = false
+
+[sub_resource type="QuadMesh" id="QuadMesh_pjnjc"]
+material = SubResource("StandardMaterial3D_4xq0t")
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_m0v11"]
+size = Vector3(1, 0.653704, 1)
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_qddc0"]
+_surfaces = [{
+"aabb": AABB(-0.166421, -2.98023e-08, -0.011612, 0.332853, 0.687803, 9.99961e-06),
+"format": 4097,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 2, 0, 1, 0, 2, 0, 0, 0, 3, 0),
+"name": "door",
+"primitive": 3,
+"vertex_count": 4,
+"vertex_data": PackedByteArray(96, 106, 42, 62, 0, 0, 0, 179, 96, 64, 62, 188, 96, 106, 42, 62, 223, 19, 48, 63, 96, 64, 62, 188, 96, 106, 42, 190, 223, 19, 48, 63, 96, 64, 62, 188, 96, 106, 42, 190, 0, 0, 0, 179, 96, 64, 62, 188)
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_a83h3"]
+resource_local_to_scene = true
+resource_name = "Root Scene_prop_Door"
+_surfaces = [{
+"aabb": AABB(-0.166421, -2.98023e-08, -0.011612, 0.332853, 0.687803, 9.99961e-06),
+"attribute_data": PackedByteArray(109, 178, 127, 63, 0, 0, 128, 63, 109, 178, 127, 63, 0, 0, 0, 0, 0, 38, 155, 58, 0, 0, 0, 0, 0, 38, 155, 58, 0, 0, 128, 63),
+"format": 4119,
+"index_count": 6,
+"index_data": PackedByteArray(0, 0, 2, 0, 1, 0, 2, 0, 0, 0, 3, 0),
+"material": ExtResource("16_mu2yj"),
+"name": "door",
+"primitive": 3,
+"vertex_count": 4,
+"vertex_data": PackedByteArray(96, 106, 42, 62, 0, 0, 0, 179, 96, 64, 62, 188, 255, 127, 255, 127, 255, 255, 255, 191, 96, 106, 42, 62, 223, 19, 48, 63, 96, 64, 62, 188, 255, 127, 255, 127, 255, 255, 255, 191, 96, 106, 42, 190, 223, 19, 48, 63, 96, 64, 62, 188, 255, 127, 255, 127, 255, 255, 255, 191, 96, 106, 42, 190, 0, 0, 0, 179, 96, 64, 62, 188, 255, 127, 255, 127, 255, 255, 255, 191)
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_qddc0")
+
+[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_r8klp"]
+data = PackedVector3Array(0.1664, 0, -0.0116, -0.1664, 0.6878, -0.0116, 0.1664, 0.6878, -0.0116, -0.1664, 0.6878, -0.0116, 0.1664, 0, -0.0116, -0.1664, 0, -0.0116)
+
+[sub_resource type="Animation" id="Animation_gersx"]
+length = 0.001
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_cja32"]
+_data = {
+"RESET": SubResource("Animation_gersx")
+}
 
 [node name="Room" type="Node3D"]
 transform = Transform3D(1, -5.49965e-05, 4.14818e-05, 5.49965e-05, 1, -1.13368e-05, -4.14818e-05, 1.13368e-05, 1, 0, 0, 0)
@@ -33,7 +111,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.25, 0, 0.25)
 mesh_library = ExtResource("2_ggfdy")
 cell_size = Vector3(1, 1, 1)
 data = {
-"cells": PackedInt32Array(4, 0, 655360, 5, 0, 655360, 6, 0, 655360, 4, 1, 655360, 5, 1, 655360, 6, 1, 655360, 4, 2, 655360, 5, 2, 655360, 6, 2, 655360, 5, 65534, 1, 3, 65534, 2, 7, 65534, 1441794, 4, 65534, 4, 7, 3, 655362, 3, 3, 1048578, 3, 65535, 1048580, 3, 0, 1048580, 3, 2, 1048580, 3, 1, 1048580, 4, 3, 655364, 5, 3, 655364, 6, 3, 655364, 7, 2, 1441796, 7, 1, 1441796, 7, 0, 1441796, 7, 65535, 1441796, 4, 65535, 1441792, 5, 65535, 1441792, 6, 65533, 1441796, 6, 65535, 1441792, 6, 65534, 4, 65541, 65528, 0, 65538, 65529, 0, 65538, 65528, 0, 65538, 65527, 0, 65539, 65527, 0, 65540, 65526, 4, 65541, 65526, 4, 65538, 65526, 4, 65537, 65529, 1048580, 65537, 65528, 1048580, 65537, 65527, 1048580, 65537, 65526, 2, 7, 65530, 1441795, 8, 65531, 655362, 8, 65530, 1441796, 7, 65531, 655365, 65545, 65531, 1048582, 65543, 65533, 655366, 65542, 65533, 1441799, 65543, 65534, 1441798, 65543, 65535, 1441799, 65543, 0, 1441799, 65543, 1, 1441799, 65543, 2, 1441799, 65543, 3, 1441799, 65538, 1, 1441799, 65538, 2, 1441799, 65538, 0, 1441799, 65538, 3, 1441800, 65539, 65534, 1048584, 65539, 65535, 1048583, 65537, 65534, 1441795, 65537, 65535, 8, 65536, 65534, 1441800, 8, 65529, 1, 10, 65527, 655364, 11, 65527, 655364, 12, 65526, 1048579, 12, 65525, 1441796, 12, 65523, 1441796, 12, 65524, 1441796, 12, 65527, 655362, 11, 65526, 655366, 10, 65526, 655367, 11, 65525, 1441799, 11, 65524, 1441799, 13, 65526, 1048583, 9, 65529, 1048583, 12, 65522, 655367, 6, 65530, 1441795, 65541, 65529, 1441792, 65540, 65529, 1441792, 65541, 65530, 1441792, 65540, 65530, 1441792, 65539, 65530, 1441792, 65538, 65530, 1441792, 65537, 65530, 1048580, 1, 65530, 655367, 0, 65528, 1441795, 1, 65529, 1441795, 1, 65533, 1048578, 2, 65533, 655363, 1, 65531, 1048580)
+"cells": PackedInt32Array(4, 0, 655360, 5, 0, 655360, 6, 0, 655360, 4, 1, 655360, 5, 1, 655360, 6, 1, 655360, 4, 2, 655360, 5, 2, 655360, 6, 2, 655360, 5, 65534, 1, 3, 65534, 2, 7, 65534, 1441794, 4, 65534, 2, 7, 3, 655362, 3, 3, 1048578, 3, 65535, 2, 3, 0, 1048580, 3, 2, 1048580, 3, 1, 1048580, 4, 3, 0, 5, 3, 0, 6, 3, 655364, 7, 2, 1441796, 7, 1, 1441796, 7, 0, 1441796, 7, 65535, 1441796, 4, 65535, 1441792, 5, 65535, 1441792, 6, 65535, 1441792, 6, 65534, 4, 65543, 65534, 1441799, 65543, 65535, 1441799, 65543, 0, 1441799, 65543, 1, 1441799, 65543, 2, 1441799, 65543, 3, 1441799, 65538, 1, 1441799, 65538, 2, 1441799, 65538, 0, 1441799, 65538, 3, 1441800, 65539, 65534, 2, 65539, 65535, 1048583, 65540, 4, 1179652, 65541, 4, 1179648, 7, 5, 1310720, 7, 4, 1310720, 4, 4, 7, 5, 4, 1, 5, 5, 0, 4, 5, 1441799, 4, 6, 1441799, 6, 5, 1048583, 6, 4, 1048583, 5, 6, 1441796, 5, 7, 1441796, 5, 8, 1441796, 5, 9, 1441796, 4, 7, 1441799, 4, 8, 1441799, 4, 9, 1441799, 5, 10, 655364, 6, 10, 1048583, 5, 11, 7, 4, 10, 1441799, 65540, 65534, 7, 65541, 65534, 7, 65542, 65534, 7, 65543, 65533, 655367)
 }
 metadata/_editor_floor_ = Vector3(0, 1, 0)
 
@@ -50,43 +128,23 @@ metadata/_editor_floor_ = Vector3(0, 9, 0)
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Environment"]
-transform = Transform3D(1, 4.68335e-10, 6.22094e-10, -1.0662e-12, 1, 2.28101e-09, 0, 0, 1, 5.45957, 1.66056, 0.76713)
-light_color = Color(0.461647, 0.568522, 0.267637, 1)
+transform = Transform3D(1, 4.68335e-10, 6.22094e-10, -1.0662e-12, 1, 2.28101e-09, 0, 0, 1, 5.95957, 2.16056, 0.26713)
+light_color = Color(0.654902, 0.784314, 0.427451, 1)
 light_energy = 0.8
 light_volumetric_fog_energy = 0.6
 shadow_enabled = true
 distance_fade_enabled = true
-
-[node name="OmniLight3D2" type="OmniLight3D" parent="Environment"]
-transform = Transform3D(1, 4.68335e-10, 6.22094e-10, -1.0662e-12, 1, 2.28101e-09, 0, 0, 1, 4.77898, 2.96775, -5.96202)
-light_color = Color(0.462745, 0.568627, 0.266667, 1)
-light_energy = 0.8
-light_volumetric_fog_energy = 0.6
-shadow_enabled = true
-distance_fade_enabled = true
-
-[node name="Box2" parent="Environment" instance=ExtResource("4_34wsi")]
-transform = Transform3D(1, -9.64521e-13, 0, -1.06619e-12, 1, 0, 0, 0, 1, 6.4999, 0.664946, 2.00006)
-skeleton = NodePath("../..")
 
 [node name="Box5" parent="Environment" instance=ExtResource("4_34wsi")]
-transform = Transform3D(1, -9.64521e-13, 0, -1.06619e-12, 1, 0, 0, 0, 1, 5.49996, 0.664984, 0.500023)
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 3.49996, 0.664984, -0.499977)
 skeleton = NodePath("../..")
 
 [node name="Box7" parent="Environment" instance=ExtResource("4_34wsi")]
-transform = Transform3D(1, -9.64521e-13, 0, -1.06619e-12, 1, 0, 0, 0, 1, 5.49998, 0.998001, 0.500013)
-skeleton = NodePath("../..")
-
-[node name="Box8" parent="Environment" instance=ExtResource("4_34wsi")]
-transform = Transform3D(1, -9.64521e-13, 0, -1.06619e-12, 1, 0, 0, 0, 1, 3.4999, 0.666521, 1.99994)
-skeleton = NodePath("../..")
-
-[node name="Box3" parent="Environment" instance=ExtResource("4_34wsi")]
-transform = Transform3D(1, -9.64521e-13, 0, -1.06619e-12, 1, 0, 0, 0, 1, 5, 0.666, 2.5)
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 3.49998, 0.998001, -0.499987)
 skeleton = NodePath("../..")
 
 [node name="Box6" parent="Environment" instance=ExtResource("4_34wsi")]
-transform = Transform3D(1, -9.64521e-13, 0, -1.06619e-12, 1, 0, 0, 0, 1, 5.49988, 0.666924, 1.50008)
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 4.99988, 0.666924, 0.50008)
 skeleton = NodePath("../..")
 
 [node name="Floor" type="MeshInstance3D" parent="Environment"]
@@ -101,82 +159,88 @@ skeleton = NodePath("../..")
 transform = Transform3D(1, -3.63798e-12, 6.40182e-14, 0, 1, -5.68434e-14, 2.73941e-11, 0, 1, 0, 0, 0)
 shape = SubResource("ConcavePolygonShape3D_58wq8")
 
-[node name="Box4" parent="Environment" node_paths=PackedStringArray("attached_chain") instance=ExtResource("4_34wsi")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 2.99887, 1.66691, -5.00158)
-skeleton = NodePath("../..")
-attached_to_chain = true
-attached_chain = NodePath("../ChainHolder2")
-
-[node name="Box11" parent="Environment" node_paths=PackedStringArray("attached_chain") instance=ExtResource("4_34wsi")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 3.50018, 1.65998, -8)
-skeleton = NodePath("../..")
-attached_to_chain = true
-attached_chain = NodePath("../ChainHolder")
-
-[node name="Box12" parent="Environment" instance=ExtResource("4_34wsi")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 4.50016, 1.65993, -7.49996)
-skeleton = NodePath("../..")
-
-[node name="Box10" parent="Environment" instance=ExtResource("4_34wsi")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 3.00008, 1.98005, -5.00002)
-skeleton = NodePath("../..")
-
-[node name="Pot" type="MeshInstance3D" parent="Environment"]
-transform = Transform3D(1, -9.64783e-05, -1.35146e-05, -1.35147e-05, -4.06872e-08, -1, 9.64783e-05, 1, -4.19905e-08, 4.75002, 0.599995, -1.7119)
-mesh = SubResource("PlaneMesh_pymdc")
-skeleton = NodePath("../..")
-
-[node name="ChainHolder" parent="Environment" node_paths=PackedStringArray("attached") instance=ExtResource("5_wyp0f")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.00045, 1.69812, -8.49981)
-max_tiles = 3
-attached = NodePath("../Box11")
-
-[node name="Pot2" type="MeshInstance3D" parent="Environment"]
-transform = Transform3D(1, -9.64783e-05, -1.35146e-05, -1.35147e-05, -4.06872e-08, -1, 9.64783e-05, 1, -4.19905e-08, 6.46276, 0.599901, -1.71183)
-mesh = SubResource("PlaneMesh_pymdc")
-skeleton = NodePath("../..")
-
-[node name="ChainHolder2" parent="Environment" node_paths=PackedStringArray("attached") instance=ExtResource("5_wyp0f")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 3.00034, 1.69824, -5.99989)
-max_tiles = 2
-attached = NodePath("../Box4")
-
-[node name="Door2" parent="Environment" node_paths=PackedStringArray("_alter") instance=ExtResource("6_keptd")]
-transform = Transform3D(-4.07454e-08, 4.36597e-05, -1, 6.63333e-05, 1, 4.36597e-05, 1, -6.63333e-05, -4.3583e-08, 7.23267, 0.499879, -5.24956)
-_alter = NodePath("../Alter")
-
-[node name="Alter" parent="Environment" instance=ExtResource("7_17wy3")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 7.00024, 0.699604, -4.74428)
-type = 1
-_required_key = 1
-
-[node name="Alter2" parent="Environment" instance=ExtResource("7_17wy3")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 13.2172, 0.699204, -9.83644)
-type = 5
-_required_key = 1
-
-[node name="Key2" parent="Environment" instance=ExtResource("7_17wy3")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 4.94158, 0.699851, -4.07021)
-has_collision = false
-_key_id = 1
-
-[node name="Key4" parent="Environment" instance=ExtResource("7_17wy3")]
-transform = Transform3D(1, -9.64521e-13, 0, -1.06619e-12, 1, 0, 0, 0, 1, 21.4418, 1.80007, -0.0700209)
-has_collision = false
-_key_id = 1
-
-[node name="Door" parent="Environment" instance=ExtResource("6_keptd")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.75, 0.5, -1.74)
-opened_by = 0
-
-[node name="HallwayLightTransition" parent="Environment" instance=ExtResource("8_ub2lw")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 8.72368, 0.745129, -6.72066)
-
-[node name="DangerZone" parent="Environment" instance=ExtResource("9_q4hlb")]
-danger_min_wait_time_seconds = 5.0
-danger_max_wait_time_seconds = 10.0
-
-[node name="PlayerSpawnPoint" type="Node3D" parent="."]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.49999, 0.817121, 1.50022)
-
 [node name="CanvasLayer" parent="." instance=ExtResource("10_ipnrv")]
+
+[node name="CameraRig" parent="." instance=ExtResource("7_6nc1r")]
+transform = Transform3D(1, 0, 0, 0, 0.898794, 0.438371, 0, -0.438371, 0.898794, 0, 0, 0)
+
+[node name="Player" parent="." instance=ExtResource("8_53baf")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.67626, 0.775434, 10.3132)
+
+[node name="Floating UI" type="Node3D" parent="."]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.70162, 0.859921, 9.52243)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floating UI"]
+transform = Transform3D(0.763602, -1.30687e-13, -4.00178e-11, -4.26676e-11, 0.218821, -1.00044e-11, 0, -3.86535e-12, 1.32259, 0.0712738, 0.232334, 0.418613)
+mesh = SubResource("QuadMesh_pn0c7")
+
+[node name="Floating UI2" type="Node3D" parent="."]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.70162, 0.859921, 8.70099)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floating UI2"]
+transform = Transform3D(0.763602, -1.30729e-13, -2.54659e-11, -2.81157e-11, 0.218821, -6.36646e-12, 0, -2.95586e-12, 1.32259, 0.0712743, 0.232334, 0.196579)
+mesh = SubResource("QuadMesh_wqihi")
+
+[node name="Floating UI3" type="Node3D" parent="."]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.70162, 0.859921, 7.49188)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floating UI3"]
+transform = Transform3D(0.763602, -1.30729e-13, -2.54659e-11, -2.81157e-11, 0.218821, -6.36646e-12, 0, -2.95586e-12, 1.32259, 0.0712743, 0.232334, 0.196579)
+mesh = SubResource("QuadMesh_qb13h")
+
+[node name="Floating UI4" type="Node3D" parent="."]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.70162, 0.859921, 5.34556)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Floating UI4"]
+transform = Transform3D(0.832499, -5.60577e-12, -3.63798e-11, -2.41431e-11, 0.278814, -9.09495e-12, -1.45519e-11, -4.54747e-12, 1.32259, 0.0712752, 0.228998, 0.196579)
+mesh = SubResource("QuadMesh_pjnjc")
+
+[node name="Scale" parent="." instance=ExtResource("14_q72uw")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 6.73489, 0.752318, -1.60029)
+
+[node name="Heart" parent="." instance=ExtResource("14_kwevs")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 3.74037, 1.56176, -1.12855)
+
+[node name="NPC" parent="." instance=ExtResource("15_4lhjo")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.79633, 0.621448, 2.95328)
+
+[node name="SceneTransitionDoor" type="Node3D" parent="." node_paths=PackedStringArray("required_alter") groups=["scene_transition_door"]]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.75, 0.619596, -1.75)
+script = ExtResource("15_5fqo8")
+type = 6
+required_alter = NodePath("../Scale")
+destination_scene = "res://Scenes/Rooms/Room2.tscn"
+
+[node name="InteractionArea" type="Area3D" parent="SceneTransitionDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.165, 0)
+collision_layer = 16
+collision_mask = 128
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SceneTransitionDoor/InteractionArea"]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 0, 0.154041, 0)
+shape = SubResource("BoxShape3D_m0v11")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="SceneTransitionDoor"]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, -1.43051e-06, -0.120232, 0)
+mesh = SubResource("ArrayMesh_a83h3")
+
+[node name="StaticBody3D" type="StaticBody3D" parent="SceneTransitionDoor/MeshInstance3D"]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="SceneTransitionDoor/MeshInstance3D/StaticBody3D"]
+shape = SubResource("ConcavePolygonShape3D_r8klp")
+
+[node name="GameStateHelper" type="Node" parent="SceneTransitionDoor"]
+script = ExtResource("17_h31vg")
+save_properties = Array[String](["_toggled_on", "dialog_triggered", "saved", "broken", "trans_door_can_open"])
+
+[node name="PlayerSpawnPoint" type="Node3D" parent="SceneTransitionDoor"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.1, 0.219)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="SceneTransitionDoor"]
+libraries = {
+"": SubResource("AnimationLibrary_cja32")
+}
+
+[connection signal="loading_data" from="SceneTransitionDoor/GameStateHelper" to="SceneTransitionDoor" method="_on_game_state_helper_loading_data" flags=18]
+
+[editable path="CanvasLayer"]

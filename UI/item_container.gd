@@ -6,5 +6,6 @@ class_name ItemContainer
 var item_id: ItemData.ItemId
 
 func set_item(id: ItemData.ItemId):
-	texture_rect.texture = ItemData.data[item_id]["icon"]
 	item_id = id
+	texture_rect.texture = ItemData.data[item_id]["icon"]
+

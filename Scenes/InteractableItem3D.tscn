@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://bece0kkh8f7g1"]
+[gd_scene load_steps=8 format=3 uid="uid://bece0kkh8f7g1"]
 
 [ext_resource type="Script" path="res://Scripts/InteractableItem.gd" id="1_xq7ro"]
 [ext_resource type="BoxMesh" uid="uid://dd8y3wv0qw735" path="res://Scenes/Pillar/PillarHalfMeshVisual.tres" id="2_3r1lw"]
@@ -8,7 +8,25 @@
 [sub_resource type="BoxShape3D" id="BoxShape3D_jhiwe"]
 size = Vector3(1, 0.38, 1)
 
+[sub_resource type="Animation" id="Animation_gersx"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.165, 0)]
+}
+
 [sub_resource type="AnimationLibrary" id="AnimationLibrary_cja32"]
+_data = {
+"RESET": SubResource("Animation_gersx")
+}
 
 [node name="InteractableItem" type="Node3D"]
 script = ExtResource("1_xq7ro")

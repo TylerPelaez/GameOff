@@ -101,16 +101,18 @@ func try_fall_and_update_lower_box(target_pos = null) -> bool:
 		ray_cast_3d.force_raycast_update()
 		if ray_cast_3d.is_colliding():
 			var collision_position = ray_cast_3d.get_collision_point()
-			if global_position.y - (collision_position.y + GRID_SIZE_Y / 2.0) > FALL_DISTANCE_MARGIN:
-				target_pos = (collision_position + Vector3(0, GRID_SIZE_Y / 2.0, 0)) if !attached_to_chain else (global_position - Vector3(0, GRID_SIZE_Y, 0))
-			else:
-				return false
-			
 			var obj = ray_cast_3d.get_collider().get_parent()
 		
 			if obj is Box:
 				obj.upper_box = self
 				lower_box = obj
+			
+			if global_position.y - (collision_position.y + GRID_SIZE_Y / 2.0) > FALL_DISTANCE_MARGIN:
+				target_pos = (collision_position + Vector3(0, GRID_SIZE_Y / 2.0, 0)) if !attached_to_chain else (global_position - Vector3(0, GRID_SIZE_Y, 0))
+			else:
+				return false
+			
+
 		else:
 			push_error("Box cannot find ground, will now float")
 			return false

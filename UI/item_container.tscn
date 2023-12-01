@@ -4,6 +4,8 @@
 [ext_resource type="Texture2D" uid="uid://dr5228tjnp5yx" path="res://Art/Test/White32.png" id="1_vdvqi"]
 
 [node name="ItemContainer" type="MarginContainer"]
+offset_right = 64.0
+offset_bottom = 64.0
 size_flags_horizontal = 4
 size_flags_vertical = 4
 script = ExtResource("1_anjci")

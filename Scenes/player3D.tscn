@@ -1,10 +1,22 @@
-[gd_scene load_steps=40 format=3 uid="uid://chawhftcwjlwv"]
+[gd_scene load_steps=52 format=3 uid="uid://chawhftcwjlwv"]
 
 [ext_resource type="Script" path="res://Scripts/Player3D.gd" id="1_d4u14"]
 [ext_resource type="Shape3D" uid="uid://oc7x3yamxs54" path="res://Scenes/Player/player3DWorldCollider.tres" id="3_7r586"]
+[ext_resource type="AudioStream" uid="uid://dl1lyoq85nbun" path="res://Sound/boxslid/2.wav" id="3_bweji"]
 [ext_resource type="Script" path="res://Scripts/PlayerLightFlicker.gd" id="4_lw1ik"]
+[ext_resource type="AudioStream" uid="uid://c71yixocl7mka" path="res://Sound/boxslid/3.wav" id="4_m3sh6"]
+[ext_resource type="AudioStream" uid="uid://cw05i4v6s8s8h" path="res://Sound/boxslid/4.wav" id="5_3cdji"]
 [ext_resource type="Material" uid="uid://c1y0pwcoki4bc" path="res://Art/Player/PlayerMaterial.tres" id="5_qa7qm"]
 [ext_resource type="Script" path="res://addons/game_state_helper/game_state_helper.gd" id="5_u0x8j"]
+[ext_resource type="AudioStream" uid="uid://cgrhviwn145rs" path="res://Sound/boxslid/5.wav" id="6_u5ful"]
+[ext_resource type="AudioStream" uid="uid://3owmubhpj6sx" path="res://Sound/sfx_jump_07-80241.mp3" id="6_udrat"]
+[ext_resource type="AudioStream" uid="uid://coneyptv4vo6x" path="res://Sound/boxslid/1.wav" id="7_1xomu"]
+[ext_resource type="AudioStream" uid="uid://cp7wwv4aibux4" path="res://Sound/boxslid/6.wav" id="7_ljwmq"]
+[ext_resource type="AudioStream" uid="uid://brx6vify16nq3" path="res://Sound/rock-smash-6304-2.wav" id="8_3nptw"]
+[ext_resource type="AudioStream" uid="uid://sehrcr6uc66o" path="res://Sound/rock-smash-6304-3.wav" id="9_8wbcd"]
+[ext_resource type="AudioStream" uid="uid://dpachh5cfg8v7" path="res://Sound/rock-smash-6304-4.wav" id="10_otocq"]
+[ext_resource type="AudioStream" uid="uid://uk3ak201qcvt" path="res://Sound/rock-smash-6304.wav" id="12_xr6tn"]
+[ext_resource type="AudioStream" uid="uid://bm52hbrnqboug" path="res://Sound/walking-cartoon-3-29625.mp3" id="18_ki2kr"]
 
 [sub_resource type="Animation" id="Animation_c6rop"]
 resource_name = "IdleFront"
@@ -607,6 +619,8 @@ max_speed = 1.0
 accel = 1501
 friction = 2000
 jump_strength = 3
+slide_sfx = Array[AudioStream]([ExtResource("7_1xomu"), ExtResource("3_bweji"), ExtResource("4_m3sh6"), ExtResource("5_3cdji"), ExtResource("6_u5ful"), ExtResource("7_ljwmq")])
+rock_break_sfx = Array[AudioStream]([ExtResource("8_3nptw"), ExtResource("9_8wbcd"), ExtResource("10_otocq"), ExtResource("12_xr6tn")])
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 reset_on_save = false
@@ -695,6 +709,25 @@ save_properties = Array[String](["global_position"])
 [node name="AltShapeCaster" type="ShapeCast3D" parent="."]
 shape = SubResource("SphereShape3D_6ebfs")
 target_position = Vector3(0, 0, 0)
+
+[node name="Jump" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("6_udrat")
+volume_db = -8.571
+pitch_scale = 0.78
+bus = &"SFX"
+
+[node name="Slide" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_1xomu")
+bus = &"SFX"
+
+[node name="rockbreak" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("7_1xomu")
+bus = &"SFX"
+
+[node name="Footsteps" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("18_ki2kr")
+autoplay = true
+bus = &"SFX"
 
 [connection signal="area_entered" from="DraggableCheck" to="." method="_on_draggable_check_area_entered"]
 [connection signal="area_exited" from="DraggableCheck" to="." method="_on_draggable_check_area_exited"]
