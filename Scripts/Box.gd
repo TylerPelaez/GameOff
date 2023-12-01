@@ -50,7 +50,20 @@ func _ready():
 		if obj is Box:
 			obj.upper_box = self
 			lower_box = obj
-
+	
+	ray_cast_3d.target_position = Vector3(0, .167, 0)
+	ray_cast_3d.force_raycast_update()
+	
+	
+	if !ray_cast_3d.is_colliding() and attached_to_chain:
+		use_attachment_pos = true
+		var chain_dir = global_position.direction_to(attached_chain.global_position)
+		chain_dir.y = 0
+		chain_dir = chain_dir.normalized()
+		attachment_pos = global_position + (chain_dir * GRID_SIZE / 2.0)
+		attachment_pos.y += GRID_SIZE_Y / 2.0
+		
+		
 func start_moving():
 	state = State.Moving
 	if upper_box != null:
