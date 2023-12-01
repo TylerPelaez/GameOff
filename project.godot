@@ -108,6 +108,7 @@ jump={
 3d_physics/layer_7="PlayerDraggableCheck"
 3d_physics/layer_8="PlayerInteractCheck"
 3d_physics/layer_9="DangerZone"
+3d_physics/layer_10="Water"
 2d_physics/layer_20="Level0"
 2d_physics/layer_21="Level1"
 2d_physics/layer_22="Level2"
