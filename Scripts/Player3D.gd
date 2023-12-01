@@ -116,7 +116,8 @@ func moving_object_mode(delta):
 		input.z = 0
 		input = input.normalized()
 
-	if input != facing_dir && input != -facing_dir:
+	var test_input = Vector2(input.x, input.z)
+	if test_input != facing_dir && test_input != -facing_dir:
 		return
 
 	var offset = (current_interactable.GRID_SIZE * input)
@@ -133,7 +134,10 @@ func moving_object_mode(delta):
 		tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 		tween.set_parallel(true)
 		tween.tween_property(self, "global_position", dragging_object_target, drag_object_animation_time_seconds)
-		tween.tween_method(current_interactable.move_to, current_interactable.global_position, current_interactable.global_position + offset, drag_object_animation_time_seconds)
+		var result = current_interactable.get_all_boxes_in_row(offset, self)
+		for box in result.values():
+			tween.tween_method(box.move_to, box.global_position, box.global_position + offset, drag_object_animation_time_seconds)
+		
 		tween.chain().tween_callback(on_object_drag_complete)
 		tween.play()
 
