@@ -11,25 +11,25 @@
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_6ixwi"]
 shader = ExtResource("5_px38l")
-shader_parameter/blur_amount = 3.0
+shader_parameter/blur_amount = 1.0
 shader_parameter/signal_quality = 0.5
 shader_parameter/bottom_strenth = 2.467
 shader_parameter/grain_tex = ExtResource("6_vdque")
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_wtu10"]
 shader = ExtResource("4_xeqsr")
-shader_parameter/_ScanLineJitter = 0.35
+shader_parameter/_ScanLineJitter = 0.272
 shader_parameter/_VerticalJump = 0.05
 shader_parameter/_HorizontalShake = 0.068
-shader_parameter/_ColorDrift = 0.274
+shader_parameter/_ColorDrift = 0.164
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_c6gb8"]
 shader = ExtResource("7_oin44")
 shader_parameter/colored = true
 shader_parameter/color_amount = 0.923
 shader_parameter/grain_amount = 0.07
-shader_parameter/grain_size = 2.0
-shader_parameter/lum_amount = 1.665
+shader_parameter/grain_size = 1.792
+shader_parameter/lum_amount = 1.335
 
 [sub_resource type="ShaderMaterial" id="ShaderMaterial_oeguw"]
 shader = ExtResource("8_i3rjv")

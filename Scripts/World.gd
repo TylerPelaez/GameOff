@@ -23,9 +23,6 @@ func _ready():
 	if scene_index == 3:
 		BgmManager.play_odd()
 	
-	if scene_index == 5:
-		BgmManager.play_scary()
-	
 	# wait for game state load to finish
 	await GameStateService.state_load_completed
 	

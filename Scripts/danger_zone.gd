@@ -16,7 +16,6 @@ func set_hunt_ocurred(val: bool):
 	hunt_occurred = val
 
 func _on_body_entered(body):
-	DangerOrchestrator.set_current_danger_zone(self, body)
+	BgmManager.play_scary()
+	EventManager.show_hunt_visuals.emit()
 
-func _on_body_exited(body):
-	DangerOrchestrator.set_danger_zone_escaped(self)

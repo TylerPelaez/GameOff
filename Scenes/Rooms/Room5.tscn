@@ -1,81 +1,87 @@
-[gd_scene load_steps=22 format=3 uid="uid://c50tbu8s7prq3"]
+[gd_scene load_steps=20 format=3 uid="uid://c50tbu8s7prq3"]
 
 [ext_resource type="Script" path="res://Scripts/World.gd" id="1_vr70i"]
 [ext_resource type="MeshLibrary" uid="uid://d00ge6jxao8rg" path="res://Art/Environment/MeshLibrary.tres" id="2_r1ifc"]
 [ext_resource type="MeshLibrary" uid="uid://03lh43oktafn" path="res://Art/ShortWallMeshLibrary.tres" id="3_xojaq"]
-[ext_resource type="PackedScene" uid="uid://l7wxwtb8sjjg" path="res://Scenes/DraggableBox.tscn" id="4_10lfs"]
 [ext_resource type="PackedScene" uid="uid://w4v1ajvmm7to" path="res://Scenes/camera_rig.tscn" id="6_nbgde"]
 [ext_resource type="PackedScene" uid="uid://chawhftcwjlwv" path="res://Scenes/player3D.tscn" id="7_uieap"]
+[ext_resource type="Texture2D" uid="uid://bh4yudvn2jafh" path="res://Art/anubis.png" id="11_5upl2"]
 [ext_resource type="PackedScene" uid="uid://bn1bbpqcqcu34" path="res://Scenes/Scale.tscn" id="12_6flqd"]
 [ext_resource type="PackedScene" uid="uid://sntsiehnprdd" path="res://Scenes/heart.tscn" id="13_71ufp"]
+[ext_resource type="PackedScene" uid="uid://btleuhp1kmvle" path="res://Scenes/door.tscn" id="13_b8vnt"]
 [ext_resource type="PackedScene" uid="uid://bw8btg3rvl7hi" path="res://UI/UIController.tscn" id="13_g11vj"]
 [ext_resource type="PackedScene" uid="uid://dndj3h43iekxf" path="res://Scenes/npc.tscn" id="14_yqnmb"]
-[ext_resource type="Script" path="res://Scripts/InteractableItem.gd" id="15_8v3yn"]
-[ext_resource type="Material" uid="uid://bsm2v2h5iddf5" path="res://Art/Environment/Materials/door.tres" id="16_x7frk"]
-[ext_resource type="Script" path="res://addons/game_state_helper/game_state_helper.gd" id="17_xn4a1"]
 
 [sub_resource type="QuadMesh" id="QuadMesh_5spff"]
 
 [sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_58wq8"]
 data = PackedVector3Array(0.5, -0.5, 0, -0.5, -0.5, 0, 0.5, 0.5, 0, -0.5, -0.5, 0, -0.5, 0.5, 0, 0.5, 0.5, 0)
 
-[sub_resource type="BoxShape3D" id="BoxShape3D_m0v11"]
-size = Vector3(1, 0.653704, 1)
+[sub_resource type="BoxShape3D" id="BoxShape3D_ubn4c"]
+size = Vector3(1, 0.97, 1)
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_qddc0"]
-_surfaces = [{
-"aabb": AABB(-0.166421, -2.98023e-08, -0.011612, 0.332853, 0.687803, 9.99961e-06),
-"format": 4097,
-"index_count": 6,
-"index_data": PackedByteArray(0, 0, 2, 0, 1, 0, 2, 0, 0, 0, 3, 0),
-"name": "door",
-"primitive": 3,
-"vertex_count": 4,
-"vertex_data": PackedByteArray(96, 106, 42, 62, 0, 0, 0, 179, 96, 64, 62, 188, 96, 106, 42, 62, 223, 19, 48, 63, 96, 64, 62, 188, 96, 106, 42, 190, 223, 19, 48, 63, 96, 64, 62, 188, 96, 106, 42, 190, 0, 0, 0, 179, 96, 64, 62, 188)
-}]
-blend_shape_mode = 0
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_awd63"]
+transparency = 1
+albedo_texture = ExtResource("11_5upl2")
+metallic_specular = 0.0
+emission = Color(0.0196078, 0.0196078, 0.0196078, 1)
+texture_filter = 0
 
-[sub_resource type="ArrayMesh" id="ArrayMesh_a83h3"]
-resource_local_to_scene = true
-resource_name = "Root Scene_prop_Door"
-_surfaces = [{
-"aabb": AABB(-0.166421, -2.98023e-08, -0.011612, 0.332853, 0.687803, 9.99961e-06),
-"attribute_data": PackedByteArray(109, 178, 127, 63, 0, 0, 128, 63, 109, 178, 127, 63, 0, 0, 0, 0, 0, 38, 155, 58, 0, 0, 0, 0, 0, 38, 155, 58, 0, 0, 128, 63),
-"format": 4119,
-"index_count": 6,
-"index_data": PackedByteArray(0, 0, 2, 0, 1, 0, 2, 0, 0, 0, 3, 0),
-"material": ExtResource("16_x7frk"),
-"name": "door",
-"primitive": 3,
-"vertex_count": 4,
-"vertex_data": PackedByteArray(96, 106, 42, 62, 0, 0, 0, 179, 96, 64, 62, 188, 255, 127, 255, 127, 255, 255, 255, 191, 96, 106, 42, 62, 223, 19, 48, 63, 96, 64, 62, 188, 255, 127, 255, 127, 255, 255, 255, 191, 96, 106, 42, 190, 223, 19, 48, 63, 96, 64, 62, 188, 255, 127, 255, 127, 255, 255, 255, 191, 96, 106, 42, 190, 0, 0, 0, 179, 96, 64, 62, 188, 255, 127, 255, 127, 255, 255, 255, 191)
-}]
-blend_shape_mode = 0
-shadow_mesh = SubResource("ArrayMesh_qddc0")
+[sub_resource type="QuadMesh" id="QuadMesh_r00wl"]
+material = SubResource("StandardMaterial3D_awd63")
+size = Vector2(0.6, 0.6)
 
-[sub_resource type="ConcavePolygonShape3D" id="ConcavePolygonShape3D_r8klp"]
-data = PackedVector3Array(0.1664, 0, -0.0116, -0.1664, 0.6878, -0.0116, 0.1664, 0.6878, -0.0116, -0.1664, 0.6878, -0.0116, 0.1664, 0, -0.0116, -0.1664, 0, -0.0116)
-
-[sub_resource type="Animation" id="Animation_gersx"]
+[sub_resource type="Animation" id="Animation_f0qst"]
 length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector3(0, 0.165, 0)]
+}
 
-[sub_resource type="AnimationLibrary" id="AnimationLibrary_cja32"]
+[sub_resource type="Animation" id="Animation_v5ae3"]
+resource_name = "hover"
+length = 5.0
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("MeshInstance3D:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2.5, 5),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [Vector3(0, 0.165, 0), Vector3(5.72205e-06, 0.252718, -9.53674e-07), Vector3(0, 0.165, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_eal5i"]
 _data = {
-"RESET": SubResource("Animation_gersx")
+"RESET": SubResource("Animation_f0qst"),
+"hover": SubResource("Animation_v5ae3")
 }
 
 [node name="Room" type="Node3D"]
 transform = Transform3D(1, -5.49965e-05, 4.14818e-05, 5.49965e-05, 1, -1.13368e-05, -4.14818e-05, 1.13368e-05, 1, 0, 0, 0)
 script = ExtResource("1_vr70i")
+scene_index = 5
 
 [node name="GridMap" type="GridMap" parent="."]
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 0.25, -4.54747e-13, 0.25)
 mesh_library = ExtResource("2_r1ifc")
 cell_size = Vector3(1, 1, 1)
 data = {
-"cells": PackedInt32Array(4, 0, 655360, 5, 0, 655360, 6, 0, 655360, 4, 1, 655360, 5, 1, 655360, 6, 1, 655360, 4, 2, 655360, 5, 2, 655360, 6, 2, 655360, 5, 65534, 1, 3, 65534, 2, 7, 65534, 1441794, 4, 65534, 2, 7, 3, 655362, 3, 3, 1048578, 3, 65535, 2, 3, 0, 1048580, 3, 2, 1048580, 3, 1, 1048580, 4, 3, 0, 5, 3, 0, 6, 3, 655364, 7, 2, 1441796, 7, 1, 1441796, 7, 0, 1441796, 7, 65535, 1441796, 4, 65535, 1441792, 5, 65535, 1441792, 6, 65535, 1441792, 6, 65534, 4, 65543, 65534, 1441799, 65543, 65535, 1441799, 65543, 0, 1441799, 65543, 1, 1441799, 65543, 2, 1441799, 65543, 3, 1441799, 65538, 1, 1441799, 65538, 2, 1441799, 65538, 0, 1441799, 65538, 3, 1441800, 65539, 65534, 2, 65539, 65535, 1048583, 65540, 4, 1179652, 65541, 4, 1179648, 7, 5, 1310720, 7, 4, 1310720, 4, 4, 7, 5, 4, 1, 5, 5, 0, 4, 5, 1441799, 4, 6, 1441799, 6, 5, 1048583, 6, 4, 1048583, 5, 6, 1441796, 5, 7, 1441796, 5, 8, 1441796, 5, 9, 1441796, 4, 7, 1441799, 4, 8, 1441799, 4, 9, 1441799, 5, 10, 655364, 6, 10, 1048583, 5, 11, 7, 4, 10, 1441799, 65540, 65534, 7, 65541, 65534, 7, 65542, 65534, 7, 65543, 65533, 655367)
+"cells": PackedInt32Array(4, 0, 4, 5, 0, 1, 6, 0, 4, 4, 1, 655360, 5, 1, 655360, 6, 1, 655360, 4, 2, 655360, 5, 2, 655360, 6, 2, 655360, 7, 3, 655362, 3, 3, 1048578, 3, 65535, 2, 3, 0, 2, 3, 2, 1048580, 3, 1, 1048580, 4, 3, 0, 5, 3, 0, 6, 3, 655364, 7, 2, 1441796, 7, 1, 1441796, 7, 0, 1441794, 7, 65535, 1441796, 4, 65535, 1441792, 5, 65535, 1441792, 6, 65535, 1441792, 65543, 0, 1310726, 65543, 1, 1310726, 65543, 2, 1310726, 65543, 3, 1310726, 65538, 1, 1441799, 65538, 2, 1441799, 65538, 3, 1441800, 65539, 65535, 655368, 65540, 4, 1179652, 65541, 4, 1179648, 7, 5, 1310720, 7, 4, 1310720, 4, 4, 7, 5, 4, 1, 5, 5, 0, 4, 5, 1441799, 4, 6, 1441799, 6, 5, 1048583, 6, 4, 1048583, 5, 6, 1441796, 5, 7, 1441796, 5, 8, 1441796, 5, 9, 1441796, 4, 7, 1441799, 4, 8, 1441799, 4, 9, 1441799, 5, 10, 655364, 6, 10, 1048583, 5, 11, 7, 4, 10, 1441799, 65540, 0, 1310726, 65541, 0, 7, 65542, 0, 7, 65544, 0, 1048584, 65539, 3, 1310726, 131075, 4, 131079, 131079, 3, 1310726, 131079, 2, 1310726, 131079, 1, 1310726, 131079, 0, 1310726, 131076, 3, 1310726, 131075, 3, 1310726, 131075, 2, 1310726, 131075, 1, 1310726, 131075, 0, 1310726, 131076, 2, 1310726, 131075, 65535, 1310726, 131076, 0, 1310726, 131076, 1, 1310726, 65540, 3, 1310726, 65540, 2, 1310726, 65539, 2, 1310726, 65539, 1, 1310726, 65540, 1, 1310726, 65539, 0, 1310726, 131076, 65535, 524294, 65541, 65535, 1179654, 65541, 65534, 1179654, 65541, 65533, 1179654, 65540, 65533, 1179654, 65540, 65534, 1179654, 65540, 65535, 1179654, 65540, 65532, 1179654, 65541, 65532, 1179654, 131077, 65535, 1310726, 65541, 65531, 1179654, 65541, 65530, 1179654, 65540, 65531, 1, 65540, 65530, 1, 131078, 65535, 1310726, 131077, 65534, 1310726, 131077, 65533, 1310726, 131077, 65532, 1310726, 131077, 65531, 1310726, 131077, 65530, 1310726, 131078, 65534, 1310726, 131078, 65533, 1310726, 131078, 65532, 1310726, 131078, 65531, 1310726, 131078, 65530, 1310726, 5, 65534, 1441792, 5, 65533, 1441792, 5, 65532, 1441792, 5, 65531, 1441792, 5, 65530, 655360, 5, 65529, 1441792, 5, 65528, 1441792, 5, 65527, 1441792, 5, 65526, 1441792, 6, 65528, 1048577, 6, 65527, 1048577, 6, 65526, 1048577, 4, 65526, 1441793, 4, 65527, 1441793, 4, 65528, 1441793, 6, 65529, 1048577, 4, 65529, 1441793, 7, 65529, 1048577, 7, 65528, 1048577, 7, 65527, 1048577, 7, 65526, 1048577, 3, 65529, 1441793, 3, 65528, 1441793, 3, 65527, 1441793, 3, 65526, 1441793, 6, 65530, 7, 7, 65530, 7, 8, 65529, 1048583, 8, 65528, 1048583, 8, 65527, 1048583, 8, 65526, 1048583, 7, 65525, 655367, 6, 65525, 655367, 5, 65525, 655367, 4, 65525, 655367, 3, 65525, 655367, 2, 65526, 1441799, 2, 65527, 1441799, 2, 65528, 1441799, 2, 65529, 1441799, 3, 65530, 7, 4, 65530, 1441794, 65543, 65525, 655361, 65542, 65525, 655361, 65541, 65525, 655361, 65540, 65525, 655361, 65539, 65525, 655361, 65538, 65526, 1441793, 65538, 65527, 1441793, 65538, 65528, 1441793, 65538, 65529, 1441793, 65538, 65530, 1441793, 65544, 65526, 1048577, 65544, 65527, 1048577, 65544, 65528, 1048577, 65544, 65529, 1048577, 65543, 65530, 1, 65542, 65530, 1, 65539, 65530, 1, 65539, 65524, 655361, 65540, 65524, 655361, 65541, 65524, 655361, 65542, 65524, 655361, 65543, 65524, 655361, 65544, 65524, 655361, 65544, 65525, 1048577, 65545, 65525, 1048577, 65545, 65526, 1048577, 65545, 65527, 1048577, 65545, 65528, 1048577, 65545, 65529, 1048577, 65545, 65530, 1048577, 65544, 65530, 1, 65545, 65531, 1, 65544, 65531, 1, 65543, 65531, 1, 65543, 65532, 1, 65542, 65532, 1, 65542, 65531, 1, 65539, 65531, 1, 65538, 65531, 1, 65537, 65531, 1441793, 65537, 65530, 1441793, 65537, 65529, 1441793, 65537, 65528, 1441793, 65537, 65527, 1441793, 65537, 65526, 1441793, 65537, 65525, 1441793, 65538, 65525, 1441793, 65537, 65524, 655361, 65538, 65524, 655361, 4, 65531, 1441799)
 }
-metadata/_editor_floor_ = Vector3(0, 1, 0)
+metadata/_editor_floor_ = Vector3(0, 0, 0)
 
 [node name="GridMap2" type="GridMap" parent="."]
 transform = Transform3D(1, -9.64521e-13, 0, -1.06619e-12, 1, 0, 0, 0, 1, 0.25, -7.29897e-13, 0.25)
@@ -90,24 +96,12 @@ metadata/_editor_floor_ = Vector3(0, 9, 0)
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [node name="OmniLight3D" type="OmniLight3D" parent="Environment"]
-transform = Transform3D(1, 4.68335e-10, 6.22094e-10, -1.0662e-12, 1, 2.28101e-09, 0, 0, 1, 5.95957, 2.16056, 0.26713)
-light_color = Color(0.654902, 0.784314, 0.427451, 1)
+transform = Transform3D(1, 4.68335e-10, 6.22094e-10, -1.0662e-12, 1, 2.28101e-09, 0, 0, 1, 5.95947, 2.16059, 2.76713)
+light_color = Color(0.819608, 0.231373, 1, 1)
 light_energy = 0.8
 light_volumetric_fog_energy = 0.6
 shadow_enabled = true
 distance_fade_enabled = true
-
-[node name="Box5" parent="Environment" instance=ExtResource("4_10lfs")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 3.49996, 0.664984, -0.499977)
-skeleton = NodePath("../..")
-
-[node name="Box7" parent="Environment" instance=ExtResource("4_10lfs")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 3.49998, 0.998001, -0.499987)
-skeleton = NodePath("../..")
-
-[node name="Box6" parent="Environment" instance=ExtResource("4_10lfs")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 4.99988, 0.666924, 0.50008)
-skeleton = NodePath("../..")
 
 [node name="Floor" type="MeshInstance3D" parent="Environment"]
 transform = Transform3D(94.1028, -0.000620166, 9.65473e-05, -0.00907888, 3.59042e-06, 1.00071, -0.00127177, -45.8884, 8.15407e-08, 3.24997, 0.5, 4.75001)
@@ -130,48 +124,62 @@ transform = Transform3D(1, 0, 0, 0, 0.898794, 0.438371, 0, -0.438371, 0.898794, 
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.67653, 0.77536, 3.8132)
 
 [node name="Scale" parent="." instance=ExtResource("12_6flqd")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 6.73489, 0.752318, -1.60029)
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 4.73481, 0.752451, 0.399627)
+_required_key = 4
 
 [node name="Heart" parent="." instance=ExtResource("13_71ufp")]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 3.74037, 1.56176, -1.12855)
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.81082, 0.561674, 1.37401)
+_key_id = 4
+
+[node name="Heart2" parent="." instance=ExtResource("13_71ufp")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.72616, 0.634176, -3.47088)
+_key_id = 5
+
+[node name="OmniLight3D" parent="Heart2/MeshInstance3D" index="1"]
+light_color = Color(0.870588, 0.631373, 0.984314, 1)
+light_energy = 0.211
 
 [node name="NPC" parent="." instance=ExtResource("14_yqnmb")]
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.79633, 0.621448, 2.95328)
+_dialog_id = 5
 
-[node name="SceneTransitionDoor" type="Node3D" parent="." node_paths=PackedStringArray("required_alter") groups=["scene_transition_door"]]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.75, 0.619596, -1.75)
-script = ExtResource("15_8v3yn")
-type = 6
-required_alter = NodePath("../Scale")
-destination_scene = "res://Scenes/Rooms/Room2.tscn"
+[node name="Door2" parent="." node_paths=PackedStringArray("_alter") instance=ExtResource("13_b8vnt")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.7473, 0.497744, 0.252128)
+_alter = NodePath("../Scale")
 
-[node name="InteractionArea" type="Area3D" parent="SceneTransitionDoor"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.165, 0)
-collision_layer = 16
-collision_mask = 128
+[node name="Door" parent="." instance=ExtResource("13_b8vnt")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.75891, 0.48863, 4.24876)
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SceneTransitionDoor/InteractionArea"]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 0, 0.154041, 0)
-shape = SubResource("BoxShape3D_m0v11")
+[node name="NPC2" parent="." instance=ExtResource("14_yqnmb")]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.74725, 0.662601, -7.5995)
+_dialog_id = 6
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="SceneTransitionDoor"]
-transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, -1.43051e-06, -0.120232, 0)
-mesh = SubResource("ArrayMesh_a83h3")
+[node name="CollisionShape3D" parent="NPC2/InteractionArea" index="0"]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 0, 0, 0)
+shape = SubResource("BoxShape3D_ubn4c")
 
-[node name="StaticBody3D" type="StaticBody3D" parent="SceneTransitionDoor/MeshInstance3D"]
+[node name="MeshInstance3D" parent="NPC2" index="1"]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 0, 0.165, 0)
+mesh = SubResource("QuadMesh_r00wl")
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="SceneTransitionDoor/MeshInstance3D/StaticBody3D"]
-shape = SubResource("ConcavePolygonShape3D_r8klp")
-
-[node name="GameStateHelper" type="Node" parent="SceneTransitionDoor"]
-script = ExtResource("17_xn4a1")
-save_properties = Array[String](["_toggled_on", "dialog_triggered", "saved", "broken", "trans_door_can_open"])
-
-[node name="AnimationPlayer" type="AnimationPlayer" parent="SceneTransitionDoor"]
+[node name="AnimationPlayer" parent="NPC2" index="3"]
 libraries = {
-"": SubResource("AnimationLibrary_cja32")
+"": SubResource("AnimationLibrary_eal5i")
 }
 
-[connection signal="loading_data" from="SceneTransitionDoor/GameStateHelper" to="SceneTransitionDoor" method="_on_game_state_helper_loading_data" flags=18]
+[node name="SpotLight3D" type="SpotLight3D" parent="."]
+transform = Transform3D(0.00539216, 0.498752, -0.866728, -0.00305198, 0.866745, 0.498743, 0.999981, -4.40621e-05, 0.00619581, 3.4649, 1.81836, -7.28205)
+light_color = Color(0.376471, 0.572549, 0.603922, 1)
+shadow_enabled = true
+
+[node name="SpotLight3D2" type="SpotLight3D" parent="."]
+transform = Transform3D(-0.482554, -0.298297, 0.823505, -0.0581482, 0.949054, 0.309701, -0.873934, 0.101562, -0.475316, 8.04156, 1.96276, -7.81111)
+light_color = Color(0.74902, 0.270588, 0.584314, 1)
+shadow_enabled = true
+
+[node name="Area3D" type="Area3D" parent="."]
+transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 0, 0, 0)
 
 [editable path="CanvasLayer"]
+[editable path="Heart2"]
+[editable path="NPC2"]
