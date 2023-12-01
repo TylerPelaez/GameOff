@@ -21,6 +21,7 @@ class_name Player3D
 
 @onready var remote_transform_3d = $RemoteTransform3D
 
+var facing_dir
 
 var hold_positions = {
 	Vector2.LEFT: Vector3(-.064, 0, 0),
@@ -115,6 +116,10 @@ func moving_object_mode(delta):
 		input.z = 0
 		input = input.normalized()
 
+	var test_input = Vector2(input.x, input.z)
+	if test_input != facing_dir && test_input != -facing_dir:
+		return
+
 	var offset = (current_interactable.GRID_SIZE * input)
 	if input != Vector3.ZERO && current_interactable.can_move_by_amount(offset, shape_cast, self):
 		var new_pos = movable_anchor.global_position - hold_position.position
@@ -129,12 +134,19 @@ func moving_object_mode(delta):
 		tween.set_process_mode(Tween.TWEEN_PROCESS_PHYSICS)
 		tween.set_parallel(true)
 		tween.tween_property(self, "global_position", dragging_object_target, drag_object_animation_time_seconds)
-		tween.tween_method(current_interactable.move_to, current_interactable.global_position, current_interactable.global_position + offset, drag_object_animation_time_seconds)
-		tween.chain().tween_callback(on_object_drag_complete)
+		var result = current_interactable.get_all_boxes_in_row(offset, self)
+		for box in result.values():
+			tween.tween_method(box.move_to, box.global_position, box.global_position + offset, drag_object_animation_time_seconds)
+		
+		tween.chain().tween_callback(on_object_drag_complete.bind(result))
 		tween.play()
 
-func on_object_drag_complete():
+func on_object_drag_complete(result: Dictionary):
 	dragging_object_playing = false
+	for box in result.values():
+		if box.lower_box == null && box != current_interactable:
+			box.on_drag_complete()
+	
 	if current_interactable.on_drag_complete():
 		stop_moving()
 
@@ -167,6 +179,8 @@ func start_moving(object: Box):
 	movable_anchor = anchor.node
 	hold_position.position = hold_positions[anchor.player_face_direction]
 
+
+	facing_dir = anchor.player_face_direction
 	animation_tree.set("parameters/Idle/blend_position", anchor.player_face_direction)
 	animation_tree.set("parameters/Walk/blend_position", anchor.player_face_direction)
 	animation_state.travel("Idle")

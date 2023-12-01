@@ -65,7 +65,7 @@ func interact():
 			
 			if !saved:
 				saved = true
-				GameStateService.save_data_to_default_path()
+				#GameStateService.save_data_to_default_path()
 			print("Key Item Interacted!")
 		Type.Alter:
 			if PlayerInventory.has_item(_required_key):
