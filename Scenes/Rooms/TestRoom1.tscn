@@ -152,8 +152,10 @@ type = 2
 
 [node name="Chisel" parent="Environment" instance=ExtResource("8_0dfrb")]
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 5.10173, 0.524904, 3.54119)
+type = 4
 has_collision = false
 _key_id = 2
+_dialog_id = 1
 
 [node name="Alter" parent="Environment" instance=ExtResource("8_0dfrb")]
 transform = Transform3D(1, -9.64506e-13, 0, -1.0662e-12, 1, 0, 0, 0, 1, 7.00023, 0.524672, -4.74428)

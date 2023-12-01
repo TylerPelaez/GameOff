@@ -1,6 +1,8 @@
 extends CanvasLayer
 class_name UIController
 
+@export var text_display_time_seconds := 1.0
+
 var interaction_prompt_prefab = preload("res://UI/interaction_prompt.tscn")
 
 var camera: Camera3D
@@ -18,12 +20,15 @@ var item_container_prefab = preload("res://UI/item_container.tscn")
 var dialog_active = false
 var current_dialog: Array
 var current_dialog_index: int = 0
-
+var cur_params: Array
 
 var prompt_prefab = preload("res://UI/interaction_prompt.tscn")
 var prompt_instance
 var prompt_origin_object
 
+
+var current_tween
+var tweening = false
 
 func _ready():
 	EventManager.show_interaction_prompt.connect(_on_show_interaction_prompt)
@@ -64,11 +69,19 @@ func _input(event):
 
 
 func play_dialog(id: DialogData.DialogId, params: Array[String]):
-	var text = DialogData.data[id]
-	if params.size() > 0 and text.size() == 1:
-		text =  [text[0] % params]
 	
-	current_dialog = text
+	var file_path = DialogData.data[id]
+		
+	var file = FileAccess.open(file_path, FileAccess.READ)
+	var text = file.get_as_text()
+		
+	var json_data = JSON.parse_string(text)
+	if json_data == null:
+		printerr("Invalid JSON!")
+	
+	cur_params = params
+
+	current_dialog = json_data
 	current_dialog_index = 0
 	
 	dialog_container.visible = true
@@ -90,8 +103,21 @@ func advance_dialog():
 		set_dialog_text()
 
 func set_dialog_text():
-	dialog_text_label.text = current_dialog[current_dialog_index]
-
+	if current_tween != null:
+		current_tween.kill()
+	
+	var data = current_dialog[current_dialog_index]
+	var text: String = data["text"]
+	if text.contains("%s"):
+		text = text % [cur_params[current_dialog_index]]
+	
+	dialog_text_label.text = text
+	dialog_text_label.visible_ratio = 0
+	
+	current_tween = get_tree().create_tween().bind_node(self)
+	current_tween.tween_property(dialog_text_label, "visible_ratio", 1, text_display_time_seconds)
+	current_tween.tween_callback(func(): tweening = false)
+	tweening = true
 
 func _on_show_interaction_prompt(prompt_src):
 	if prompt_instance != null:
